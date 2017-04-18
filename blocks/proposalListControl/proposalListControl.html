@@ -1,0 +1,47 @@
+<div class="proposalsListControl" style="">
+    <ul class="list-group proposalsListControl__listBlock" style="" >
+        <li  class="list-group-item proposalsListControlListBlock__listElement" ng-class="{true:'selected', false:''}[item.ProposalID===selectedProposalID]"
+             ui-sref="proposals.searchResult.proposal({ProposalID:item.ProposalID})" ng-repeat="item in items" ng-click="select(item.ProposalID)">            
+            <div class="proposalsListControlListElement__imageBlock" style="background: #{{item.LogoBaseColor.substring(3)}};">
+                <img moloko-image-api="item.ProposalID" url="/Proposal/:id/Logo" class="img-responsive" alt="{{item.Organization.Name}}"
+                     style='height: 100%; width: 100%; object-fit: cover'>
+            </div>
+
+            <div class="proposalsListControlListElement__infoBlock">
+                <div class="proposalsListControlListElement__name">
+                    {{item.Name}}
+                </div>
+                <div class="proposalsListControlListElement__summary">
+                    {{item.Summary}}
+                </div>
+                <div class="proposalsListControlListElement__remainder" ng-if="item.DateEnd">
+                    Осталось {{item.DateEnd|remainDays}}
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="proposalsListControlVertical" style="position: absolute;
+    height: 100%;
+    overflow-y: scroll;
+    width: 100%;
+    z-index:5;
+    overflow-x: hidden;
+    background: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);">
+    <ul class="wrapper"  style="padding:0;">
+        <li ng-click="select(item.ProposalID)" ui-sref="proposals.proposalsList.proposal({ProposalID:item.ProposalID})" class="item" 
+            style="border:lightgray solid 1px;margin:0.5%;padding:1%;width: 32%;" ng-repeat="item in items">
+            <img  moloko-image-api="item.ProposalID" url="/Proposal/:id/Logo" class="img-responsive" alt="{{item.Organization.Name}}" style='/*height: 100%; width: 100%;*/ object-fit: cover'>        
+            <div class="proposalsListControlListElement__name" style="white-space: normal;">
+                {{item.Name}}
+            </div>
+            {{item.Summary}}
+            <div class="proposalsListControlListElement__remainder" ng-if="item.DateEnd">
+                Осталось {{item.DateEnd|remainDays}}
+            </div>             
+        </li>
+    </ul>
+</div>
+

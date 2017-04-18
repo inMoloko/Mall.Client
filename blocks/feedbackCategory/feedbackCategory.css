@@ -1,0 +1,10 @@
+﻿.feedbackCategoryList{
+    display: -moz-inline-box;
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+}
+
+.formatTheme_vertical .feedbackCategoryList{ 
+    width: 87%;
+}

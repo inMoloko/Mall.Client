@@ -1,0 +1,251 @@
+.marker__item {
+    fill: @color-base;
+    opacity:1;
+    fill-opacity:1;
+    stroke:none;
+    stroke-opacity:1;
+}
+
+.btnContainer__zoom_plus {
+    background: @color-work;
+    color:@color-white;
+     width: 50px;
+    height: 50px; 
+    border-radius:25px;
+    border-width:0px;
+    padding: 0px;
+    position:absolute;
+    left:5px;
+}
+
+.btnContainer__zoom_minus {
+    background: @color-work;
+    color:@color-white;
+    width: 40px;
+    height: 40px;     
+    border-radius: 20px;
+    border-width:0px; 
+    position:absolute;
+    top:5px;
+    left:10px;
+}
+
+.btnContainer__zoom_disabled { 
+    color:@color-white;
+    background:#a7a7a7;
+}
+
+.colorTheme_black .btnContainer__zoom_disabled { 
+    color:@color-white;
+    background:#a7a7a7;
+}
+
+.floor__label {    
+    background:@color-white;
+    text-align: center;
+    position: absolute;
+    color: red;
+    border:solid red 2px;
+    border-radius: 1em;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+}
+
+.btnContainer__originalAngle_active {    
+    color: @color-work;
+    background:white;
+}
+
+.floor__floor {
+    background-color: @color-work;
+    width: 40px;
+    height: 40px;
+    border-radius: 2em;
+    color: white;
+    padding:0;
+    font-size:1.7em;
+    margin-bottom: 10px;
+}
+
+.selected .floor__number{
+    color: @color-work;
+}
+
+.colorTheme_black .floor__number{       
+    color:@color-white;
+}
+
+.selected {
+    background:@color-white;
+    border:2px solid transparent;
+}
+
+.floor__number{
+    color:@color-white;
+}
+
+.anchor-icon {
+     font-family:@font-base;  
+     fill:@color-map-sign;
+     font-weight:bold;
+}
+.marker__text{
+     font-family:@font-base;  
+     z-index: 15;
+     position: absolute;
+     display: block;
+     top:-5px;
+     left: 15px;
+     width: 100px;
+     font-weight: bold;
+}
+
+.mapControl {
+    position: relative;
+    padding: 0;
+    z-index: 1;
+    width: 3;
+}
+.mapControl__btnContainer {
+    position: absolute;
+    z-index: 999;
+    top: 100px;
+    width: 60px;
+    text-align:center;
+}
+.mapControl__btnContainer_bottom {
+    top: 300px;
+}
+.mapControl__btnContainer_right {
+    right: 50px;
+}
+.mapControl__btnContainer_left {
+    left: 0px;
+}
+.colorTheme_color .btnContainer__zoom_plus{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.colorTheme_blackLite .btnContainer__zoom_plus{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.colorTheme_black .btnContainer__zoom_plus,
+.colorTheme_black .btnContainer__zoom_minus,
+.colorTheme_black .floor__floor{   
+    background:black;
+}
+.colorTheme_black .selected .floor__number{ 
+    color:black;
+}
+.colorTheme_black .selected{ 
+    border:2px solid black;  
+    background:white;
+}
+.colorTheme_color .btnContainer__zoom_minus{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.colorTheme_blackLite .btnContainer__zoom_minus{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.btnContainer__originalAngle {
+    background-color: #09F;
+    width: 4em;
+    height: 4em;
+    font-weight: 900;
+    border-radius: 2em;
+}
+.colorTheme_color .btnContainer__originalAngle{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.colorTheme_blackLite .btnContainer__originalAngle{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.colorTheme_black .btnContainer__originalAngle_active {   
+    background:white;
+    color:black;
+    border:2px solid black
+}
+.floor {
+    position: relative;
+}
+.colorTheme_color .floor__floor{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.colorTheme_blackLite .floor__floor{
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.floor__label_right {
+    right: 0em;
+    color: white;
+    background: red;
+    border: 0px;
+}
+.marker {
+    width: 50px;
+    height: 25px;
+}
+.marker svg {
+    width: 10px;
+    height: 10px;
+}
+.marker>div {
+    position: relative;
+}
+.marker__image {
+    width: 22px;
+    height: 22px;
+}
+.marker__image._selected {
+    margin-left: -1px;
+    margin-top: -1px;
+     width: 26px;
+    height: 26px;
+    border: solid red 2px;
+    background: red;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+.marker__wc{
+    width: 32px;
+    height: 32px;
+}
+.marker__wc._selected{    
+    width: 36px;
+    height: 36px;
+    margin-left: -1px;
+    margin-top: -1px;
+    border: solid red 2px;
+    background: red;
+    border-radius: 18px;
+    box-sizing: border-box;
+}
+.marker__item._selected {
+    fill: red;
+
+}
+.marker._selected svg circle {
+    fill: red;
+}
+div.leaflet-top {
+    visibility: collapse;
+}
+.path {
+    stroke-dasharray: 5,15; 
+}
+.you {
+    border: solid red 2px;
+    width: 2.3em;
+    height: 2.3em;
+    border-radius: 2.3em;
+    color: red;
+    z-index: 100;
+    text-align: center;
+    padding-top: 0.25em;
+    font-weight: bold;
+    background: white;
+    font-size: 8pt;
+}
+.man__item {
+    font-size: 40px;
+    color: red;
+}

@@ -1,0 +1,51 @@
+.screensaverControl{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:@color-map-back;
+}
+
+.screensaverControl__image{
+    width: 100%; 
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.screensaverControl__text{
+    position: absolute;
+    bottom: 30px;
+    text-align:center;
+    width:100%;
+    font-size: 24px;
+    color: @color-base;
+}
+
+#slides {
+padding: 0px;
+margin: 0px;
+list-style-type: none;
+}
+ 
+.slide {
+position: absolute;
+top: 0px;
+width: 100%;
+opacity: 0;
+ 
+-webkit-transition: opacity 1s;
+-moz-transition: opacity 1s;
+-o-transition: opacity 1s;
+transition: opacity 1s;
+}
+ 
+.showing {
+opacity: 1;
+}

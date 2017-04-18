@@ -1,0 +1,49 @@
+.animation { -webkit-transition: 0.4s; }
+
+/*.animation.ng-enter-stagger,
+.animation.ng-leave-stagger{
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+  -webkit-transition-duration:0;
+  transition-duration:0;
+}*/
+
+.animation.ng-leave { 
+    opacity: 1;    
+}
+.animation.ng-leave.ng-leave-active { 
+    opacity: 0;    
+}
+
+.animation.ng-enter { 
+    opacity: 0; 
+    margin-left:20px;
+    position:absolute;
+    z-index:5;
+    height: 100%;
+    width: 100%;    
+    
+}
+.animation.ng-enter.ng-enter-active { 
+    opacity: 1; 
+    margin-left:0px;    
+}
+
+
+.itemAnimation.ng-enter{
+    -webkit-transition:all linear 0.4s;
+    transition: all linear 0.4s ;
+    opacity:0;
+}
+
+.itemAnimation.ng-enter-stagger{
+    -webkit-transition-delay:0.4s;
+    transition-delay:0.4s;
+
+    -webkit-transition-duration:0s;
+    transition-duration:0s;
+}
+
+.itemAnimation.ng-enter.ng-enter-active{
+    opacity:1;
+}

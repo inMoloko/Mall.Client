@@ -1,0 +1,133 @@
+<form style="background: #ffffff;
+                z-index: 5;
+                width: 100%;
+                height: 100%;
+                position: absolute;" name="form">
+
+    <div style="background: transparent;
+                z-index: 5;
+                width: 100%;
+                height: 10%;
+                position: absolute;">
+        <div class="parent" style="width: 100%;height: 100%;">
+            <div class="child" style="display: -moz-inline-box;
+                     display: inline-block;
+                     width: 50%;
+                     vertical-align: middle;
+                     font-size: 30px;
+                     font-family: 'Open Sans' ;
+                     padding-left: 6%;">
+                СПАСИБО, ЧТО ОЦЕНИЛИ!
+            </div>
+            <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
+        </div>
+
+    </div>
+    <div style="background: transparent;
+                z-index: 5;
+                width: 100%;
+                height: 90%;
+                top: 10%;
+                position: absolute;">
+        <div style="background: transparent;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 5;
+                        padding: 0px;">
+            <div style="width: 100%;height: 25%;background:transparent;position: absolute;">
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;
+                        font-size: 22px;padding:0px 10px 0px 10px;text-align:right;overflow:hidden">
+                    Напишите ваш отзыв или предложение
+                    и оставьте телефон или электронную
+                    почту для связи с вами:
+                </div>
+                <div style="width: 44%;height: 100%;background:transparent;position: absolute;left:28%;">
+                    <textarea keyboard  ng-model="item.FeedbackCommentText" style="padding-left:10px;width: 100%;height: 100%;font-size: 22px;resize: none;background:#efefef;border: 0;"/>
+                </div>
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;left:72%;
+                    font-size: 22px;padding:0px 10px 0px 10px;text-align:left;">
+                    Мы стремимся сделать нашу работу
+                    еще лучше и всегда готовы ответить
+                    на все ваши вопросы и предложения.
+                </div>
+            </div>
+            <div style="width: 100%;height: 7%;background:transparent;position: absolute;top:26%;">
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;
+                        font-size: 22px;padding:0px 10px 0px 10px;text-align:right;">
+                    <div class="parent" style="width: 100%;height: 100%;">
+                        <div class="child" style="display: -moz-inline-box;display: inline-block;
+                                 vertical-align: middle;">Имя: </div>
+                        <div class="helper" style="display: inline-block;
+                                height: 100%;
+                                width: 0px;
+                                vertical-align: middle;"></div>
+                    </div>
+                </div>
+                <div style="width: 44%;height: 100%;background:transparent;position: absolute;left:28%;">
+                    <input keyboard ng-model="item.ApplicantName"  style="padding-left:10px;width: 100%;height: 100%;font-size: 22px;background:#efefef;border: 0;" />
+                </div>
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;left:72%;
+                    font-size: 22px;font-family: 'Open Sans';padding:0px 10px 0px 10px;text-align:left;">                    
+                </div>
+            </div>
+            <div style="width: 100%;height: 7%;background:transparent;position: absolute;top:34%;">
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;
+                        font-size: 22px;font-family: 'Open Sans';padding:0px 10px 0px 10px;text-align:right;">
+                    <div class="parent" style="width: 100%;height: 100%;">
+                        <div class="child" style="display: -moz-inline-box;display: inline-block;
+                                 vertical-align: middle;">Телефон:</div>
+                        <div class="helper" style="display: inline-block;
+                                height: 100%;
+                                width: 0px;
+                                vertical-align: middle;"></div>
+                    </div>
+                </div>
+                <div style="width: 44%;height: 100%;background:transparent;position: absolute;left:28%;">
+                    <input keyboard ng-model="item.ApplicantPhone" style="padding-left:10px;width: 100%;height: 100%;font-size: 22px;font-family: 'Open Sans';background:#efefef;border: 0;" />
+                </div>
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;left:72%;
+                    font-size: 22px;font-family: 'Open Sans';padding:0px 10px 0px 10px;text-align:left;">
+                </div>
+            </div>
+            <div style="width: 100%;height: 7%;background:transparent;position: absolute;top:42%;">
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;
+                        font-size: 22px;font-family: 'Open Sans';padding:0px 10px 0px 10px;text-align:right;">
+                    <div class="parent" style="width: 100%;height: 100%;">
+                        <div class="child" style="display: -moz-inline-box;display: inline-block;
+                                 vertical-align: middle;">Электронная почта:</div>
+                        <div class="helper" style="display: inline-block;
+                                height: 100%;
+                                width: 0px;
+                                vertical-align: middle;"></div>
+                    </div>
+                </div>
+                <div style="width: 44%;height: 100%;background:transparent;position: absolute;left:28%;">
+                    <input keyboard ng-model="item.ApplicantEmail" style="padding-left:10px;width: 100%;height: 100%;font-size: 22px;font-family: 'Open Sans';background:#efefef;border: 0;" />
+                </div>
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;left:72%;
+                    font-size: 22px;font-family: 'Open Sans';padding:0px 10px 0px 10px;text-align:left;">
+                </div>
+            </div>
+            <div style="width: 100%;height: 8.4%;background:transparent;position: absolute;top:50%;">
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;
+                        font-size: 22px;font-family: 'Open Sans';padding:0px 10px 0px 10px;text-align:right;">                    
+                </div>
+                <div style="width: 44%;height: 100%;background:transparent;position: absolute;left:28%;">
+                    <div class="feedbackSendMessageButtonBlock" ui-sref="navigation.mainMenu" >
+                        <button ng-disabled="form.$invalid" 
+                        ng-click="controller.save()"
+                        style="width: 100%;height: 100%;background: #28303b;border-radius: 4px;border-width: 0px;padding: 0px 10px 0px 10px;color:#ffffff">
+                            Отправить
+                        </button>
+                    </div>
+                </div>
+                <div style="width: 28%;height: 100%;background:transparent;position: absolute;left:72%;
+                    font-size: 22px;font-family: 'Open Sans';padding:0px 10px 0px 10px;text-align:left;">
+                </div>
+            </div>            
+
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,52 @@
+<div style="background: #ffffff;
+                z-index: 5;
+                width: 100%;
+                height: 100%;
+                position: absolute;">
+
+    <div style="background: transparent;
+                z-index: 5;
+                width: 100%;
+                height: 10%;
+                position: absolute;">
+        <div class="parent" style="width: 100%;height: 100%;">
+            <div class="child" style="display: -moz-inline-box;
+                     display: inline-block;
+                     width: 50%;
+                     vertical-align: middle;
+                     font-size: 30px;
+                     padding-left: 6%;">
+                ПОСТАВЬТЕ НАМ ОЦЕНКУ
+            </div>
+            <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
+        </div>
+
+    </div>
+    <div style="background: transparent;
+                z-index: 5;
+                width: 100%;
+                height: 90%;
+                top: 10%;
+                position: absolute;">
+        <div style="background: transparent;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 5;
+                        padding: 0px;">
+            <div class="parent" style="width: 100%;height: 100%;text-align: center;">
+                <div class="feedbackMarkList child" >
+                    <div class="feedbackBadMark" ui-sref=".message({FeedbackMark:'bad'})" >
+                        <i class="iconMall-iconBadSmile"style="color:red;font-size:12em"></i>
+                    </div>
+                    <div ui-sref=".message({FeedbackMark:'good'})" style="width: 20%;height: 50%;background: transparent;position: absolute;">
+                        <i class="iconMall-iconGoodSmile" style="color:green;font-size:19em"></i>
+                    </div>
+                </div>
+                <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,19 @@
+<div class="closeResult" style="">
+    <div class="organizationsList__organizationsHeadBlock closeResult__headBlock" style="">
+        <div class="closeResult__searchCountBlock" style="">
+            <div class="searchCountBlock__searchCount" ng-hide="filter&&$root.currentOrganizations.length==0">
+                {{$root.closeResultTitle}}
+            </div>            
+        </div>
+        <div class="organizationsHeadBlock__closeButtonBlock" ui-sref="navigation.mainMenu" style="">
+            <button class="closeButtonBlock_closeButton" style="">
+                <i class="iconMall-iconClose closeButton_icon" style=""></i>
+            </button>
+        </div>
+        <div class="organizationsHeadBlock__hideButtonBlock" ng-click="comeBack()" style="">
+            <button class="closeButtonBlock_closeButton" style="">
+                <i class="iconMall-iconArrowDown closeButton_icon" style=""></i>
+            </button>
+        </div>
+    </div>
+</div>

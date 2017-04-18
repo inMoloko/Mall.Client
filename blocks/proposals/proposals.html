@@ -1,0 +1,20 @@
+<div class="appContainer__basicArea">
+    <div class="appContainer__headBlock appContainer__proposalsHeadBlock ">
+        <!--<div class="headBlock__searchControl" ng-include="'blocks/searchControl/searchControl.html'"></div>-->
+        <div class="proposals__headBlock" ng-include="'blocks/headControl/headControl.html'"></div>
+        <!--<div class="headBlock__changeViewTypeControl" ng-include="'blocks/changeTypeViewControl/changeTypeViewControl.html'"></div>-->
+    </div>
+    <div class="appContainer__workspaceBlock appContainer__proposalsWorkspaceBlock">
+        <div class="workspaceBlock__sideBlock workspaceBlock__proposalSideBlock">
+            <div ui-view="proposalsList" class="animation"></div>
+        </div>
+        <div class="appContainer__infoBlock appContainer__proposalInfoBlock" style="">
+            <div ui-view="proposal@main" class="animation"></div>
+        </div>
+    </div>
+
+    <div class="proposals__toolBar">
+        <div ng-include="'blocks/toolBar/toolBar.html'" style="position: absolute;left: 30px;right: 0px;height: 100%;"></div>
+    </div>
+
+</div>

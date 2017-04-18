@@ -1,0 +1,87 @@
+<div class="searchControl" ng-controller="searchControlController">
+    <div class="searchControl ng-scope" ng-controller="searchControlController">
+        <div class="searchControl__buttonBlock">
+            <div class="homeButtonBlock__homeButtonBlock" ng-click="home()">
+                <button class="homeButtonBlock__homeButton">
+                    <i class="iconMall-iconHome homeButton__icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div style="background: transparent;
+                z-index: 5;
+                width: 100%;">
+        <div style="background: transparent;
+         z-index: 5;
+         position:absolute;
+         height: 60px;
+         left: 90px;
+         RIGHT: 0px;
+         font-size: 40px;
+         text-transform:uppercase;">            
+                {{::customer.Name}}            
+        </div>
+    </div>
+    <div class="searchControl__block">
+        <div class="dropdown searchControl__categoryBlock">
+            <button class="dropbtn categoryBlock_categoryButton" onclick="openList()">
+                <div class="dropbtn" style="white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    margin-right: 15px;
+                    margin-left: 5px;" ng-bind="currentCategory.Name">
+                </div>
+                <div class="dropbtn categoryBlock_categoryButtonArrow " style="">
+                    <i class="dropbtn iconMall-iconArrowDown categoryButton_icon"></i>
+                </div>
+            </button>
+            <div class="dropdown-content categoryBlock_listCategoryTriangle" id="myDropdownTriangle"></div>
+            <div class="dropdown-content categoryBlock_listCategory" id="myDropdown">
+                <div ng-repeat="cat in categories|filter:{ParentID:null}|orderBy:'OrderID':true">
+                    <span class="listCategory_item" ng-click="changeCategory(cat, $root.currentFilter)" ng-class="{'listCategory_item_active':cat.CategoryID==currentCategory.CategoryID}"
+                          ng-bind="::cat.Name"></span>
+                    <span class="listCategory_item" ng-click="changeCategory(cat, $root.currentFilter)" ng-class="{'listCategory_item_active':cat.CategoryID==currentCategory.CategoryID}" ng-repeat="cat in cat.Children|orderBy:['-OrderID','+Name']"><span class="listCategory_item_sub" ng-bind="::cat.Name"></span></span>
+                </div>
+            </div>
+        </div>
+        <div class="searchControl__searchBlock">
+            <input id="searchInputBlock" keyboard class="searchBlock__input" ng-model="$root.currentFilter" type="text" placeholder="Zara, Ашан или джинсы...">
+            <div ng-hide="currentFilter.length>0" class="searchBlock__searchButtonBlock">
+                <button class="searchButtonBlock__searchButton">
+                    <i class="iconMall-iconSearch searchButton__icon"></i>
+                </button>
+            </div>
+            <div ng-click="$root.currentFilter=''" ng-show="$root.currentFilter.length>0" class="searchBlock__searchButtonBlock">
+                <button class="searchButtonBlock__searchButton">
+                    <i class="iconMall-iconClose searchButton__icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+
+        function openList() {
+            document.getElementById("myDropdown").classList.toggle("show");
+            document.getElementById("myDropdownTriangle").classList.toggle("show");
+
+            document.getElementsByClassName("categoryBlock_categoryButton")[0].classList.toggle("showList");
+        }
+
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                        document.getElementsByClassName("categoryBlock_categoryButton")[0].classList.remove("showList");
+                    }
+                }
+            }
+        }
+    </script>

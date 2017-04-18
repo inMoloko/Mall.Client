@@ -1,0 +1,54 @@
+/*organizationProposal*/
+.organizationProposal{
+    background: #ffffff;
+    z-index: 5;
+    width: 100%;
+    overflow-y: hidden;
+    height: 100%;
+    position: absolute;
+    border: 1px solid transparent;
+}
+.colorTheme_black .organizationProposal{
+    border: 1px solid black;
+}
+/*organizationProposal__imageBlock*/
+.organizationProposal__imageBlock{
+    background:transparent;flex-basis: 40%;
+}
+
+.colorTheme_black .organizationProposal__imageBlock {
+    display:none;
+}
+
+/*organizationProposal__infoBlock*/
+.organizationProposal__infoBlock{
+    background:transparent;
+    flex-basis: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.colorTheme_black .organizationProposal__infoBlock {
+    flex-basis: 100%;
+    padding-left:10px;
+}
+
+/*organizationProposalInfoBlock__remainder*/
+.organizationProposalInfoBlock__remainder{
+    background: transparent;
+    z-index: 5;
+    width: 100%;
+    top:46%; 
+    margin-bottom: 10px;
+    font-size:18px;
+}
+
+.colorTheme_color .organizationProposalInfoBlock__remainder{
+    display:none;
+}
+
+.colorTheme_blackLite .organizationProposalInfoBlock__remainder{
+    display:none;
+}

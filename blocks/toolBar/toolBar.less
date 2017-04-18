@@ -1,0 +1,77 @@
+﻿.toolBar__button, .buttonChahgeColorTheme, .buttonChahgeFormatTheme {               
+    background:@color-work;
+    width: 60px;
+    height: 100%;
+    border-radius:4px;
+    border-width:0px;
+    padding: 0px;
+    display:inline-block;
+}
+
+.toolBar{
+    background: transparent;
+     height: 100%;
+     width:100%;
+     position:absolute;
+     z-index:20;
+}
+
+.colorTheme_black .toolBar__button,
+.colorTheme_black .buttonChahgeFormatTheme{
+   background:black
+}
+
+.colorTheme_color .buttonChahgeColorTheme,
+.colorTheme_color .buttonChahgeFormatTheme,
+.colorTheme_blackLite .buttonChahgeColorTheme,
+.colorTheme_blackLite .buttonChahgeFormatTheme{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.buttonChahgeColorTheme{
+    background:#28303b;
+    margin-bottom:5px;
+}
+.colorTheme_black .buttonChahgeColorTheme{
+   background:white;
+   border:2px solid black;
+}
+.colorTheme_blackLite .buttonChahgeColorTheme{
+   background:white; 
+}
+
+.formatTheme_horizontalSmall .buttonChahgeFormatTheme{
+   background:white;   
+}
+.colorTheme_black .buttonChahgeFormatTheme{
+   border:2px solid black;
+}
+
+.toolBarButton__icon, .toolBarButton__iconFormat, .toolBarButton__iconColor{
+    font-size:3em;
+    color:white;
+}
+
+.colorTheme_black .toolBarButton__icon,
+.colorTheme_black .toolBarButton__iconFormat,
+.colorTheme_blackLite .toolBarButton__icon,
+.colorTheme_blackLite .toolBarButton__iconFormat{
+    font-size:3em;
+}
+
+.colorTheme_black .toolBarButton__iconColor{
+   font-size:3em;
+   color:black;
+}
+.colorTheme_blackLite .toolBarButton__iconColor{
+   font-size:3em;
+   color:#28303b;
+}
+.formatTheme_horizontalSmall .toolBarButton__iconFormat{   
+   color:black;
+}
+
+.formatTheme_vertical .buttonChahgeFormatTheme{
+    display:none;
+}
+

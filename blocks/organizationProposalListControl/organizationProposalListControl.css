@@ -1,0 +1,234 @@
+/*organizationProposalsList*/
+.organizationProposalsList{
+    background: #ffffff;
+    z-index: 5;
+    width: 100%;
+    overflow-y: hidden;
+    height: 100%;
+    position: absolute;    
+}
+
+
+.colorTheme_color .organizationProposalsList,
+.colorTheme_blackLite .organizationProposalsList{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border:1px solid transparent;
+}
+
+.colorTheme_black .organizationProposalsList{
+    border:1px solid black;
+}
+
+/*organizationProposalsList__headBlock*/
+.organizationProposalsList__headBlock{
+    background: transparent;
+    z-index: 5;
+    width: 100%;
+    height: 60px;
+}
+
+/*organizationProposalsListHeadBlock__titleBlock*/
+.organizationProposalsListHeadBlock__titleBlock{
+    background: transparent;
+    z-index: 5; position:absolute;
+    width: 95%;
+    height: 60px;
+    padding:0px 10px 0px 10px;
+    font-size: 30px;
+}
+
+/*organizationProposalsListTitleBlock__title*/
+.organizationProposalsListTitleBlock__title{
+    width: 100%;
+    height: 100%; 
+    font-size: 30px;
+}
+
+/*organizationProposalsListHeadBlock__closeBlock*/
+.organizationProposalsListHeadBlock__closeBlock{
+    background: transparent;
+    z-index: 5; position:absolute;
+    width: 60px;
+    height: 60px;
+    right:0px;
+}
+
+/*organizationProposalsListCloseBlock__button*/
+.organizationProposalsListCloseBlock__button{
+    width: 60px;
+    height: 60px; 
+    background:transparent;
+    border-radius:4px;
+    border-width:0px;
+    padding: 0px;
+}
+
+/*organizationProposalsListCloseButton__icon*/
+.organizationProposalsListCloseButton__icon{
+    font-size: 3em;
+    color:black
+}
+
+/*organizationProposalsList__listBlock*/
+.organizationProposalsList__listBlock{
+    background: transparent;
+    position: absolute;
+    width: 100%;
+    height: 92.5%;
+    z-index: 5;
+    padding: 0px;
+}
+
+/*organizationProposalsListBlock__list*/
+.organizationProposalsListBlock__list{
+    height: 100%;
+    padding-left:10px;
+    display: block;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+    background:transparent;
+}
+
+/*organizationProposalsListBlock__listElement*/
+.organizationProposalsListBlock__listElement{
+    background: transparent;
+    height: 25.1748%;
+    width: 48.75%;
+    float: left;
+    border-radius: 0px;
+    padding: 0px;
+    border: 1px solid transparent;
+    margin-bottom: 10px;
+    margin-right: 1.25%;
+}
+
+.colorTheme_black .organizationProposalsListBlock__listElement{
+    background:black;
+    border-radius: 0;
+}
+/*organizationProposalsListElement_logoBlock*/
+.organizationProposalsListElement_logoBlock{
+    position: absolute;
+    height: 100%;
+    width: 46.875%;
+}
+.colorTheme_black .organizationProposalsListElement_logoBlock{
+    width: 0;
+}
+
+/*organizationProposalsListElement_logo*/
+.organizationProposalsListElement_logo{
+    height: 100%;
+    background: transparent;
+    position: absolute;
+    width: 100%;
+}
+
+/*organizationProposalsListElement_image*/
+.organizationProposalsListElement_image{
+    height: 100%; 
+    width: 100%; 
+    /*object-fit: contain;*/
+    object-fit: cover;
+}
+
+/*organizationProposalsListElement_infoBlock*/
+.organizationProposalsListElement_infoBlock{
+    position: absolute;
+    height: 100%;
+    width:53.125%;
+    left: 46.875%;
+}
+
+.colorTheme_black .organizationProposalsListElement_infoBlock{
+    width:100%;
+    left: 0;
+    color:white;
+}
+
+/*organizationProposalsListElement_info*/
+.organizationProposalsListElement_info{
+    background:transparent;
+    position: absolute;
+    width:100%;
+    height: 100%;
+    padding-left: 10px;
+}
+
+/*organizationProposalsListElement_name*/
+.organizationProposalsListElement_name{
+    background:transparent;
+    position: relative;
+    width:100%;
+    height: auto;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform:uppercase;
+}
+
+.colorTheme_black .organizationProposalsListElement_name{
+    font-size: 24px;
+    text-transform:uppercase;
+}
+
+.colorTheme_blackLite .organizationProposalsListElement_name{
+    font-size: 24px;
+    text-transform:uppercase;
+}
+
+/*organizationProposalsListElement_summary*/
+.organizationProposalsListElement_summary{
+    background:transparent;
+    position: relative;
+    width:100%;
+    height: auto;
+    max-height:68%;
+    font-size: 14px;
+    white-space: normal;
+    overflow: hidden;
+    margin-top:10px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+.colorTheme_black .organizationProposalsListElement_summary,
+.colorTheme_blackLite .organizationProposalsListElement_summary{
+    max-height:56%;
+    font-size: 20px;
+    -webkit-line-clamp: 4;
+}
+
+
+.formatTheme_horizontalSmall .organizationProposalsListElement_summary{
+    max-height:54%;
+    -webkit-line-clamp: 4;
+}
+
+.formatTheme_horizontalSmall.colorTheme_black .organizationProposalsListElement_summary,
+.formatTheme_horizontalSmall.colorTheme_blackLite .organizationProposalsListElement_summary{
+    max-height:42%;
+    -webkit-line-clamp: 2;
+}
+/*organizationProposalsListElement_remainder*/
+.organizationProposalsListElement_remainder{
+    background:transparent;
+    position: relative;
+    width:100%;
+    height: 17%;
+    font-size: 18px;
+    font-weight:600;
+    margin-top:10px;
+}
+.colorTheme_black .organizationProposalsListElement_remainder,
+.colorTheme_blackLite .organizationProposalsListElement_remainder{    
+    font-size: 20px;
+}
+
+.formatTheme_horizontalSmall .organizationProposalsList .vertical,
+.formatTheme_horizontal .organizationProposalsList .vertical{
+    display:none;
+}

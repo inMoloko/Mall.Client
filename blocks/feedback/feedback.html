@@ -1,0 +1,17 @@
+﻿<!--<script type="text/ng-template" id="proposals.html">-->
+<div class="appContainer__basicArea">
+    <div class="appContainer__headBlock appContainer__proposalsHeadBlock">
+        <div class="proposals__headBlock" ng-include="'blocks/headControl/headControl.html'"></div>
+    </div>
+    <div class="appContainer__workspaceBlock appContainer__feedbackWorkspaceBlock">
+        <div ui-view="feedbackCategory@feedback" ></div>
+        <div ui-view="feedbackMark@feedback" ></div>
+        <div ui-view="feedbackMessage@feedback" ></div>
+        <!--style="position: absolute;top: 0px;bottom: 0px;right: 160px;width: 95.57292%;background: #ffffff;box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.2);"-->
+    </div>
+
+    <div class="proposals__toolBar">
+        <div ng-include="'blocks/toolBar/toolBar.html'" style="position: absolute;left: 30px;right: 0px;height: 100%;"></div>
+    </div>
+</div>
+<!--</script>-->

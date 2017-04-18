@@ -1,0 +1,79 @@
+/*proposalControl*/
+.proposalControl{
+    background: #ffffff;
+    z-index: 5;
+    width: 100%;
+    overflow-y: hidden;
+    height: 100%;
+    position: absolute;
+}
+
+.colorTheme_color .proposalControl,
+.colorTheme_blackLite .proposalControl{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border:1px solid transparent;
+}
+
+.colorTheme_black .proposalControl{    
+    border:1px solid black;
+}
+
+/*organizationProposalInfoBlock__toMap*/
+.colorTheme_color .organizationProposalInfoBlock__toMap, 
+.colorTheme_color .organizationProposalInfoBlock__remainder{
+    display:none;
+}
+
+
+/*organizationProposal__imageBlock*/
+.organizationProposal__imageBlock{
+    width:45%;
+}
+.colorTheme_black .organizationProposal__imageBlock{
+    width:0;
+    display:none;
+}
+
+
+
+/*organizationProposal__infoBlock*/
+.organizationProposal__infoBlock{
+    width:55%;
+}
+.colorTheme_black .organizationProposal__infoBlock{
+    width:100%;
+    padding-left:10px;
+}
+
+/*organizationProposalInfoBlock__name*/
+.organizationProposalInfoBlock__name{
+    display: -moz-inline-box;
+    display: inline-block;
+    vertical-align: middle;
+    width: 99%;
+    font-size: 24px;
+    margin-top:10px;
+    margin-bottom:35px;
+}
+
+.colorTheme_black .organizationProposalInfoBlock__name{    
+    margin-bottom:5px;
+}
+
+/*organizationProposalInfoBlock__description*/
+.organizationProposalInfoBlock__description{
+    position: relative;
+    background: transparent;
+    padding-right:16px;
+    /*padding-left: 10px;overflow: auto;*/
+    font-size:14px;
+}
+.colorTheme_black .organizationProposalInfoBlock__description,
+.colorTheme_blackLite .organizationProposalInfoBlock__description{    
+    font-size:20px;
+}
+
+.formatTheme_horizontal .proposalControl vertical.vertical,
+.formatTheme_horizontalSmall .proposalControl vertical.vertical{
+    display:none;
+}

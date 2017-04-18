@@ -1,0 +1,11 @@
+﻿<div class="screensaverControl" ng-click="closeScreenSaver()">    
+    <ul id="slides" >
+        <li class="slide showing" style="position: initial;" >
+            <img class="screensaverControl__image" moloko-image-source="::customer.Logo" />
+        </li>
+        <li class="slide " style="position: initial;" ng-repeat="item in banners">
+            <img class="screensaverControl__image"  moloko-image-source="item.Image"/>
+        </li>        
+    </ul>
+    <span class="screensaverControl__text" >Прикоснитесь, чтобы перейти на главную страницу</span>
+</div>

@@ -1,0 +1,12 @@
+﻿.formatTheme_horizontalSmall .appContainer__feedbackWorkspaceBlock{
+    top: 130px;
+    bottom: 30px;
+}
+
+.formatTheme_horizontal .appContainer__feedbackWorkspaceBlock{ 
+    top: 170px;
+}
+
+.formatTheme_vertical .appContainer__feedbackWorkspaceBlock{
+    top:155px;
+}

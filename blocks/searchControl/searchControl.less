@@ -1,0 +1,261 @@
+﻿.colorTheme_color .searchButton__icon,
+.colorTheme_color .homeButton__icon{    
+    color: @color-work;
+    font-size: 2em; 
+}
+
+.categoryBlock_categoryButton{
+    background-color: @color-work;
+    color: white;
+    height: 60px;
+    width:100%;
+    border-bottom-left-radius: 4px;
+    border-top-left-radius: 4px;
+    padding: 14px;
+    font-size: 20px;
+    text-align: left;
+    border: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.listCategory_item_active{ 
+    background-color: @color-work;
+    color: white;
+}
+
+.colorTheme_color .showList.categoryBlock_categoryButton{ 
+    color: @color-work;
+    background:white;
+}
+
+.categoryBlock_categoryButtonArrow{
+    background: @color-work;
+    width: 30px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.searchControl {               
+    background: transparent;
+    z-index: 5;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+}
+
+.searchControl__buttonBlock{
+    background: transparent;
+    z-index: 5;
+    width: 60px;
+    height: 60px;
+    left:0;
+    position: absolute;
+}
+
+.formatTheme_vertical .searchControl__buttonBlock{ 
+    left:20px;
+}
+
+.homeButtonBlock__homeButtonBlock{
+    background: transparent;
+    z-index: 5; position:absolute;
+    width: 100%;
+    height: 60px;
+}
+
+.homeButtonBlock__homeButton{
+    width: 100%;
+    height: 60px; 
+    background:transparent;
+    border-radius:4px;
+    border-width:0px;
+    padding: 0px;
+}
+
+.homeButton__icon
+{
+    font-size: 2em;    
+}
+
+.colorTheme_black .homeButton__icon{
+    color:black;
+    font-size: 3em;    
+}
+
+.colorTheme_blackLite .homeButton__icon{
+    font-size: 3em;    
+}
+
+.searchControl__searchBlock{
+    background: transparent;
+    z-index: 5;                
+    height: 60px;
+    left:260px;
+    right:20px;
+    display: flex;
+    position: absolute;
+}
+
+.formatTheme_vertical .searchControl__searchBlock{
+    background: transparent;
+    z-index: 5;                
+    height: 60px;
+    left:220px;
+}
+
+.searchBlock__input{
+    width: 100%;
+    height:60px;
+    border-bottom-right-radius: 4px;                    
+    border-top-right-radius: 4px;                    
+    right:0px;
+    position:absolute;
+    padding-left: 10px;
+    padding-right: 40px;
+    font-size: 18px;
+}
+
+.colorTheme_color .searchBlock__input{    
+    border: 1px solid transparent;
+}
+.colorTheme_blackLite .searchBlock__input{    
+    border: 1px solid transparent;
+}
+.colorTheme_black .searchBlock__input{
+    border: 1px solid black;
+    text-transform:uppercase;
+}
+
+.searchBlock__searchButtonBlock{
+    background: transparent;
+    z-index: 5;
+    width: 40px;
+    height: 100%;
+    right:5px;
+    position: absolute;
+}
+
+.searchButtonBlock__searchButton{
+    width: 100%;
+    height: 100%; 
+    background:transparent;
+    border-radius:4px;
+    border-width:0px;
+    padding: 0px;
+    max-width: 40px;
+}
+
+.searchButton__icon{
+    font-size: 2em;    
+}
+
+.colorTheme_black .searchButton__icon{
+    color:black;
+    font-size: 3em;    
+}
+
+.colorTheme_black .searchButton__icon{
+    font-size: 3em;    
+}
+
+.searchControl__categoryBlock{
+    background: transparent;
+    z-index: 5;
+    width: 200px;
+    display: inline-block;
+    height: 60px;
+    font-size: 18px;
+    left:60px;
+    position: absolute;
+}
+
+.formatTheme_vertical .searchControl__categoryBlock{    
+    left:20px;
+}
+
+.colorTheme_black .categoryBlock_categoryButton{
+    background-color: black;
+}
+.categoryButton_icon{
+    color:white;
+    color: white;
+    position: absolute;
+    right: 7px;
+    top: 25px;
+    font-size: 13px;
+}
+
+.categoryBlock_listCategoryTriangle{
+    display: none;
+    background: transparent;
+    width: 15px;
+    border: 7px transparent solid;
+    border-bottom: 7px white solid;
+    position: absolute;
+    bottom: -10px;left: 180px;
+}
+
+.colorTheme_black .categoryBlock_listCategoryTriangle{
+    border-bottom: 7px black solid;  
+}
+
+
+.formatTheme_horizontalSmall .categoryBlock_listCategoryTriangle {
+    top: -15px;
+    transform: rotate(180deg)
+}
+.categoryBlock_listCategory{
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    margin-top: 10px;
+    min-width: 160px;
+    width: 500px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    max-height: 600px;
+    overflow: scroll;
+    border-radius:4px;
+    overflow-x: hidden;
+}
+
+.colorTheme_black .categoryBlock_listCategory{
+    background-color: black;
+}
+.formatTheme_horizontalSmall .categoryBlock_listCategory {
+    max-height: 440px;
+    margin-top: -515px;
+}
+
+.listCategory_item{
+    color: black;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e4e1e1;
+    text-decoration: none;
+    display: block;
+}
+.listCategory_item_sub{
+    margin-left:15px;
+}
+.listCategory_item_sub.listCategory_item_active{
+    margin-left:15px;
+}
+
+.colorTheme_black .listCategory_item{
+    color: white;
+}
+
+
+.colorTheme_blackLite .showList.categoryBlock_categoryButton{
+    background:white;
+}
+
+.colorTheme_black .categoryBlock_categoryButtonArrow{    
+    background: black;
+}
+
+.formatTheme_vertical .searchControl__block{
+    padding-top:70px;
+}

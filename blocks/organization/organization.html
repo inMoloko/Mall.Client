@@ -1,0 +1,245 @@
+﻿<div class="organization" style="padding-bottom:100px;" >
+    <div class="organization__headBlock" style="flex-basis: 31.9677%;">
+        <div style="width: 100%;height: 100%;display: flex;">
+            <div class="headBlock__logoBlock" ng-class="{'white':'{{currentOrganization.LogoBaseColor.substring(3)}}'==='FFFFFF'}" style="flex-basis: 64%;background: #{{currentOrganization.LogoBaseColor.substring(3)}};">
+                <img class="img-responsive logoBlock__organizationLogo" moloko-image-api="$root.currentOrganization.OrganizationID" url="/Organization/:id/Logo"
+                    default-src="/Customer/Logo" alt="{{::item.Organization.Name}}">
+            </div>
+            <div style="flex-basis: 40%;">
+                <div style="width: 100%;height: 100%;display: flex;flex-direction: column;align-items: flex-end;justify-content: space-between;">
+                    <div style="width: 60px;height: 60px;">
+                        <button class="organizationCloseBlock_closeButton" ui-sref="^" ng-click="closeOrganization()">
+                                <div class="organizationCloseButton__iconBlock">
+                                    <i class="iconMall-iconClose organizationCloseButton__icon"></i>
+                                </div>
+                            </button>
+                    </div>
+                    <div class="organizationsHeadBlock__closeButtonBlock" ng-click="hide()" style="right:60px;height: auto;">
+                        <button class="closeButtonBlock_closeButton">
+                            <i class="iconMall-iconArrowUp closeButton_icon"></i>
+                        </button>
+                    </div>
+                    <div style="margin-right: 10px;">
+                        <div class="headBlock_organizationFloor">
+                            <span ng-bind="getFloors(currentOrganization)"></span> ЭТАЖ
+                        </div>
+                        <div ng-if="currentOrganization.megacard" style="width: 60px;height: 30px;background: #ffffff;margin-left: -174px;position: absolute;margin-top: -30px;"
+                            class="ng-scope">
+                            <i class="iconMall-iconMegacard " style="font-size:60px;margin-bottom:-15px;color:black;position: absolute;top: -15px;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="organization__nameBlock" style="">
+        <div class="organizationNameBlock__name">
+            {{currentOrganization.Name}}
+        </div>
+    </div>
+    <div class="organization__categoryBlock">
+        <div class="organizationCategoryBlock__category" ng-bind="currentOrganization.CategoryOrganization|limitTo:6|joinBy:', ':'Category.Name'">
+        </div>
+    </div>
+    <div class="organization__proposalsBlock"  ng-show="proposals.length!==0&&!isVisibleSendPathControl"  ng-click="openProposal()">
+        <div style="width: 100%;height: 100%;display: flex;">
+            <div class="headBlock__logoBlock" style="flex-basis: 95%;max-width:95%">
+                <div class="organizationProposalBlock__toListProposalsBlock">
+                    АКЦИИ и СОБЫТИЯ в {{currentOrganization.Name}}
+                </div>
+            </div>
+            <div style="flex-basis: 5%;">
+                <button class="organizationToListProposalsArrowButton__button">
+                        <div class="organizationToListProposalsArrowButton__buttonIcon">
+                            <i class="organizationToListProposalsArrowButton__icon" route-class="{'navigation.organization':'iconMall-iconArrowRight','navigation.mainMenu.organization':'iconMall-iconArrowRight','navigation.searchResult.organization':'iconMall-iconArrowRight','navigation.mainMenu.organization.proposalsList':'iconMall-iconArrowLeft','navigation.searchResult.organization.proposalsList':'iconMall-iconArrowLeft','navigation.mainMenu.organization.proposalsList.proposal':'iconMall-iconArrowLeft','navigation.searchResult.organization.proposalsList.proposal':'iconMall-iconArrowLeft'}" ></i>
+                        </div>
+                    </button>
+            </div>
+        </div>
+    </div>
+    <div class="organization__proposalsBlock" ng-show="currentOrganization.OrganizationID==cinemaID&&!isVisibleSendPathControl">
+        <div style="width: 100%;height: 100%;display: flex;">
+            <div class="headBlock__logoBlock" style="flex-basis: 95%;max-width:95%">
+                <div class="organizationProposalBlock__toListProposalsBlock" ng-click="openTimetable()">
+                    Расписание сеансов в {{currentOrganization.Name}}
+                </div>
+            </div>
+            <div style="flex-basis: 5%;">
+                <button class="organizationToListProposalsArrowButton__button" ng-click="openTimetable()">
+                        <div class="organizationToListProposalsArrowButton__buttonIcon">
+                            <i class="organizationToListProposalsArrowButton__icon" route-class="{'navigation.mainMenu.organization':'iconMall-iconArrowRight','navigation.searchResult.organization':'iconMall-iconArrowRight','navigation.searchResult.organization.cinemaTimetable':'iconMall-iconArrowLeft','navigation.searchResult.organization.proposalsList':'iconMall-iconArrowLeft'}" ></i>
+                        </div>
+                    </button>
+            </div>
+        </div>
+    </div>
+    <div class="organization__sendPathBlock" ng-show="isVisibleSendPathControl">
+        <div style="display: flex;">
+            <div class="headBlock__logoBlock" style="flex-basis: 95%;max-width:95%">
+                <div class="organizationProposalBlock__toListProposalsBlock">
+                   ОТПРАВКА МАРШРУТА
+                </div>
+            </div>
+            <div style="flex-basis: 5%;">
+                <button class="organizationToListProposalsArrowButton__button" ng-click="closeSendPathControl()">
+                    <div class="organizationToListProposalsArrowButton__buttonIcon">
+                        <i class="organizationToListProposalsArrowButton__icon iconMall-iconClose"></i>
+                    </div>
+                </button>
+            </div>
+        </div>
+        <div class="sendPathBlock__botPath" ng-hide="selectedSendSection === 'mail'">
+            <div style="flex-grow:1;"></div>
+            <div class="botPath__info">
+                {{botAddress}}
+                <!--<img src="../../Content/images/QRCode.png" style="width:100px;margin-left:30px"/>-->
+                <qrcode data="{{botUrl}}" size="100" style="width:100px;margin-left:30px"></qrcode>
+            </div>
+            <div class="botPath__info2">
+                Перейдите по ссылке и отправьте
+                в сообщении следующий код:
+            </div>
+            <div class="botPath__info3" ng-bind="code">
+            </div>
+            <div style="flex-grow:1;" ></div>
+        </div>
+
+        <div class="sendPathBlock__mail"  ng-hide="selectedSendSection != 'mail'">
+            <div style="flex-grow:1;"></div>
+            <div class="sendPathBlock__mailInfo">
+                Введите здесь свой email-адрес:
+            </div>
+            <div class="sendPathBlock__mailInfo2">
+                <input class="sendPathBlock__mailInput" keyboard  placeholder="example@mail.com" ng-model="mail" />
+                <button class="sendPathBlock__mailButton" ng-click="sendMail(mail)" ng-disabled="!mail||isBusy">
+                    Отправить
+                </button>
+            </div>            
+            <div style="flex-grow:1;"></div>
+        </div>
+    </div>
+    <div class="organization__descriptionBlock" ng-hide="isVisibleSendPathControl">
+        <div style="height:100%" >
+            {{currentOrganization.Description}}
+        </div>
+    </div>
+    
+</div>
+
+<div class="organization__sendPathButton" ng-click="openSendPathControl()">
+    <div class="parent" style="width: 100%;height: 100%;text-align: center;" ng-hide="isVisibleSendPathControl">
+        <div class="child" style="display: -moz-inline-box;
+                     display: inline-block;
+                     vertical-align: middle;
+                     font-size: 18px;
+                     color:white">
+            <i class="iconMall-iconMail" style="font-size:40px;color:white;position: absolute;margin-left: -70px;margin-top: -10px;"></i> Получить маршрут на телефон
+        </div>
+        <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
+    </div>
+    <div class="sendPathBlock__selectSection" ng-show="isVisibleSendPathControl">
+        <div style="flex-grow:1"></div>
+        <div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('vk')">
+            <button style="background:white; border:4px solid #5075A5; width: 60px; height:60px; border-radius:50%;margin-top:10px;">
+                <i class="iconMall-iconVK" style="font-size: 35px;color:#5075A5;"></i>
+            </button>
+            <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'vk'" ></div>
+        </div>
+
+        <div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('telegram')">
+            <button style="background:white; border:4px solid white; width: 60px; height:60px; border-radius:50%;margin-top:10px;">
+                <img src="../../Content/images/telegram_logo.png" style="width: 52px;margin-left: -6px;margin-top: -1px;" />
+            </button>
+            <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'telegram'" ></div>
+        </div>
+
+        <div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('facebook')">
+            <button style="background:white; border:4px solid #295396; width: 60px; height:60px; border-radius:50%;margin-top:10px;">
+                <i class="iconMall-iconFacebook" style="font-size: 35px;color:#295396;"></i>
+            </button>
+            <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'facebook'" ></div>
+        </div>
+        <div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('mail')">
+            <button style="background:white; border:4px solid #0094ff; width: 60px; height:60px; border-radius:50%;margin-top:10px;">
+                <i class="iconMall-iconMail" style="font-size: 35px;color:#0094ff;"></i>
+            </button>
+            <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'mail'"></div>
+        </div>
+        <div style="flex-grow:1">
+        </div>
+    </div>
+</div>
+
+<div class="organizationBlack" style="background: #ffffff;
+     width: 96%;
+     height: 100%;
+     position: absolute;
+     z-index: 5;
+     left: 4%;
+     border: 1px solid black;">
+
+    <div class="organization" style="height: 100%;
+         width: 100%;
+         background: #ffffff;
+         display: flex;
+         flex-direction: column;
+         align-content: space-around;">
+        <div class="organization__headBlock" style="height: auto;">
+            <div style="width: 100%;height: 100%;display: flex;">
+                <div class="headBlock__logoBlock" style="width:90%;">
+                    <div class="organization__nameBlock" style="">
+                        <div class="organizationNameBlock__name">
+                            {{currentOrganization.Name}}
+                        </div>
+                    </div>
+                </div>
+                <div style="">
+                    <div style="width: 100%;height: 100%;display: flex;flex-direction: column;align-items: flex-end;justify-content: space-between;">
+                        <div style="width: 60px;">
+                            <button class="organizationCloseBlock_closeButton" style="height: auto;" ui-sref="^" ng-click="closeOrganization()">
+                                <div class="organizationCloseButton__iconBlock" style="height: auto;">
+                                    <i class="iconMall-iconClose organizationCloseButton__icon"></i>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .colorTheme_black::-webkit-scrollbar-thumb {
+                background: black;
+            }
+            
+            .colorTheme_black::-webkit-scrollbar-track {
+                background: white;
+            }
+        </style>
+
+        <div class="organization__categoryBlock" style="margin-bottom: 10px;">
+            <div class="organizationCategoryBlock__category" style="font-size:20px;" ng-bind="currentOrganization.CategoryOrganization|limitTo:6|joinBy:', ':'Category.Name'"></div>
+        </div>
+        <div class="organization__proposalsBlock" ng-show="proposals.length!==0" ng-click="openProposal()">
+            <div style="width: 100%;height: 100%;display: flex;">
+                <div class="headBlock__logoBlock" style="flex-basis: 95%;">
+                    <div class="organizationProposalBlock__toListProposalsBlock" >
+                        АКЦИИ и СОБЫТИЯ в {{currentOrganization.Name}}
+                    </div>
+                </div>
+                <div style="flex-basis: 5%;">
+                    <button class="organizationToListProposalsArrowButton__button" >
+                        <div class="organizationToListProposalsArrowButton__buttonIcon">
+                            <i class="iconMall-iconArrowRight organizationToListProposalsArrowButton__icon"></i>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="organization__descriptionBlock" style="font-size:20px;">
+            {{currentOrganization.Description}}
+        </div>
+
+    </div>
+</div>

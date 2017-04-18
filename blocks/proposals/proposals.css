@@ -1,0 +1,95 @@
+﻿
+/*appContainer__proposalsHeadBlock */
+.formatTheme_horizontalSmall .appContainer__proposalsHeadBlock {
+    top:20px;
+}
+
+.formatTheme_vertical .appContainer__proposalsHeadBlock {
+    height:100px;
+}
+
+/*appContainer__proposalsWorkspaceBlock*/
+.formatTheme_horizontalSmall .appContainer__proposalsWorkspaceBlock{
+    top: 130px;
+    bottom: 30px;
+}
+
+.formatTheme_horizontal .appContainer__proposalsWorkspaceBlock{ 
+    top: 170px;
+}
+
+.formatTheme_vertical .appContainer__proposalsWorkspaceBlock{ 
+    top: 155px;
+    right:60px;
+
+}
+
+.formatTheme_vertical .workspaceBlock__proposalSideBlock{
+    width:100%;
+}
+
+/*proposals__headBlock*/
+.proposals__headBlock{
+    position:absolute;
+    left:0px;
+    height: 100%;
+    /*right: 4.42708%;*/
+    right: 160px;
+    background: #ffffff;
+}
+
+.formatTheme_horizontal .proposals__headBlock {
+    right: 160px;
+}
+
+.formatTheme_horizontalSmall .proposals__headBlock {
+    right: 160px;
+}
+
+.formatTheme_vertical .proposals__headBlock {
+    right: 60px;
+}
+
+.transport__imageBlock{
+    background:white;
+}
+
+
+.proposals__toolBar{
+    background:transparent;    /**/ 
+    height: 60px;
+    /**/bottom:30px;
+    /**/position:absolute;
+
+    width: 60px;
+    bottom: 95px;
+    right: 80px;
+}
+
+.formatTheme_horizontal .proposals__toolBar{
+    /*width:100%;
+    bottom:30px;*/
+    width: 60px;
+    bottom: 95px;
+    right: 80px;
+}
+
+.formatTheme_horizontalSmall .proposals__toolBar{
+    /*width: 60px;
+    bottom: 90px;
+    right: 60px;*/
+    width: 60px;
+    bottom: 95px;
+    right: 80px;
+}
+
+.formatTheme_vertical .proposals__toolBar{    
+    width: 100%;    
+    bottom:30px;
+    right: 0px;
+}
+
+.formatTheme_vertical .appContainer__proposalInfoBlock{
+    left:30px;
+    right:0;
+}

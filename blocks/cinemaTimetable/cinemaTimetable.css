@@ -1,0 +1,279 @@
+/*cinemaTimetable*/
+.cinemaTimetable{
+    background: #ffffff;
+    z-index: 5;
+    width: 100%;
+    overflow-y: hidden;
+    height: 100%;
+    position: absolute;    
+}
+
+
+.colorTheme_color .cinemaTimetable,
+.colorTheme_blackLite .cinemaTimetable{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border:1px solid transparent;
+}
+
+.colorTheme_black .cinemaTimetable{
+    border:1px solid black;
+}
+
+/*cinemaTimetable__headBlock*/
+.cinemaTimetable__headBlock{
+    background: transparent;
+    z-index: 5;
+    width: 100%;
+    height: 60px;
+}
+
+/*cinemaTimetableHeadBlock__titleBlock*/
+.cinemaTimetableHeadBlock__titleBlock{
+    background: transparent;
+    z-index: 5; position:absolute;
+    width: 95%;
+    height: 60px;
+    padding:0px 10px 0px 10px;
+    font-size: 30px;
+}
+
+/*cinemaTimetableTitleBlock__title*/
+.cinemaTimetableTitleBlock__title{
+    width: 100%;
+    height: 100%; 
+    font-size: 30px;
+}
+
+/*cinemaTimetableHeadBlock__closeBlock*/
+.cinemaTimetableHeadBlock__closeBlock{
+    background: transparent;
+    z-index: 5; position:absolute;
+    width: 60px;
+    height: 60px;
+    right:0px;
+}
+
+/*cinemaTimetableCloseBlock__button*/
+.cinemaTimetableCloseBlock__button{
+    width: 60px;
+    height: 60px; 
+    background:transparent;
+    border-radius:4px;
+    border-width:0px;
+    padding: 0px;
+}
+
+/*cinemaTimetableCloseButton__icon*/
+.cinemaTimetableCloseButton__icon{
+    font-size: 3em;
+    color:black
+}
+
+/*cinemaTimetable__listBlock*/
+.cinemaTimetable__listBlock{
+    background: transparent;
+    position: absolute;
+    width: 100%;
+    height: 92.5%;
+    z-index: 5;
+    padding: 0px;
+}
+
+/*cinemaTimetableBlock__list*/
+.cinemaTimetableBlock__list{
+    height: 100%;
+    padding-left:10px;
+    display: block;
+    overflow: auto;
+    overflow-x: hidden;
+    margin-bottom: 0px;
+    background:transparent;
+}
+
+/*cinemaTimetableBlock__listElement*/
+.cinemaTimetableBlock__listElement{
+    background: transparent;
+    /* height: 100%; */
+    width: 97.5%;
+    float: left;
+    border-radius: 0px;
+    padding: 0px;
+    border: 1px solid transparent;
+    margin-bottom: 10px;
+    margin-right: 1.25%;
+}
+
+.colorTheme_black .cinemaTimetableBlock__listElement{
+    background:black;
+    border-radius: 0;
+}
+/*cinemaTimetableElement_logoBlock*/
+.cinemaTimetableElement_logoBlock{
+    /* position: absolute; */
+    /* height: 100%; */
+    width: 33.33%;
+}
+.colorTheme_black .cinemaTimetableElement_logoBlock{
+    width: 0;
+}
+
+/*cinemaTimetableElement_logo*/
+.cinemaTimetableElement_logo{
+    /* height: 100%; */
+    background: transparent;
+    /*position: absolute;*/
+    float: left;
+    width: 100%;
+}
+
+/*cinemaTimetableElement_image*/
+.cinemaTimetableElement_image{
+    height: 100%; 
+    width: 100%; 
+    /*object-fit: contain;*/
+    object-fit: cover;
+}
+
+/*cinemaTimetableElement_infoBlock*/
+.cinemaTimetableElement_infoBlock{
+    /*position: absolute;*/
+    /*height: 100%;*/
+    float: right;
+    width:66.66%;
+    left: 33.33%;
+}
+
+.colorTheme_black .cinemaTimetableElement_infoBlock{
+    width:100%;
+    left: 0;
+    color:white;
+}
+
+/*cinemaTimetableElement_info*/
+.cinemaTimetableElement_info{
+    background:transparent;
+    /*position: absolute;*/
+    width:100%;
+    height: 100%;
+    padding-left: 10px;
+}
+
+/*cinemaTimetableElement_name*/
+.cinemaTimetableElement_name{
+    background:transparent;
+    position: relative;
+    width:100%;
+    height: auto;
+    font-size: 18px;
+    /* white-space: nowrap; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform:uppercase;
+    font-size: 24px;
+}
+
+.colorTheme_black .cinemaTimetableElement_name{
+    font-size: 24px;
+    text-transform:uppercase;
+}
+
+.colorTheme_blackLite .cinemaTimetableElement_name{
+    font-size: 24px;
+    text-transform:uppercase;
+}
+
+/*cinemaTimetableElement_summary*/
+.cinemaTimetableElement_summary{
+    background:transparent;
+    position: relative;
+    width:100%;
+    height: auto;
+    max-height:68%;
+    font-size: 14px;
+    white-space: normal;
+    overflow: hidden;
+    margin-top:10px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+.cinemaTimetableElement_time{
+    /* height: 40px; */
+}
+.cinemaTimetableElement_time__item{
+    display: inline-block;
+    width: 13em;
+    margin-right: 5px;
+    border: 1px solid #c3c6cd;
+}
+.cinemaTimetableElement_time__item .tr {
+    display: table-row;
+}
+.cinemaTimetableElement_time__item .tr div {
+    display: table-cell;
+    padding: 0.3em;
+    width: 6.5em;
+    text-align: center;
+    vertical-align: middle;
+}
+.cinemaTimetableElement_time__item .tr:hover div {
+    background: #33509B;
+    color: white;
+}
+.cinemaTimetableElement_time__item .tr div:first-child {
+    font-size: 1.8em;
+}
+.cinemaTimetableElement_time__item .tr div:last-child {
+    background: #dddfe5;
+}
+.cinemaTimetableElement_time__item .tr:hover div:last-child {
+    background: white;
+    color: black;
+} 
+.colorTheme_black .cinemaTimetableElement_summary,
+.colorTheme_blackLite .cinemaTimetableElement_summary{
+    max-height:56%;
+    font-size: 20px;
+    -webkit-line-clamp: 4;
+}
+.cinemaTimetableElement_genre {
+    color: #006bc2;
+}
+
+.formatTheme_horizontalSmall .cinemaTimetableElement_summary{
+    max-height:54%;
+    -webkit-line-clamp: 4;
+}
+.cinemaTimetableElement_ageLimit{
+    border: solid 1px;
+    width: 32px;
+    height: 32px;
+    /* vertical-align: sub; */
+    text-align: center;
+    border-radius: 16px;
+    padding: 6px 0;
+    position: absolute;
+    right: 0;
+    /* bottom: 0; */
+    top: 0;
+}
+.formatTheme_horizontalSmall.colorTheme_black .cinemaTimetableElement_summary,
+.formatTheme_horizontalSmall.colorTheme_blackLite .cinemaTimetableElement_summary{
+    max-height:42%;
+    -webkit-line-clamp: 2;
+}
+/*cinemaTimetableElement_remainder*/
+.cinemaTimetableElement_remainder{
+    background:transparent;
+    position: relative;
+    width:100%;
+    /* height: 17%; */
+    font-size: 18px;
+    font-weight:600;
+    margin-top:10px;
+}
+.colorTheme_black .cinemaTimetableElement_remainder,
+.colorTheme_blackLite .cinemaTimetableElement_remainder{    
+    font-size: 20px;
+}

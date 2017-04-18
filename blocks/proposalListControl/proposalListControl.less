@@ -1,0 +1,147 @@
+.selected.proposalsListControlListBlock__listElement{
+    background:@color-base;
+}
+.proposalsListControlHeadBlock__iconClose{
+    color: @color-work;
+}
+
+.proposalsListControl{
+    background: #ffffff;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.colorTheme_color .proposalsListControl,
+.colorTheme_blackLite .proposalsListControl{
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border:1px solid transparent;
+    border-left:0px;
+}
+
+.colorTheme_black .proposalsListControl{
+    border:1px solid black;
+    background: black;
+    color:white;
+}
+
+.colorTheme_black .proposalsListControlHeadBlock__iconClose{ 
+    color:white;
+}
+
+.proposalsListControlHeadBlock__headSearchCount{
+    display: -moz-inline-box;
+    padding-left: 15%;
+    display: inline-block;
+    vertical-align: middle;    
+    font-size: 14px;
+}
+
+.colorTheme_black .proposalsListControlHeadBlock__headSearchCount,
+.colorTheme_blackLite .proposalsListControlHeadBlock__headSearchCount{    
+    font-size: 20px;
+    text-transform:uppercase;
+}
+
+.proposalsListControl__listBlock{
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    width: 100%;
+    margin-bottom: 0;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.proposalsListControlListBlock__listElement{
+    background: #ffffff;
+    height: 120px;
+    border-radius: 0px;
+    padding: 0px;
+    border: 0px solid transparent;
+    border-bottom: 1px solid #e4e1e1;
+    margin:0px;
+
+}
+
+.colorTheme_black .proposalsListControlListBlock__listElement{
+    background: black; 
+}
+.colorTheme_black .selected.proposalsListControlListBlock__listElement{
+    background: white; 
+    color:black;
+}
+
+.proposalsListControlListElement__imageBlock{
+    height: 120px;
+    border: 0px solid transparent;
+    border-bottom: 1px solid #e4e1e1;
+    position: absolute;
+    width: 180px;
+}
+
+.colorTheme_black .proposalsListControlListElement__imageBlock{    
+    width: 0;
+}
+
+.proposalsListControlListElement__infoBlock{
+    background:transparent;
+    position: absolute; 
+    height: 120px; 
+    max-width: 430px;
+    left: 180px;
+    padding-left: 15px;
+}
+
+.colorTheme_black .proposalsListControlListElement__infoBlock{
+    left: 20px;   
+    max-width: 100%; 
+}
+
+.proposalsListControlListElement__name{
+    font-size: 18px;
+    text-transform:uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+}
+
+.colorTheme_black .proposalsListControlListElement__name,
+.colorTheme_blackLite .proposalsListControlListElement__name{
+    font-size: 24px;
+    margin-top: 0px;
+}
+
+.proposalsListControlListElement__summary{
+    font-size: 14px;
+    max-height: 35px;
+    overflow: hidden;
+    margin-top: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.colorTheme_black .proposalsListControlListElement__summary,
+.colorTheme_blackLite .proposalsListControlListElement__summary{
+    font-size: 20px;
+    max-height: 50px;
+    margin-top: 2px;
+}
+
+.proposalsListControlListElement__remainder{
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+.colorTheme_black .proposalsListControlListElement__remainder,
+.colorTheme_blackLite .proposalsListControlListElement__remainder{
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.formatTheme_horizontal .proposalsListControlVertical,
+.formatTheme_horizontalSmall .proposalsListControlVertical{
+    display:none;
+}

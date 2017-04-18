@@ -1,0 +1,12 @@
+<div class="changeViewTypeControl" >
+    <div ui-sref="navigation.searchResult({ CategoryID: $root.currentCategory.CategoryID, Filter: $root.currentFilter })" class="changeViewTypeControl__mapTypeBlock" >
+        <button class="mapTypeBlock__mapButton" route-class="{'searchResultFull.result':'searchResultFull'}">
+            <i class="iconMall-iconMap mapButton__icon" route-class="{'searchResultFull.result':'searchResultFull'}"></i>
+        </button>
+    </div>
+    <div ui-sref="searchResultFull.result({ CategoryID: $root.currentCategory.CategoryID, Filter: $root.currentFilter })" class="changeViewTypeControl__listTypeBlock" >
+        <button class="listTypeBlock__listButton" route-class="{'searchResultFull.result':'searchResultFull'}">
+            <i class="iconMall-iconList listButton__icon" route-class="{'searchResultFull.result':'searchResultFull'}" style=""></i>
+        </button>
+    </div>
+</div>
