@@ -1,3 +1,4 @@
+@import '../../Styles/style';
 .marker__item {
     fill: @color-base;
     opacity:1;
@@ -5,7 +6,15 @@
     stroke:none;
     stroke-opacity:1;
 }
-
+.circle-marker {
+    background-color: @color-base;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+}
+.circle-marker._selected{
+    background-color: red;
+}
 .btnContainer__zoom_plus {
     background: @color-work;
     color:@color-white;

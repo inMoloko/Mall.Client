@@ -138,7 +138,7 @@
         $scope.getFloors = function (item) {
             if(!item)
                 return;
-            return item.OrganizationMapObject.map(i => {
+            return item.OrganizationMapObject.filter(i=>$rootScope.floorsDic[i.MapObject.FloorID]).map(i => {
                 return $rootScope.floorsDic[i.MapObject.FloorID].Number;
             }).join(',');
         };

@@ -12,7 +12,7 @@
 </div>
 <div class="appContainer__basicArea">
     <div class="appContainer__headBlock appContainer__transportHeadBlock ">
-        <div class="transport__headBlock " ng-include="'blocks/headControl/headControl.html'" style="width: 630px"></div>
+        <div class="transport__headBlock" ng-include="'blocks/headControl/headControl.html'"></div>
     </div>
     <div class="appContainer__workspaceBlock appContainer__transportWorkspaceBlock" >
         <div class="workspaceBlock__sideBlock transport__listBlock" style="background:white">
@@ -50,9 +50,11 @@
             <!--&lt;!&ndash;<img src="http://demo.inmoloko.ru/api/api/Floor/1/File" style="width: 100%"/>&ndash;&gt;-->
         <!--</div>-->
     </div>
+
+    <transport-map class="transport__map" options="{minZoom: 17,maxZoom : 19}"></transport-map>
 </div>
-<transport-map class="transport__map" options="{}"></transport-map>
+
 
 <div class="transport__toolBar" style="" >
-    <div ng-include="'blocks/toolBar/toolBar.html'" style="position: absolute;left: 30px;right: 0px;height: 100%;"></div>
+    <div ng-include="'blocks/toolBar/toolBar.html'"></div>
 </div>

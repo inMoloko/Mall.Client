@@ -67,8 +67,8 @@
         let self = this;
         return this.$http.get(this.settings.webApiBaseUrl + `/Floor/GetFullMap`, {cache: true}).then(i => {
             let data = i.data;
-
-            //self.initGraph(data.Floors, data.Terminal);
+            let terminal = data.find(i => i.Terminal).Terminal;
+            self.initGraph(data, terminal);
             return data;
         });
     };
