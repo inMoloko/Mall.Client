@@ -57,6 +57,21 @@
 
         return result ? result.Value : null;
     };
+    service.prototype.getPath = function (mapObject, terminalMapObject) {
+        let self = this;
+        if (!self.graph)
+            return null;
+        return self.graph.findPath(terminalMapObject.Longitude, terminalMapObject.Latitude, terminalMapObject.FloorID, mapObject.Longitude, mapObject.Latitude, mapObject.FloorID);
+    };
+    service.prototype.getFullMap = function () {
+        let self = this;
+        return this.$http.get(this.settings.webApiBaseUrl + `/Floor/GetFullMap`, {cache: true}).then(i => {
+            let data = i.data;
+
+            //self.initGraph(data.Floors, data.Terminal);
+            return data;
+        });
+    };
     angular
         .module('app')
         .service('floorService', service);

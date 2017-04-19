@@ -83,7 +83,7 @@
             //$rootScope.currentTerminal = response.data[0];
         });
         //var organizationLink = $http.get(settings.webApiBaseUrl + '/OrganizationLink?$expand=OrganizationFrom,OrganizationTo&$select=OrganizationToID,OrganizationFromID,OrganizationTo/Longitude,OrganizationTo/Latitude,OrganizationFrom/Longitude,OrganizationFrom/Latitude,OrganizationFrom/FloorID,OrganizationTo/FloorID&CustomerID=' + settings.customerID);
-        var organizationLink = $http.get(settings.webApiBaseUrl + '/MapObjectLink?$expand=MapObjectFrom,MapObjectTo&CustomerID=' + settings.customerID);
+        var organizationLink = $http.get(settings.webApiBaseUrl + '/MapObjectLink?$expand=MapObjectFrom,MapObjectTo&$filter=MapObjectTo/Floor/Type eq null&CustomerID=' + settings.customerID);
         // var categoriesPromise =$http.get(settings.webApiBaseUrl + '/Category?$expand=Children&$select=Name,CategoryID&$filter=IsUsed eq true and ParentID eq null');
         var categoriesPromise = $http.get(settings.webApiBaseUrl + '/Category/GetAllRecursive?CustomerID=' + settings.customerID);
 

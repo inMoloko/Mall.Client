@@ -333,7 +333,8 @@
                                         $rootScope.currentOrganization = item;
                                         clickToOrganization(item.OrganizationID);
                                     });
-                                    $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(markerText);
+                                    if($scope.mapFloors[mapObject.MapObject.FloorID])
+                                        $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(markerText);
                                 }
                                 else {
                                     var position = map.unproject([mapObject.MapObject.Longitude, mapObject.MapObject.Latitude], map.getMaxZoom());
@@ -344,7 +345,7 @@
                                         iconSize: [16, 16],
                                         zIndexOffset: getZIndex(item)
                                     });
-                                    if (mapObject.MapObject.FloorID) {
+                                    if (mapObject.MapObject.FloorID && $scope.mapFloors[mapObject.MapObject.FloorID]) {
                                         $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(marker, {pane: 'tilePane'});
                                         if (!$scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID])
                                             $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID] = [];
