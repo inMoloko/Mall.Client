@@ -4,7 +4,7 @@
         return {
             restrict: 'A',
             link: function (scope, element, attributes, ctrl) {
-                function refresh (time = 400){
+                function refresh(time = 400) {
                     if (scope.timeout) {
                         $timeout.cancel(scope.timeout);
                     }
@@ -32,8 +32,8 @@
                     refresh(5000);
                 });
 
-                jElement.on('writeKeyboard', function(){
-                     refresh(5000);
+                jElement.on('writeKeyboard', function () {
+                    refresh(5000);
                 });
                 scope.$on("$destroy", function () {
                     jElement.unbind();

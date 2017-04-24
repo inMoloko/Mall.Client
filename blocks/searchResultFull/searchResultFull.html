@@ -1,0 +1,19 @@
+<div class="appContainer__basicArea">
+    <div class="appContainer__headBlock">
+        <div class="headBlock__searchControl" ng-include="'blocks/searchControl/searchControl.html'"></div>
+        <div class="headBlock__changeViewTypeControl"
+             ng-include="'blocks/changeTypeViewControl/changeTypeViewControl.html'"></div>
+    </div>
+    <div class="appContainer__workspaceBlock">
+        <div class="workspaceBlock__sideBlock" route-class="{'searchResultFull.result':'searchResultFull'}">
+            <div ui-view="searchResultFull" class="animation"></div>
+        </div>
+        <div class="appContainer__infoBlock" style="">
+        </div>
+    </div>
+
+    <div class="appContainer__footerBlock">
+        <div class="footerBlock__toolBar" ng-controller="toolBarController"
+             ng-include="'blocks/toolBar/toolBar.html'"></div>
+    </div>
+</div>

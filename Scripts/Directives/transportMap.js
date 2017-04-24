@@ -105,7 +105,14 @@
                             }
                             L.DomUtil.addClass(obj.Value._icon, '_selected');
                             $scope.selectedStops = [obj.Value];
-                            $rootScope.currentPath = floorService.getPath(obj.Value.object.MapObject, $scope.terminalMapObject);
+
+                            if (obj.Value.object.IsAbstract !== true)
+                                $rootScope.currentPath = floorService.getPath(obj.Value.object.MapObject, $scope.terminalMapObject);
+                            else
+                                $rootScope.currentPath = null;
+
+                            //$state.go(".", {BusStopID: obj.Value.object.BusStopID});
+                            $rootScope.$broadcast('transport-bus-change', {filter: obj.Value.object.Name});
                             if (!$rootScope.$$phase)
                                 $rootScope.$digest();
                         }
@@ -169,11 +176,22 @@
                             item.BusStopMapObjects.forEach(busStop => {
                                 let position = map.unproject([busStop.MapObject.Longitude, busStop.MapObject.Latitude], map.getMaxZoom());
 
-                                let marker = item.layerGroup.addSimpleMarker(position, {
-                                    BusStopID: busStop.BusStopID,
-                                    MapObject: busStop.MapObject
-                                });
-
+                                if (busStop.MapObject.Params && busStop.MapObject.Params.FontSize) {
+                                    let marker = item.layerGroup.addTextMarker(position, {
+                                        BusStopID: busStop.BusStopID,
+                                        Name: busStop.Name,
+                                        IsAbstract: busStop.IsAbstract,
+                                        MapObject: busStop.MapObject
+                                    });
+                                }
+                                else {
+                                    let marker = item.layerGroup.addSimpleMarker(position, {
+                                        BusStopID: busStop.BusStopID,
+                                        Name: busStop.Name,
+                                        IsAbstract: busStop.IsAbstract,
+                                        MapObject: busStop.MapObject
+                                    });
+                                }
                                 //busDic[busStop.BusStopID] = marker;
                             });
                             //Организации

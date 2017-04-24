@@ -17,6 +17,21 @@
             this.addLayer(marker);
             return marker;
         },
+        addTextMarker: function (latLng, object) {
+            let marker = L.marker(latLng, {
+                icon: L.divIcon({
+                    className: 'text-marker',
+                    html: `<div></div><span>${object.Name}</span>`,
+                    iconSize: null,
+                    iconAnchor: [5, 5]
+                }),
+                title: object.Name,
+                zIndexOffset: 10
+            });
+            marker.object = object;
+            this.addLayer(marker);
+            return marker;
+        },
         addCategoryMarker: function (latLng, url, object) {
             let marker = L.marker(latLng, {
                 icon: L.icon({
@@ -30,7 +45,7 @@
             this.addLayer(marker);
             return marker;
         },
-        addTerminal:function (latLng, object) {
+        addTerminal: function (latLng, object) {
             let marker = L.marker(latLng, {
                 icon: L.icon({
                     className: 'marker',

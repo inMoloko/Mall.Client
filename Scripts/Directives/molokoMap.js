@@ -45,7 +45,8 @@
                         inertia: false,
                         bounceAtZoomLimits: true,
                         fadeAnimation: false,
-                        zoomSnap: 0
+                        zoomSnap: 0,
+                        bearing:30
                     });
                     //console.log('Create map');
                     map.setView([0, 0], 1);

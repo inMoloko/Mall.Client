@@ -13,6 +13,7 @@ let uglify = require('gulp-uglify');
 let less = require('gulp-less');
 let sourcemaps = require('gulp-sourcemaps');
 let path = require('path');
+let urlAdjuster = require('gulp-css-url-adjuster');
 
 gulp.task('bower', function () {
     return gulp.src('./index.html')
@@ -73,10 +74,14 @@ gulp.task('lint', function () {
         .pipe(eslint.failAfterError());
 });
 gulp.task('less-serve', function () {
-    return gulp.src(['style.less', './blocks/**/*.{less,css}', './Scripts/Keyboard/jsKeyboard.css', './Styles/*.{less,css}'])
+    //,'./Content/icons/mainicons/style.css'
+    return gulp.src(['style.less', './Scripts/Keyboard/jsKeyboard.css', './Styles/*.{less,css}','./Content/icons/mainicons/style.css','./Scripts/Custom-leaflet/leaflet.less','./blocks/**/*.{less,css}'])
         .pipe(sourcemaps.init())
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
+        }))
+        .pipe(urlAdjuster({
+            replace: ['fonts/', '../Content/icons/mainicons/fonts/'],
         }))
         .pipe(concat('client.css'))
         .pipe(sourcemaps.write())

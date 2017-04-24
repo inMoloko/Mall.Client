@@ -1,0 +1,41 @@
+@import '../../Styles/style';
+
+.search-block {
+  background-color: @color-base;
+  z-index: 2;
+  width: 630px;
+  display: flex;
+  align-items: center;
+  &__home {
+    background-color: transparent;
+    border: none;
+    width: 60px;
+  }
+  &__filter-container {
+    height: 60px;
+    flex: 1;
+    margin-right: 20px;
+    position: relative;
+  }
+  &__filter {
+    height: 100%;
+    font-size: 18px;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 20px;
+    border-radius: 4px;
+    border: none;
+  }
+  &__search {
+    background-color: transparent;
+    border: none;
+    height: 60px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    font-size: 2em;
+    > i {
+      width: 28px;
+    }
+  }
+}

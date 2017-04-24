@@ -9,7 +9,7 @@
         $stateProvider
             .state('navigation', {
                 url: "/navigation",
-                templateUrl: 'navigation.html',
+                templateUrl: 'blocks/navigation/navigation.html',
                 fullScreen: true,
                 resetMap: true
             })
@@ -71,15 +71,15 @@
                     }
                 }
             })
-             .state('navigation.organization.proposalsList', {
-                 url: '/proposalsList/:OrganizationID',
-                 views: {
-                     'proposalsList@main': {
-                         controller: 'organizationProposalListController',
-                         templateUrl: 'blocks/organizationProposalListControl/organizationProposalListControl.html'
-                     }
-                 }
-             })
+            .state('navigation.organization.proposalsList', {
+                url: '/proposalsList/:OrganizationID',
+                views: {
+                    'proposalsList@main': {
+                        controller: 'organizationProposalListController',
+                        templateUrl: 'blocks/organizationProposalListControl/organizationProposalListControl.html'
+                    }
+                }
+            })
             .state('navigation.organization.proposalsList.proposal', {
                 url: '/proposal/:ProposalID',
                 views: {
@@ -145,21 +145,21 @@
                         templateUrl: 'blocks/organizationProposalControl/organizationProposalControl.html'
                     }
                 }
-            })            
+            })
             .state('navigation.searchResult.organization.cinemaTimetable', {
                 url: '/cinemaTimetable',
                 views: {
                     'proposal@main': {
                         controller: 'cinemaTimetableController',
                         templateUrl: 'blocks/cinemaTimetable/cinemaTimetable.html',
-                        controllerAs:'controller'
+                        controllerAs: 'controller'
                     }
                 }
             })
 
             .state('searchResultFull', {
                 url: "/searchResultFull",
-                templateUrl: "searchResultFull.html"
+                templateUrl: "blocks/searchResultFull/searchResultFull.html"
             })
             .state('searchResultFull.result', {
                 url: "/result/?CategoryID&Filter&OrganizationType",
@@ -173,10 +173,10 @@
             })
 
             .state('transport', {
-                url: "/transport?TransportRouteID",
+                url: "/transport?TransportRouteID&BusStopID",
                 controller: 'transportController',
                 templateUrl: "blocks/transport/transport.html",
-                reloadOnSearch: false
+                controllerAs: 'controller',
             })
 
             .state('screensaver', {
@@ -260,7 +260,7 @@
             })
             .state('events', {
                 url: "/events",
-                templateUrl: "events.html"
+                templateUrl: "blocks/events/events.html"
             })
             .state('events.searchResult', {
                 url: "/searchResult",

@@ -19,8 +19,8 @@
             </button>
         </div>
     </div>
-    <ul class="list-group organizationsList__organizationsSearchResultBlock" >
-        <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem" route-class="{'searchResultFull.result':'searchResultFull'}" ng-repeat="item in $root.currentOrganizations"
+    <ul class="list-group organizationsList__organizationsSearchResultBlock">
+        <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem" route-class="{'searchResultFull.result':'searchResultFull'}" ng-repeat="item in $root.currentOrganizations track by item.OrganizationID"
             ng-click="select(item)">
             <div style="position: relative;">
                 <div class="organizationsSearchResultItem__logoBlock" style="background: #{{item.LogoBaseColor.substring(3)}};">
