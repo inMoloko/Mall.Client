@@ -243,7 +243,7 @@
                         } else {
                             //Тип организации дополнительно
                             //if (org.OrganizationType === 5) {
-                            if (org.ServiceCategoryType == constants.Service) {
+                            if (org.CategoryOrganization.length!=0 && org.CategoryOrganization.some(i=>i.Category.ServiceCategoryType == constants.Service)) {
                                 if (org.CategoryOrganization.length != 0) {
                                     let cat = org.CategoryOrganization[0];
                                     if (org.CategoryOrganization.map(i => i.CategoryID).includes($rootScope.serviceCategories.toilet))
@@ -268,7 +268,7 @@
                         if ($rootScope.currentTerminal.OrganizationID === item.OrganizationID)
                             return 400;
                         //Сервистные
-                        if (item.OrganizationType === 5)
+                        if (item.CategoryOrganization.length!=0 && item.CategoryOrganization.some(i=>i.Category.ServiceCategoryType == constants.Service))
                             return 1;
                         return 10;
                     };
