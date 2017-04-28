@@ -18,7 +18,7 @@
                 scope: {
                     options: '=options'
                 },
-                templateUrl: './Views/molokoMap.html',
+                templateUrl: './Views/transportMap.html',
                 link: function ($scope, element, attrs) {
 
                     $scope.mapFloors = {};
@@ -68,6 +68,13 @@
                         map.invalidateSize();
                         if (!$scope.currentMapFloor)
                             return;
+                        let bounds = $scope.currentMapFloor.layer.getBounds();
+                        map.fitBounds(bounds, {
+                            paddingTopLeft: [620, 50],
+                            paddingBottomRight: [50, 50],
+                            reset: false,
+                            animate: false
+                        });
                         calculateBounds();
                     };
 
@@ -123,7 +130,7 @@
                     function calculateBounds(offset) {
                         let full = $state.current.name == "navigation";
 
-                        var tb = $scope.currentMapFloor.layer.getBounds();
+                        var tb = $scope.currentMapFloor.layerGroup.getBounds();
 
                         let s = (offset || 620) / Math.pow(2, map.getZoom());
                         //debugger;

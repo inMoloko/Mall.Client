@@ -174,9 +174,27 @@
 
             .state('transport', {
                 url: "/transport?TransportRouteID&BusStopID",
-                controller: 'transportController',
-                templateUrl: "blocks/transport/transport.html",
-                controllerAs: 'controller',
+                templateUrl:'blocks/transport/transport.html',
+            })
+            .state('transport.searchResult', {
+                url: "/searchResult?TransportRouteID&BusStopID",
+                views: {
+                    'searchResult@transport': {
+                        controller: 'transportController',
+                        templateUrl: "blocks/transportSearchResult/transportSearchResult.html",
+                        controllerAs: 'controller'
+                    }
+                }
+            })
+            .state('transport.searchResult.closedResult', {
+                url: "/closedResult?TransportRouteID&BusStopID",
+                views: {
+                    'searchResult@transport': {
+                        controller: 'transportController',
+                        templateUrl: "blocks/transportCloseResult/transportCloseResult.html",
+                        controllerAs: 'controller'
+                    }
+                }
             })
 
             .state('screensaver', {

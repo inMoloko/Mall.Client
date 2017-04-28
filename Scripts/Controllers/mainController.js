@@ -10,7 +10,8 @@
             if ($rootScope.statisticStack && $rootScope.statisticStack.length > 0)
                 $rootScope.sendStatistics();
             //$state.go('navigation.mainMenu', {});
-
+            console.log('send');
+            Idle.watch();
             //TODO
             return;
             $("input, textarea").focusout();
@@ -138,7 +139,7 @@
                     mapObject.MapObject.Longitude = cos * x + sin * y;
                     mapObject.MapObject.Latitude = cos * y - sin * x;
                     if (mapObject.MapObject.Params)
-                        mapObject.MapObject.ParamsAsJson = angular.isObject(mapObject.MapObject.Params)?mapObject.MapObject.Params :angular.fromJson(mapObject.MapObject.Params);
+                        mapObject.MapObject.ParamsAsJson = angular.isObject(mapObject.MapObject.Params) ? mapObject.MapObject.Params : angular.fromJson(mapObject.MapObject.Params);
                 });
             });
 
