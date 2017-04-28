@@ -10,10 +10,10 @@
             if ($rootScope.statisticStack && $rootScope.statisticStack.length > 0)
                 $rootScope.sendStatistics();
             //$state.go('navigation.mainMenu', {});
-            console.log('send');
-            Idle.watch();
-            //TODO
-            return;
+            // console.log('send');
+            // Idle.watch();
+            // //TODO
+            // return;
             $("input, textarea").focusout();
             if ($rootScope.banners.length > 0)
                 $state.go('screensaver', {});
