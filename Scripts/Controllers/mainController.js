@@ -317,13 +317,13 @@
                     url: settings.webApiBaseUrl + '/Statistic',
                     data: JSON.stringify($rootScope.statisticStack),
                     headers: {'Content-type': 'application/json'}
-                }).success(function (response) {
+                }).then(function (response) {
                     $rootScope.statisticStack = undefined;
-                }).error(function (response) {
+                },function (response) {
                     //$rootScope.addStatistics('SendStatistics', '{"Param":"Not sended"}');
                     console.error("При отправке статистики произошла ошибка");
                 });
-            }
+            };
             $rootScope.systemSettings = response[8].data;
             if ($rootScope.systemSettings && $rootScope.systemSettings.length) {
                 let result = $rootScope.systemSettings.find(i => i.SettingType == "TERMINAL_MENU_ITEMS");
