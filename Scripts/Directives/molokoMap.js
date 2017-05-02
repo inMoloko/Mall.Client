@@ -445,7 +445,7 @@
                                 mapObjects = [$scope.mapObjects[$stateParams.MapObjectID]];
                             }
                             else {
-                                document.querySelectorAll('[data-org-id="' + $rootScope.currentOrganization + '"]').forEach(m => {
+                                document.querySelectorAll('[data-org-id="' + $rootScope.currentOrganization.OrganizationID + '"]').forEach(m => {
                                     m.classList.add('_selected');
                                 });
                                 mapObjects = $rootScope.currentOrganization.OrganizationMapObject.map(i => i.MapObject);

@@ -24,6 +24,7 @@
 
         $scope.go = function (item) {
             $rootScope.$broadcast('transport-change', {TransportRouteID: item.TransportRouteID})
+            self.currentItem = item;
         };
 
         $rootScope.$on('transport-bus-change', function (event, args) {

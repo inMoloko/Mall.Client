@@ -3,7 +3,7 @@
         <div style="width: 100%;height: 100%;display: flex;">
             <div class="headBlock__logoBlock" ng-class="{'white':'{{currentOrganization.LogoBaseColor.substring(3)}}'==='FFFFFF'}" style="flex-basis: 64%;background: #{{currentOrganization.LogoBaseColor.substring(3)}};">
                 <img class="img-responsive logoBlock__organizationLogo" moloko-image-api="$root.currentOrganization.OrganizationID" url="/Organization/:id/Logo"
-                    default-src="/Customer/Logo" alt="{{::item.Organization.Name}}">
+                    default-src="/Customer/Logo" alt="{{item.Organization.Name}}">
             </div>
             <div style="flex-basis: 40%;">
                 <div style="width: 100%;height: 100%;display: flex;flex-direction: column;align-items: flex-end;justify-content: space-between;">
@@ -149,7 +149,7 @@
 
         <div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('telegram')">
             <button style="background:white; border:4px solid white; width: 60px; height:60px; border-radius:50%;margin-top:10px;">
-                <img src="../../Content/images/telegram_logo.png" style="width: 52px;margin-left: -6px;margin-top: -1px;" />
+                <img src="../../Content/images/telegram_logo.png" style="width: 60px;margin-left: -4px;margin-top: -4px;" />
             </button>
             <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'telegram'" ></div>
         </div>
@@ -160,12 +160,12 @@
             </button>
             <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'facebook'" ></div>
         </div>
-        <div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('mail')">
-            <button style="background:white; border:4px solid #0094ff; width: 60px; height:60px; border-radius:50%;margin-top:10px;">
-                <i class="iconMall-iconMail" style="font-size: 35px;color:#0094ff;"></i>
-            </button>
-            <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'mail'"></div>
-        </div>
+        <!--<div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('mail')">-->
+            <!--<button style="background:white; border:4px solid #0094ff; width: 60px; height:60px; border-radius:50%;margin-top:10px;">-->
+                <!--<i class="iconMall-iconMail" style="font-size: 35px;color:#0094ff;"></i>-->
+            <!--</button>-->
+            <!--<div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'mail'"></div>-->
+        <!--</div>-->
         <div style="flex-grow:1">
         </div>
     </div>

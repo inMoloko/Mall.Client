@@ -24,13 +24,27 @@
 
 .transport_listItem {
   background: #ffffff;
-  height: 120px;
+  max-height: 120px;
+  min-height: 120px;
   margin-left: 15px;
   border-radius: 0px;
   padding: 0px;
   border: 0px solid transparent;
   border-bottom: 1px solid #f4f7f1;
   margin-bottom: 0px;
+  //position: relative;
+  display: flex;
+  &._selected {
+    max-height: none;
+    background-color: gainsboro;
+    .transportListItemInfoBlock__description {
+      max-height: none;
+      &::after {
+        display: none;
+      }
+    }
+
+  }
 }
 
 .appContainer__transportHeadBlock {
@@ -134,8 +148,8 @@
 }
 
 .transportListItem__iconBlock {
-  height: 119px;
-  position: absolute;
+  //height: 119px;
+  //position: absolute;
   width: 180px;
   color: white;
   text-align: center;
@@ -161,8 +175,21 @@
 .transportListItemInfoBlock__description {
   font-size: 14px;
   max-height: 69px;
+  min-height: 69px;
   overflow: hidden;
   margin-bottom: 10px;
+  position: relative;
+  height: 100%;
+  &::after {
+    content: ' ';
+    height: 40px;
+    width: 100%;
+    display: block;
+    background: linear-gradient(to bottom, transparent, white);
+    position: absolute;
+    bottom: -10px;
+    opacity: 0.8;
+  }
 }
 
 .colorTheme_black .transportListItemInfoBlock__description,
@@ -184,7 +211,7 @@
 
 .transport__list {
   height: calc(~"100%" - ~"60px");
-  overflow: scroll;
+  overflow-y: scroll;
   overflow-x: hidden;
   margin-left: -15px;
   margin-bottom: 0px;

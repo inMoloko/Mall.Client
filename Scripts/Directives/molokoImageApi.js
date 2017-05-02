@@ -17,10 +17,14 @@
                     element.attr('src', 'data:image/jpeg;base64,' + $rootScope.customer.Logo);
                     element.unbind('error');
                 });
-                element.bind('load', function (result) {
+                scope.$on("$destroy", function () {
                     watch();
-                    element.bind();
-                });
+                    element.unbind();
+                })
+                // element.bind('load', function (result) {
+                //     watch();
+                //     element.bind();
+                // });
             }
         };
     }]);

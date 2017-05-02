@@ -17,40 +17,41 @@
 <div class="appContainer__workspaceBlock appContainer__transportWorkspaceBlock">
     <div class="workspaceBlock__sideBlock transport__listBlock" style="background:white">
         <div class="listToolBar">
-            <div class="listToolBar__text"><span ng-if="items.length>0">Найденно</span> <span ng-if="items.length>0" ng-bind="items.length"></span></div>
-            <button class="listToolBar__closeButton" ui-sref=".closedResult">
-                <i class="iconMall-iconArrowUp closeButton_icon" style=""></i>
-            </button>
+            <div class="listToolBar__text"><span ng-if="items.length>0">Найденно</span> <span ng-if="items.length>0"
+                                                                                              ng-bind="items.length"></span>
+            </div>
+            <!--<button class="listToolBar__closeButton" ui-sref=".closedResult">-->
+                <!--<i class="iconMall-iconArrowUp closeButton_icon" style=""></i>-->
+            <!--</button>-->
             <button class="listToolBar__closeButton" ui-sref="navigation.mainMenu">
                 <i class="iconMall-iconClose closeButton_icon"></i>
             </button>
         </div>
         <ul class="list-group transport__list" ng-if="items.length!=0">
-            <li class="list-group-item transport_listItem" ng-repeat="item in items" ng-click="go(item)">
-                <div style="position: relative;">
-                    <div class="text-center transportListItem__iconBlock">
-                        <div class="parent" style="width: 100%;height: 100%;">
-                            <div class="child" style="display: -moz-inline-box;
-                                         display: inline-block;
-                                         vertical-align: middle; ">
-                                <i ng-class="{'iconMall-bus':item.TransportTypeID===1,'iconMall-minibus':item.TransportTypeID===2}"
-                                   style="font-size: 6em;/*color:#28303b*/"></i>
-                            </div>
-                            <div class="helper"
-                                 style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
-                        </div>
+            <li class="list-group-item transport_listItem" ng-repeat="item in items" ng-click="go(item)"
+                ng-class="{'_selected':controller.currentItem==item}">
+                <div class="text-center transportListItem__iconBlock">
+                    <!--<div class="parent" style="width: 100%;height: 100%;">-->
+                        <!--<div class="child" style="display: -moz-inline-box;-->
+                                         <!--display: inline-block;-->
+                                         <!--vertical-align: middle; ">-->
+                            <i ng-class="{'iconMall-bus':item.TransportTypeID===1,'iconMall-minibus':item.TransportTypeID===2}"
+                               style="font-size: 6em;/*color:#28303b*/"></i>
+                        <!--</div>-->
+                        <!--<div class="helper"-->
+                             <!--style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
+                    <!--</div>-->
+                </div>
+                <div class="" style="background:transparent;
+                            left: 180px;padding-left: 20px;padding-right: 16px;display:flex;flex-direction:column;flex:1">
+                    <div class="transportListItemInfoBlock__name" style="">
+                        {{item.TransportType.Name}} № {{item.Name}}
                     </div>
-                    <div class="" style="background:transparent;position: absolute;/*width:450px;*/ height: 120px;
-                            left: 180px;padding-left: 20px;padding-right: 16px;display:flex;flex-direction:column;">
-                        <div class="transportListItemInfoBlock__name" style="">
-                            {{item.TransportType.Name}} № {{item.Name}}
-                        </div>
-                        <div class="transportListItemInfoBlock__description" style="">
-                            {{item.Description}}
-                        </div>
-                        <div class="transportListItemInfoBlock__price" style="" ng-show="item.Price">
-                            Стоимость проезда: {{item.Price}}
-                        </div>
+                    <div class="transportListItemInfoBlock__description">
+                        {{item.Description}}
+                    </div>
+                    <div class="transportListItemInfoBlock__price" style="" ng-show="item.Price">
+                        Стоимость проезда: {{item.Price}}
                     </div>
                 </div>
             </li>
