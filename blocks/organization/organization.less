@@ -1,236 +1,298 @@
 @import '../../Styles/style';
-.organization{
-    background: @color-white;
-    height: 100%;
-    width: 598px;    
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    align-content: space-around;
-    position:absolute;    
-    z-index: 5;    
-    padding-left: 10px;
-    padding-top: 10px; 
+
+.organization {
+  background: @color-white;
+  height: 100%;
+  width: 598px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
+  position: absolute;
+  z-index: 5;
+  padding-left: 10px;
+  padding-top: 10px;
 }
+
 .colorTheme_color .organizationCategoryBlock__category,
-.colorTheme_blackLite .organizationCategoryBlock__category{    
-    color:@color-base;
+.colorTheme_blackLite .organizationCategoryBlock__category {
+  color: @color-base;
 }
 
 .organizationToListProposalsArrowButton__icon,
-.organizationCloseButton__icon{
-    color: @color-work;
-    font-size: 3em;
+.organizationCloseButton__icon {
+  color: @color-work;
+  font-size: 3em;
 }
 
-.closeButton_icon{
-    color: @color-work;
+.closeButton_icon {
+  color: @color-work;
 }
 
-.organizationCloseButton__iconBlock{
-    background: @color-white;
-    width: 60px;
-    height: 60px;
+.organizationCloseButton__iconBlock {
+  background: @color-white;
+  width: 60px;
+  height: 60px;
 }
 
-.colorTheme_black .organizationColor{
-    display:none;
+.colorTheme_black .organizationColor {
+  display: none;
 }
 
 .colorTheme_color .organizationBlack,
-.colorTheme_blackLite .organizationBlack{
-    display:none;
+.colorTheme_blackLite .organizationBlack {
+  display: none;
 }
 
 .colorTheme_color .organization,
-.colorTheme_blackLite .organization{
-   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+.colorTheme_blackLite .organization {
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
-.formatTheme_vertical .organization{
-    width:568px;
+.formatTheme_vertical .organization {
+  width: 568px;
 }
 
-.organization__headBlock{
-    height: 31.9677%;
-    max-height:240px;
-    background: transparent;
+.organization__headBlock {
+  height: 31.9677%;
+  max-height: 240px;
+  background: transparent;
 }
 
-.headBlock__logoBlock{
-    width: 64%;
-    max-width:360px;
-    height: 100%;
-    border:0px;
+.headBlock__logoBlock {
+  width: 64%;
+  max-width: 360px;
+  height: 100%;
+  border: 0px;
 }
 
-.colorTheme_black .headBlock__logoBlock{    
-    max-width:95%;
+.colorTheme_black .headBlock__logoBlock {
+  max-width: 95%;
 }
 
 .white {
-    border:1px solid #dcdcdc;
+  border: 1px solid #dcdcdc;
 }
 
-.logoBlock__organizationLogo{
-    height: 100%; 
-    width: 100%; 
-    object-fit: contain
+.logoBlock__organizationLogo {
+  height: 100%;
+  width: 100%;
+  object-fit: contain
 }
 
-.headBlock__organizationCloseBlock{
-    background:transparent;
-    position: absolute;  
-    right: 0px;
+.headBlock__organizationCloseBlock {
+  background: transparent;
+  position: absolute;
+  right: 0px;
 }
 
-.organizationCloseBlock_closeButton{
-    background: transparent;
-    border: 0px;
-    width:60px;
-    height:60px;
-    padding:0;
+.organizationCloseBlock_closeButton {
+  background: transparent;
+  border: 0px;
+  width: 60px;
+  height: 60px;
+  padding: 0;
 }
 
-.headBlock_organizationFloor{
-    background: transparent;
-    right: 10px;
-    bottom: 0px;
-    height: 24px; 
-    font-size: 24px;
-    text-transform:uppercase;
-    font-weight:600;
+.headBlock_organizationFloor {
+  background: transparent;
+  right: 10px;
+  bottom: 0px;
+  height: 24px;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
-.organization__nameBlock{
-    margin-top: 20px;
+.organization__nameBlock {
+  margin-top: 20px;
 }
 
-.organizationNameBlock__name{
-    width: 100%;
-    height: 100%;
-    font-size: 24px;
-    text-transform:uppercase;
+.organizationNameBlock__name {
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  text-transform: uppercase;
 }
 
-.organization__categoryBlock{
-    margin-top: 20px; 
+.organization__categoryBlock {
+  margin-top: 20px;
 }
 
-.organizationCategoryBlock__category{
-    width: 100%;
-    height: 100%;
-    font-size: 14px;
-}
-.colorTheme_blackLite .organizationCategoryBlock__category{
-    font-size: 20px;
+.organizationCategoryBlock__category {
+  width: 100%;
+  height: 100%;
+  font-size: 14px;
 }
 
-.organization__proposalsBlock{
-    margin-top: 20px;
+.colorTheme_blackLite .organizationCategoryBlock__category {
+  font-size: 20px;
 }
 
-.organizationProposalBlock__toListProposalsBlock{
-    width: 100%;
-    height: 100%;
-    font-size: 24px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;  
-    margin-top: 6px; 
+.organization__proposalsBlock {
+  margin-top: 20px;
 }
 
-.organizationToListProposalsBlock_arrowButton{
-    background:transparent;
-    position: absolute; 
-    height: 50px; 
-    right: 0px;
+.organizationProposalBlock__toListProposalsBlock {
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 6px;
 }
 
-.organizationToListProposalsArrowButton__button{
-    background: transparent;
-    border: 0px;
-    height:100%;
-    padding:0;
+.organizationToListProposalsBlock_arrowButton {
+  background: transparent;
+  position: absolute;
+  height: 50px;
+  right: 0px;
 }
 
-.organizationToListProposalsArrowButton__buttonIcon{
-    height: 100%;
+.organizationToListProposalsArrowButton__button {
+  background: transparent;
+  border: 0px;
+  height: 100%;
+  padding: 0;
 }
 
-.organization__descriptionBlock{
-    padding-right: 16px;
-    font-size: 14px;
-    overflow: auto;
-    height:inherit;
-    margin-top: 30px;
+.organizationToListProposalsArrowButton__buttonIcon {
+  height: 100%;
 }
 
-.colorTheme_blackLite .organization__descriptionBlock{    
-    font-size: 20px;
+.organization__descriptionBlock {
+  padding-right: 16px;
+  font-size: 14px;
+  overflow: auto;
+  height: inherit;
+  margin-top: 30px;
 }
 
-.organization__sendPathBlock{
-    background: @color-white;
-    box-shadow: 0px -10px 16px 0px rgba(0, 0, 0, 0.2);
-    height: 100%;
-    margin-top: 20px;
-    margin-left: -10px;
-    padding: 10px;
-    display:flex; flex-direction:column
+.colorTheme_blackLite .organization__descriptionBlock {
+  font-size: 20px;
 }
 
-.sendPathBlock__botPath{
-    display:flex;flex-grow: 1;flex-direction: column;
+.organization__sendPathBlock {
+  background: @color-white;
+  box-shadow: 0px -10px 16px 0px rgba(0, 0, 0, 0.2);
+  //height: 100%;
+  margin-top: 20px;
+  margin-left: -10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  //top: 290px;
+  height: 420px;
+  bottom: 40px;
+  z-index: 5;
 }
 
-.botPath__info{
-    flex-basis:30%; font-size:20px; padding-left:60px;padding-right:40px;color:#006bc2;text-align:center;
-}
-.botPath__info2{
-    flex-basis:30%; font-size:20px; padding-left:60px;padding-right:60px;margin-top:30px;text-align:center;
-}
-
-.botPath__info3{
-    flex-basis:30%; font-size:50px; padding-left:60px;padding-right:60px;text-align:center;color:#006bc2;margin-top:20px;
+.formatTheme_horizontalSmall {
+  .organization__sendPathBlock {
+    //top: 40px;
+  }
 }
 
-.sendPathBlock__mail{
-    display:flex;flex-grow: 1;flex-direction: column;
+.sendPathBlock__botPath {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
-.sendPathBlock__mailButton{
-    height: 40px;border: 0;border-radius: 4px;background: #28303b;color: #ffffff;width:150px
+.botPath__info {
+  margin-top: 20px;
+  flex-basis: 30%;
+  font-size: 20px;
+  padding-left: 60px;
+  padding-right: 40px;
+  color: #006bc2;
+  text-align: center;
 }
 
-.sendPathBlock__mailInput{
-    border: 2px solid lightgray;height: 40px;width: 320px;
+.botPath__info2 {
+  flex-basis: 30%;
+  font-size: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-top: 30px;
+  text-align: center;
 }
 
-.sendPathBlock__mailInfo{
-    flex-basis:30%; font-size:20px; padding-left:60px;padding-right:40px;
+.botPath__info3 {
+  flex-basis: 30%;
+  font-size: 50px;
+  padding-left: 60px;
+  padding-right: 60px;
+  text-align: center;
+  color: #006bc2;
+  margin-top: 20px;
 }
 
-.sendPathBlock__mailInfo2{
-    flex-basis:30%; font-size:20px; padding-left:60px;padding-right:10px;margin-top:30px;
+.sendPathBlock__mail {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
-.organization__sendPathButton{
-    height: 80px;
-    background: #006bc2;
-    bottom: 0px;
-    position: absolute;
-    z-index: 5;
-    right: 0px;
-    left: 30px;
+.sendPathBlock__mailButton {
+  height: 40px;
+  border: 0;
+  border-radius: 4px;
+  background: #28303b;
+  color: #ffffff;
+  width: 150px
 }
+
+.sendPathBlock__mailInput {
+  border: 2px solid lightgray;
+  height: 40px;
+  width: 320px;
+}
+
+.sendPathBlock__mailInfo {
+  flex-basis: 30%;
+  font-size: 20px;
+  padding-left: 60px;
+  padding-right: 40px;
+}
+
+.sendPathBlock__mailInfo2 {
+  flex-basis: 30%;
+  font-size: 20px;
+  padding-left: 60px;
+  padding-right: 10px;
+  margin-top: 30px;
+}
+
+.organization__sendPathButton {
+  height: 80px;
+  background: #006bc2;
+  bottom: 0px;
+  position: absolute;
+  z-index: 5;
+  right: 0px;
+  left: 30px;
+}
+
 .sendPathBlock__mailButton:disabled {
-    background-color: darkgrey;
-}
-.sendPathBlock__selectSection{
-    background:#006bc2; width:100%;height:100%; display:flex
+  background-color: darkgrey;
 }
 
-.sendPathBlock__selectedSection{
-    background: transparent;width: 40px;border: 20px transparent solid;border-bottom: 20px #006bc2 solid;position: absolute;margin-left:10px;top: -35px;
+.sendPathBlock__selectSection {
+  background: #006bc2;
+  width: 100%;
+  height: 100%;
+  display: flex
+}
+
+.sendPathBlock__selectedSection {
+  background: transparent;
+  width: 40px;
+  border: 20px transparent solid;
+  border-bottom: 20px #006bc2 solid;
+  position: absolute;
+  margin-left: 10px;
+  top: -35px;
 }
