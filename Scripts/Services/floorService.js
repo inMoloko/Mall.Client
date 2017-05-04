@@ -65,7 +65,7 @@
     };
     service.prototype.getFullMap = function () {
         let self = this;
-        return this.$http.get(this.settings.webApiBaseUrl + `/Floor/GetFullMap`, {cache: true}).then(i => {
+        return this.$http.get(this.settings.webApiBaseUrl + `/Floor/GetFullMap?CustomerID=${self.settings.customerID||''}`, {cache: true}).then(i => {
             let data = i.data;
             let terminal = data.find(i => i.Terminal).Terminal;
             self.initGraph(data, terminal);
