@@ -13,7 +13,7 @@
             // console.log('send');
             // Idle.watch();
             // //TODO
-            //return;
+            // return;
             $("input, textarea").focusout();
             if ($rootScope.banners.length > 0)
                 $state.go('screensaver', {});
@@ -172,10 +172,12 @@
             $rootScope.banners.forEach(i => {
                 var img = new Image();
                 img.src = 'data:image/jpeg;base64,' + i.Image;
-                if (img.width > img.height)
-                    $rootScope.horizontalBanners.push(i);
-                else
-                    $rootScope.verticalBanners.push(i);
+                img.onload = function() {
+                    if (img.width > img.height)
+                        $rootScope.horizontalBanners.push(i);
+                    else
+                        $rootScope.verticalBanners.push(i);
+                }
             });
 
             $rootScope.categories.forEach(i => {
