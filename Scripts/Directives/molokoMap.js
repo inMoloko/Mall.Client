@@ -243,7 +243,7 @@
                         } else {
                             //Тип организации дополнительно
                             //if (org.OrganizationType === 5) {
-                            if (org.CategoryOrganization.length!=0 && org.CategoryOrganization.some(i=>i.Category.ServiceCategoryType == constants.Service)) {
+                            if (org.CategoryOrganization.length!=0 && org.CategoryOrganization.some(i=>i.Category.ServiceCategoryType == constants.Service || i.Category.ServiceCategoryType == constants.Link)) {
                                 if (org.CategoryOrganization.length != 0) {
                                     let cat = org.CategoryOrganization[0];
                                     if (org.CategoryOrganization.map(i => i.CategoryID).includes($rootScope.serviceCategories.toilet))
