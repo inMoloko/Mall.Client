@@ -358,6 +358,9 @@
                 }
             }
             $rootScope.customer = response[9].data[0];
+
+            document.title = 'Навигация по '+ $rootScope.customer.Name;
+
             let dat = new Date().getDay() - 1;
             if (dat < 0)
                 dat = 6;
