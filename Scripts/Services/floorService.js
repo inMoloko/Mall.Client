@@ -65,10 +65,15 @@
     };
     service.prototype.getFullMap = function () {
         let self = this;
-        return this.$http.get(this.settings.webApiBaseUrl + `/Floor/GetFullMap?CustomerID=${self.settings.customerID||''}`, {cache: true}).then(i => {
+        return this.$http.get(this.settings.webApiBaseUrl + `/Floor/GetFullMap?CustomerID=${this.settings.customerID || ''}`, {cache: true}).then(i => {
             let data = i.data;
-            let terminal = data.find(i => i.Terminal).Terminal;
-            self.initGraph(data, terminal);
+            let terminal = data.find(i => i.Terminal);
+            if (terminal) {
+                terminal = terminal.Terminal;
+                self.initGraph(data, terminal);
+            }else
+                console.error('Нет терминала на этаже, граф не инициализирован');
+
             return data;
         });
     };
