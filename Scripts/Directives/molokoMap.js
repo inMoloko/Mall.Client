@@ -247,11 +247,11 @@
                                 if (org.CategoryOrganization.length != 0) {
                                     let cat = org.CategoryOrganization[0];
                                     if (org.CategoryOrganization.map(i => i.CategoryID).includes($rootScope.serviceCategories.toilet))
-                                        html = `<div><img class="marker__image marker__wc${cls}" src="${settings.webApiBaseUrl}/Category/${cat.CategoryID}/Logo" data-org-id="${org.OrganizationID}" data-map-id="${mapObjectID}"/></div>`;
+                                        html = `<div><img class="marker__image marker__wc${cls}" src="${settings.resourceFolder}/Categories/${cat.CategoryID}.${cat.Category.LogoExtension}" data-org-id="${org.OrganizationID}" data-map-id="${mapObjectID}"/></div>`;
                                     // else if (cat.CategoryID === $rootScope.serviceCategories.terminal)
                                     //     html = ``;
                                     else
-                                        html = `<div><img class="marker__image${cls}" src="${settings.webApiBaseUrl}/Category/${cat.CategoryID}/Logo" data-org-id="${org.OrganizationID}" data-map-id="${mapObjectID}"/></div>`;
+                                        html = `<div><img class="marker__image${cls}" src="${settings.resourceFolder}/Categories/${cat.CategoryID}.${cat.Category.LogoExtension}" data-org-id="${org.OrganizationID}" data-map-id="${mapObjectID}"/></div>`;
                                 }
                             }
                             else //if (org.MapSize > 0 && org.SignPointRadius == null)
@@ -298,7 +298,7 @@
 
 
                             if (!settings.terminalID)
-                                item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File`, [southWest, northEast]);
+                                item.layer = L.imageOverlay(`${settings.resourceFolder}/Floors/${item.FloorID}.${item.FileExtension}`, [southWest, northEast]);
                             else
                                 item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File?TerminalID=${settings.terminalID}`, [southWest, northEast]);
                             item.layerGroup = L.featureGroup();

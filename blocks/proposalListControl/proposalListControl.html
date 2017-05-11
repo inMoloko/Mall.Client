@@ -3,8 +3,10 @@
         <li  class="list-group-item proposalsListControlListBlock__listElement" ng-class="{true:'selected', false:''}[item.ProposalID===selectedProposalID]"
              ui-sref="proposals.searchResult.proposal({ProposalID:item.ProposalID})" ng-repeat="item in items" ng-click="select(item.ProposalID)">            
             <div class="proposalsListControlListElement__imageBlock" style="background: #{{item.LogoBaseColor.substring(3)}};">
-                <img moloko-image-api="item.ProposalID" url="/Proposal/:id/Logo" class="img-responsive" alt="{{item.Organization.Name}}"
+                <img class="img-responsive" alt="{{item.Organization.Name}}"
+                     file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension}}"
                      style='height: 100%; width: 100%; object-fit: cover'>
+                <!--moloko-image-api="item.ProposalID" url="/Proposal/:id/Logo"-->
             </div>
 
             <div class="proposalsListControlListElement__infoBlock">

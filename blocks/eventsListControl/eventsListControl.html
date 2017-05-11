@@ -3,8 +3,10 @@
         <li class="list-group-item proposalsListControlListBlock__listElement" ng-class="{true:'selected', false:''}[item.EventID===selectedEventID]"
             ui-sref="events.searchResult.event({EventID:item.EventID})" ng-repeat="item in events" ng-click="select(item.EventID)">
             <div class="proposalsListControlListElement__imageBlock" >
-                <img moloko-image-api="item.EventID" url="/Event/:id/Logo" class="img-responsive" alt="{{item.Name}}"
+                <img class="img-responsive" alt="{{item.Name}}"
+                     file-system-image="Events/{{item.EventID+'_Logo.'+item.LogoExtension}}"
                      style='height: 100%; width: 100%; object-fit: cover'>
+                <!--moloko-image-api="item.EventID" url="/Event/:id/Logo"-->
             </div>
 
             <div class="proposalsListControlListElement__infoBlock">

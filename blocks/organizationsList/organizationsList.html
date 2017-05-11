@@ -4,7 +4,8 @@
             <div class="searchCountBlock__searchCount" ng-hide="searchText&&$root.currentOrganizations.length==0">
                 Найдено {{$root.currentOrganizations.length}}
             </div>
-            <div class="searchCountBlock__searchCount" ng-show="searchText&&$root.currentOrganizations.length==0&&$root.otherCurrentOrganizations.length>0">
+            <div class="searchCountBlock__searchCount"
+                 ng-show="searchText&&$root.currentOrganizations.length==0&&$root.otherCurrentOrganizations.length>0">
                 Найдено {{$root.otherCurrentOrganizations.length}}
             </div>
         </div>
@@ -20,14 +21,20 @@
         </div>
     </div>
     <ul class="list-group organizationsList__organizationsSearchResultBlock">
-        <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem" route-class="{'searchResultFull.result':'searchResultFull'}" ng-repeat="item in $root.currentOrganizations track by item.OrganizationID"
+        <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem"
+            route-class="{'searchResultFull.result':'searchResultFull'}"
+            ng-repeat="item in $root.currentOrganizations track by item.OrganizationID"
             ng-click="select(item)">
             <div style="position: relative;">
-                <div class="organizationsSearchResultItem__logoBlock" style="background: #{{item.LogoBaseColor.substring(3)}};">
-                    <img moloko-image-api="item.OrganizationID" url="/Organization/:id/Logo" default-src="/Customer/Logo" class="logoBlock__logo" alt="{{::item.Organization.Name}}"
-                        style=''>
-                    <div ng-if="item.megacard" style="width:59px;height:30px;background:white;position:absolute;bottom:0;right:0;">
-                        <i class="iconMall-iconMegacard logoBlock__icon" style="font-size:60px;margin-bottom:-15px;color:black" ></i>
+                <div class="organizationsSearchResultItem__logoBlock"
+                     style="background: #{{item.LogoBaseColor.substring(3)}};">
+                    <img class="logoBlock__logo" alt="{{::item.Organization.Name}}"
+                         default="{{settings.webApiBaseUrl}}/Customer/Logo"
+                         file-system-image="Organizations/{{item.OrganizationID+'_Logo.'+item.LogoExtension}}">
+                    <div ng-if="item.megacard"
+                         style="width:59px;height:30px;background:white;position:absolute;bottom:0;right:0;">
+                        <i class="iconMall-iconMegacard logoBlock__icon"
+                           style="font-size:60px;margin-bottom:-15px;color:black"></i>
                     </div>
                 </div>
 
@@ -43,17 +50,19 @@
                     </div>
                     <div ng-if="item.megacard" class="organizationsSearchResultItem__megacardBlock" style="">
                         Принимает MEGACARD
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </li>
     </ul>
 
 
-
     <div ng-show="$root.currentOrganizations.length==0">
-        <div class="errorHeaderBlock organizationsSearchResultItem__errorHeaderBlock" ng-show="$root.currentOrganizations.length==0">
-            По запросу <strong>"{{searchText| limitTo: 150 }}{{searchText.length > 150 ? '...' : ''}}" </strong><span ng-show="currentCategory&&currentCategory.CategoryID!=-1&&$root.otherCurrentOrganizations.length>0">для категории <strong>"{{currentCategory.Name}}"</strong></span>            ничего не найдено.
+        <div class="errorHeaderBlock organizationsSearchResultItem__errorHeaderBlock"
+             ng-show="$root.currentOrganizations.length==0">
+            По запросу <strong>"{{searchText| limitTo: 150 }}{{searchText.length > 150 ? '...' : ''}}" </strong><span
+                ng-show="currentCategory&&currentCategory.CategoryID!=-1&&$root.otherCurrentOrganizations.length>0">для категории <strong>"{{currentCategory.Name}}"</strong></span>
+            ничего не найдено.
         </div>
         <div class="errorBlock organizationsSearchResultItem__errorBlock">
             Рекомендации:
@@ -64,19 +73,27 @@
             </ul>
         </div>
 
-        <div class="errorHeaderBlock organizationsSearchResultItem__errorHeaderBlock" ng-show="$root.otherCurrentOrganizations.length>0">
+        <div class="errorHeaderBlock organizationsSearchResultItem__errorHeaderBlock"
+             ng-show="$root.otherCurrentOrganizations.length>0">
             Возможно, Вы искали следующее:
         </div>
 
-        <ul style="top:310px;" class="list-group organizationsList__organizationsSearchResultBlock" >
-            <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem" route-class="{'searchResultFull.result':'searchResultFull'}" ng-repeat="item in $root.otherCurrentOrganizations"
+        <ul style="top:310px;" class="list-group organizationsList__organizationsSearchResultBlock">
+            <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem"
+                route-class="{'searchResultFull.result':'searchResultFull'}"
+                ng-repeat="item in $root.otherCurrentOrganizations"
                 ng-click="select(item)">
                 <div style="position: relative;">
-                    <div class="organizationsSearchResultItem__logoBlock" style="background: #{{item.LogoBaseColor.substring(3)}};">
-                        <img moloko-image-api="item.OrganizationID" url="/Organization/:id/Logo" class="logoBlock__logo" alt="{{::item.Organization.Name}}"
-                             style=''>
-                        <div ng-if="item.megacard" style="width:59px;height:30px;background:white;position:absolute;bottom:0;right:0;">
-                            <i class="iconMall-iconMegacard logoBlock__icon" style="font-size:60px;margin-bottom:-15px;color:black"></i>
+                    <div class="organizationsSearchResultItem__logoBlock"
+                         style="background: #{{item.LogoBaseColor.substring(3)}};">
+                        <img class="logoBlock__logo"
+                             alt="{{::item.Organization.Name}}"
+                             default="{{settings.webApiBaseUrl}}/Customer/Logo"
+                             file-system-image="Organizations/{{item.OrganizationID+'_Logo.'+item.LogoExtension}}">
+                        <div ng-if="item.megacard"
+                             style="width:59px;height:30px;background:white;position:absolute;bottom:0;right:0;">
+                            <i class="iconMall-iconMegacard logoBlock__icon"
+                               style="font-size:60px;margin-bottom:-15px;color:black"></i>
                         </div>
                     </div>
 
