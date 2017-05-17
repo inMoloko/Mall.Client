@@ -20,7 +20,7 @@
                 scope: {
                     options: '=options'
                 },
-                templateUrl: './Views/molokoMap.html',
+                templateUrl: '/Views/molokoMap.html',
                 link: function ($scope, element, attrs) {
                     $scope.rootScope = $rootScope;
                     if (!$scope.options)

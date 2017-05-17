@@ -13,7 +13,8 @@
             // console.log('send');
             // Idle.watch();
             // //TODO
-            // return;
+           if(settings.autoReset === false)
+               return;
             $("input, textarea").focusout();
             if ($rootScope.banners.length > 0)
                 $state.go('screensaver', {});

@@ -4,102 +4,18 @@
 <head>
     <meta charset="utf-8"/>
     <title>Навигация</title>
-    <link rel="icon" HREF="Content/icons/favicon.ico">
+    <link rel="icon" href="Content/icons/favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic&subset=latin,cyrillic'
           rel='stylesheet' type='text/css'/>
-    <!--<link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />-->
-
-    <!--<link rel="stylesheet" href="Content/icons/mainIcons/style.css">-->
-    <!--<link rel="stylesheet" href="Styles/AnimationStyle.css">-->
-    <!--<link rel="stylesheet" href="dist/vendor.min.css">-->
-    <!--<link rel="stylesheet/less" type="text/css" href="Styles/style.less">-->
-    <!--<link rel="stylesheet" href="Scripts/Keyboard/jsKeyboard.css">-->
-
     <!-- inject:css -->
-    <!--<link rel="stylesheet" href="Scripts/Keyboard/jsKeyboard.css">-->
-    <!--<link rel="stylesheet" href="Scripts/Keyboard/main.css">-->
-    <!--<link rel="stylesheet" href="blocks/cinemaTimetable/cinemaTimetable.css">-->
-    <!--<link rel="stylesheet" href="blocks/feedback/feedback.css">-->
-    <!--<link rel="stylesheet" href="blocks/feedbackCategory/feedbackCategory.css">-->
-    <!--<link rel="stylesheet" href="blocks/feedbackMark/feedbackMark.css">-->
-    <!--<link rel="stylesheet" href="blocks/feedbackMessage/feedbackMessage.css">-->
-    <!--<link rel="stylesheet" href="blocks/mainMenu/mainMenu.css">-->
-    <!--<link rel="stylesheet" href="blocks/organizationProposalControl/organizationProposalControl.css">-->
-    <!--<link rel="stylesheet" href="blocks/organizationProposalListControl/organizationProposalListControl.css">-->
-    <!--<link rel="stylesheet" href="blocks/proposalControl/proposalControl.css">-->
-    <!--<link rel="stylesheet" href="blocks/proposals/proposals.css">-->
-    <!--<link rel="stylesheet" href="blocks/sheduleControl/sheduleControl.css">-->
-    <!--<link rel="stylesheet" href="blocks/sideMenu/sideMenu.css">-->
-    <!--<link rel="stylesheet" href="Content/icons/mainIcons/style.css">-->
-    <!-- endinject -->
+    <link rel="stylesheet" href="dist/vendor.min.css">
     <link rel="stylesheet" href="dist/client.css">
-
+    <!-- endinject -->
 </head>
-
 <body>
-<script src="dist/vendor.min.js"></script>
-<script src="Scripts/Masonry/masonry.js"></script>
-<script src="Scripts/Directives/imagesLoaded.js"></script>
-<!--<script src="less.js" type="text/javascript"></script>-->
 <!-- inject:js -->
-<script src="Scripts/app.js"></script>
-<script src="Scripts/constant.js"></script>
-<script src="Scripts/idleConfig.js"></script>
-<script src="Scripts/stateConfig.js"></script>
-<script src="Scripts/bowser/bowser.js"></script>
-<script src="Scripts/Controllers/appContainerController.js"></script>
-<script src="Scripts/Controllers/mainController.js"></script>
-<script src="Scripts/Controllers/mainMenuController.js"></script>
-<script src="Scripts/Controllers/mapController.js"></script>
-<script src="Scripts/Controllers/organizationsController.js"></script>
-<script src="Scripts/Custom-leaflet/leaflet.js"></script>
-<script src="Scripts/Custom-leaflet/movingMarker.js"></script>
-<script src="Scripts/Custom-leaflet/objectLayer.js"></script>
-<script src="Scripts/Custom-leaflet/zoomingMarker.js"></script>
-<script src="Scripts/Directives/imagesLoaded.js"></script>
-<script src="Scripts/Directives/keyboard.js"></script>
-<script src="Scripts/Directives/molokoImageApi.js"></script>
-<script src="Scripts/Directives/molokoImageSource.js"></script>
-<script src="Scripts/Directives/molokoMap.js"></script>
-<script src="Scripts/Directives/routeClass.js"></script>
-<script src="Scripts/Directives/scaleSvgText.js"></script>
-<script src="Scripts/Directives/transportMap.js"></script>
-<script src="Scripts/Directives/__molokoMap.js"></script>
-<script src="Scripts/Filters/joinBy.js"></script>
-<script src="Scripts/Filters/remainDays.js"></script>
-<script src="Scripts/Filters/unique.js"></script>
-<script src="Scripts/Helpers/arrayHelper.js"></script>
-<script src="Scripts/Helpers/mapHelper.js"></script>
-<script src="Scripts/Keyboard/jsKeyboard.js"></script>
-<script src="Scripts/Keyboard/main.js"></script>
-<script src="Scripts/Masonry/masonry.js"></script>
-<script src="Scripts/Services/busStopsService.js"></script>
-<script src="Scripts/Services/floorService.js"></script>
-<script src="Scripts/Services/mapObjectService.js"></script>
-<script src="Scripts/Services/mapService.js"></script>
-<script src="Scripts/Services/proposalService.js"></script>
-<script src="Scripts/Services/transportRouteService.js"></script>
-<script src="blocks/changeTypeViewControl/changeTypeViewControl.js"></script>
-<script src="blocks/cinemaTimetable/cinemaTimetable.js"></script>
-<script src="blocks/eventControl/eventController.js"></script>
-<script src="blocks/closedResult/closeResultController.js"></script>
-<script src="blocks/eventsListControl/eventListController.js"></script>
-<script src="blocks/feedbackCategory/feedbackCategoryController.js"></script>
-<script src="blocks/feedbackMessage/feedbackMessageController.js"></script>
-<script src="blocks/mainMenu/mainMenu.js"></script>
-<script src="blocks/mapControl/mapController.js"></script>
-<script src="blocks/organization/organization.js"></script>
-<script src="blocks/organizationProposalListControl/organizationProposalListController.js"></script>
-<script src="blocks/organizationsList/organizationsList.js"></script>
-<script src="blocks/proposalControl/proposalController.js"></script>
-<script src="blocks/proposalListControl/proposalListController.js"></script>
-<script src="blocks/proposals/proposalsController.js"></script>
-<script src="blocks/screensaver/screensaver.js"></script>
-<script src="blocks/searchControl/searchControl.js"></script>
-<script src="blocks/sheduleControl/sheduleControl.js"></script>
-<script src="blocks/sideMenu/sideMenu.js"></script>
-<script src="blocks/toolBar/toolBar.js"></script>
-<script src="blocks/transport/transportController.js"></script>
+<script src="dist/vendor.min.js"></script>
+<script src="dist/script.js"></script>
 <!-- endinject -->
 <div class="appContainer" ng-controller="mainController" ng-class="[colorTheme,formatTheme]">
     <div ng-click="changeTheme('formatTheme')" class="appContainer__secondArea">
@@ -125,23 +41,23 @@
     <div id="virtualKeyboard"></div>
     <div ui-view=""></div>
 
-    <script>
-        var slideIndex = 0;
-        carousel();
-        function carousel() {
-            var i;
-            var x = document.getElementsByClassName("bannerSlides");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > x.length) {
-                slideIndex = 1
-            }
-            x[slideIndex - 1].style.display = "block";
-            setTimeout(carousel, 10000);
-        }
-    </script>
+    <!--<script>-->
+    <!--var slideIndex = 0;-->
+    <!--//carousel();-->
+    <!--function carousel() {-->
+    <!--var i;-->
+    <!--var x = document.getElementsByClassName("bannerSlides");-->
+    <!--for (i = 0; i < x.length; i++) {-->
+    <!--x[i].style.display = "none";-->
+    <!--}-->
+    <!--slideIndex++;-->
+    <!--if (slideIndex > x.length) {-->
+    <!--slideIndex = 1-->
+    <!--}-->
+    <!--x[slideIndex - 1].style.display = "block";-->
+    <!--setTimeout(carousel, 10000);-->
+    <!--}-->
+    <!--</script>-->
 </div>
 </body>
 

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'iconMallClient';
-  src:  url('fonts/iconMallClient.eot?usjn1w');
-  src:  url('fonts/iconMallClient.eot?usjn1w#iefix') format('embedded-opentype'),
-    url('fonts/iconMallClient.ttf?usjn1w') format('truetype'),
-    url('fonts/iconMallClient.woff?usjn1w') format('woff'),
-    url('fonts/iconMallClient.svg?usjn1w#iconMallClient') format('svg');
+  src:  url('/Content/icons/mainIcons/fonts/iconMallClient.eot?usjn1w');
+  src:  url('/Content/icons/mainIcons/fonts/iconMallClient.eot?usjn1w#iefix') format('embedded-opentype'),
+    url('/Content/icons/mainIcons/fonts/iconMallClient.ttf?usjn1w') format('truetype'),
+    url('/Content/icons/mainIcons/fonts/iconMallClient.woff?usjn1w') format('woff'),
+    url('/Content/icons/mainIcons/fonts/iconMallClient.svg?usjn1w#iconMallClient') format('svg');
   font-weight: normal;
   font-style: normal;
 }

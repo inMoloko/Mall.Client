@@ -5,9 +5,9 @@
  */
 
 !function (name, definition) {
-    if (typeof module != 'undefined' && module.exports) module.exports = definition()
-    else if (typeof define == 'function' && define.amd) define(name, definition)
-    else this[name] = definition()
+    if (typeof module != 'undefined' && module.exports) module.exports = definition();
+    else if (typeof define == 'function' && define.amd) define(name, definition);
+    else window[name] = definition()
 }('bowser', function () {
     /**
       * See useragents.js for examples of navigator.userAgent

@@ -9,7 +9,7 @@
         $stateProvider
             .state('navigation', {
                 url: "/navigation",
-                templateUrl: 'blocks/navigation/navigation.html',
+                templateUrl: '/blocks/navigation/navigation.html',
                 fullScreen: true,
                 resetMap: true
             })
@@ -17,7 +17,7 @@
                 url: '/mainMenu',
                 views: {
                     'mainMenu': {
-                        templateUrl: 'blocks/sideMenu/sideMenu.html',
+                        templateUrl: '/blocks/sideMenu/sideMenu.html',
                         controller: 'mainMenuController'
                     }
                 },
@@ -27,7 +27,7 @@
                 url: '/organization/:OrganizationID?MapObjectID',
                 views: {
                     'organization@main': {
-                        templateUrl: 'blocks/organization/organization.html',
+                        templateUrl: '/blocks/organization/organization.html',
                         controller: 'organizationController'
                     }
                 },
@@ -37,7 +37,7 @@
                 url: '/navigation.shedule',
                 views: {
                     'mainMenu': {
-                        templateUrl: 'blocks/sheduleControl/sheduleControl.html',
+                        templateUrl: '/blocks/sheduleControl/sheduleControl.html',
                         controller: 'mainMenuController'
                     }
                 }
@@ -47,7 +47,7 @@
                 url: '/organization/:OrganizationID?MapObjectID',
                 views: {
                     'organization@main': {
-                        templateUrl: 'blocks/organization/organization.html',
+                        templateUrl: '/blocks/organization/organization.html',
                         controller: 'organizationController'
                     }
                 },
@@ -58,7 +58,7 @@
                 views: {
                     'proposalsList@main': {
                         controller: 'organizationProposalListController',
-                        templateUrl: 'blocks/organizationProposalListControl/organizationProposalListControl.html'
+                        templateUrl: '/blocks/organizationProposalListControl/organizationProposalListControl.html'
                     }
                 }
             })
@@ -67,7 +67,7 @@
                 views: {
                     'proposal@main': {
                         controller: 'proposalController',
-                        templateUrl: 'blocks/organizationProposalControl/organizationProposalControl.html'
+                        templateUrl: '/blocks/organizationProposalControl/organizationProposalControl.html'
                     }
                 }
             })
@@ -76,7 +76,7 @@
                 views: {
                     'proposalsList@main': {
                         controller: 'organizationProposalListController',
-                        templateUrl: 'blocks/organizationProposalListControl/organizationProposalListControl.html'
+                        templateUrl: '/blocks/organizationProposalListControl/organizationProposalListControl.html'
                     }
                 }
             })
@@ -85,7 +85,7 @@
                 views: {
                     'proposal@main': {
                         controller: 'proposalController',
-                        templateUrl: 'blocks/organizationProposalControl/organizationProposalControl.html'
+                        templateUrl: '/blocks/organizationProposalControl/organizationProposalControl.html'
                     }
                 }
             })
@@ -94,7 +94,7 @@
                 url: '/closedResult/?CategoryID&Filter&OrganizationType',
                 views: {
                     'searchResult': {
-                        templateUrl: 'blocks/closedResult/closedResult.html',
+                        templateUrl: '/blocks/closedResult/closedResult.html',
                         controller: 'closeResultController'
                     }
                 }
@@ -103,7 +103,7 @@
                 url: '/organization/:OrganizationID?MapObjectID',
                 views: {
                     'organization@main': {
-                        templateUrl: 'blocks/organization/organization.html',
+                        templateUrl: '/blocks/organization/organization.html',
                         controller: 'organizationController'
                     }
                 },
@@ -113,7 +113,7 @@
                 url: '/searchResult/?CategoryID&Filter&OrganizationType',
                 views: {
                     'searchResult': {
-                        templateUrl: 'blocks/organizationsList/organizationsList.html',
+                        templateUrl: '/blocks/organizationsList/organizationsList.html',
                         controller: 'organizationsListController'
                     }
                 },
@@ -123,7 +123,7 @@
                 url: '/organization/:OrganizationID?MapObjectID',
                 views: {
                     'organization@main': {
-                        templateUrl: 'blocks/organization/organization.html',
+                        templateUrl: '/blocks/organization/organization.html',
                         controller: 'organizationController'
                     }
                 }
@@ -133,7 +133,7 @@
                 views: {
                     'proposalsList@main': {
                         controller: 'organizationProposalListController',
-                        templateUrl: 'blocks/organizationProposalListControl/organizationProposalListControl.html'
+                        templateUrl: '/blocks/organizationProposalListControl/organizationProposalListControl.html'
                     }
                 }
             })
@@ -142,7 +142,7 @@
                 views: {
                     'proposal@main': {
                         controller: 'proposalController',
-                        templateUrl: 'blocks/organizationProposalControl/organizationProposalControl.html'
+                        templateUrl: '/blocks/organizationProposalControl/organizationProposalControl.html'
                     }
                 }
             })
@@ -151,7 +151,7 @@
                 views: {
                     'proposal@main': {
                         controller: 'cinemaTimetableController',
-                        templateUrl: 'blocks/cinemaTimetable/cinemaTimetable.html',
+                        templateUrl: '/blocks/cinemaTimetable/cinemaTimetable.html',
                         controllerAs: 'controller'
                     }
                 }
@@ -159,13 +159,13 @@
 
             .state('searchResultFull', {
                 url: "/searchResultFull",
-                templateUrl: "blocks/searchResultFull/searchResultFull.html"
+                templateUrl: "/blocks/searchResultFull/searchResultFull.html"
             })
             .state('searchResultFull.result', {
                 url: "/result/?CategoryID&Filter&OrganizationType",
                 views: {
                     'searchResultFull': {
-                        templateUrl: 'blocks/organizationsList/organizationsList.html',
+                        templateUrl: '/blocks/organizationsList/organizationsList.html',
                         controller: 'organizationsListController'
                     }
                 },
@@ -174,14 +174,14 @@
 
             .state('transport', {
                 url: "/transport?TransportRouteID&BusStopID",
-                templateUrl:'blocks/transport/transport.html',
+                templateUrl:'/blocks/transport/transport.html',
             })
             .state('transport.searchResult', {
                 url: "/searchResult?TransportRouteID&BusStopID",
                 views: {
                     'searchResult@transport': {
                         controller: 'transportController',
-                        templateUrl: "blocks/transportSearchResult/transportSearchResult.html",
+                        templateUrl: "/blocks/transportSearchResult/transportSearchResult.html",
                         controllerAs: 'controller'
                     }
                 }
@@ -191,7 +191,7 @@
                 views: {
                     'searchResult@transport': {
                         controller: 'transportController',
-                        templateUrl: "blocks/transportCloseResult/transportCloseResult.html",
+                        templateUrl: "/blocks/transportCloseResult/transportCloseResult.html",
                         controllerAs: 'controller'
                     }
                 }
@@ -200,18 +200,18 @@
             .state('screensaver', {
                 url: "/screensaver",
                 controller: 'screensaverController',
-                templateUrl: "blocks/screensaver/screensaver.html"
+                templateUrl: "/blocks/screensaver/screensaver.html"
             })
 
             .state('feedback', {
                 url: "/feedback",
-                templateUrl: "blocks/feedback/feedBack.html"
+                templateUrl: "/blocks/feedback/feedBack.html"
             })
             .state('feedback.category', {
                 url: "/category",
                 views: {
                     'feedbackCategory@feedback': {
-                        templateUrl: 'blocks/feedbackCategory/feedbackCategory.html',
+                        templateUrl: '/blocks/feedbackCategory/feedbackCategory.html',
                         controller: 'feedbackCategoryController',
                         controllerAs: 'controller'
                     }
@@ -221,7 +221,7 @@
                 url: "/mark/:FeedbackCategoryID",
                 views: {
                     'feedbackMark@feedback': {
-                        templateUrl: 'blocks/feedbackMark/feedbackMark.html'
+                        templateUrl: '/blocks/feedbackMark/feedbackMark.html'
                     }
                 }
             })
@@ -229,7 +229,7 @@
                 url: "/message/:FeedbackMark",
                 views: {
                     'feedbackMessage@feedback': {
-                        templateUrl: 'blocks/feedbackMessage/feedbackMessage.html',
+                        templateUrl: '/blocks/feedbackMessage/feedbackMessage.html',
                         controller: 'feedbackMessageController',
                         controllerAs: 'controller'
                     }
@@ -238,14 +238,14 @@
             .state('proposals', {
                 url: "/proposals",
                 controller: 'proposalsController',
-                templateUrl: "blocks/proposals/proposals.html"
+                templateUrl: "/blocks/proposals/proposals.html"
             })
             .state('proposals.searchResult', {
                 url: "/searchResult",
                 views: {
                     'proposalsList': {
                         controller: 'proposalListController',
-                        templateUrl: 'blocks/proposalListControl/proposalListControl.html'
+                        templateUrl: '/blocks/proposalListControl/proposalListControl.html'
                     }
                 }
             })
@@ -254,7 +254,7 @@
                 views: {
                     'proposal@main': {
                         controller: 'proposalController',
-                        templateUrl: 'blocks/proposalControl/proposalControl.html'
+                        templateUrl: '/blocks/proposalControl/proposalControl.html'
                     }
                 }
             })
@@ -263,7 +263,7 @@
                 views: {
                     'proposalsList': {
                         controller: 'proposalListController',
-                        templateUrl: 'blocks/proposalListControl/proposalListControl.html'
+                        templateUrl: '/blocks/proposalListControl/proposalListControl.html'
                     }
                 }
             })
@@ -272,19 +272,19 @@
                 views: {
                     'proposal@main': {
                         controller: 'proposalController',
-                        templateUrl: 'blocks/proposalControl/proposalControl.html'
+                        templateUrl: '/blocks/proposalControl/proposalControl.html'
                     }
                 }
             })
             .state('events', {
                 url: "/events",
-                templateUrl: "blocks/events/events.html"
+                templateUrl: "/blocks/events/events.html"
             })
             .state('events.searchResult', {
                 url: "/searchResult",
                 views: {
                     'eventsList': {
-                        templateUrl: 'blocks/eventsListControl/eventsListControl.html',
+                        templateUrl: '/blocks/eventsListControl/eventsListControl.html',
                         controller: 'eventListController',
                         controllerAs: 'controller'
                     }
@@ -294,7 +294,7 @@
                 url: "/event/:EventID",
                 views: {
                     'event@main': {
-                        templateUrl: 'blocks/eventControl/eventControl.html',
+                        templateUrl: '/blocks/eventControl/eventControl.html',
                         controller: 'eventController',
                         controllerAs: 'controller'
                     }
@@ -305,7 +305,7 @@
                 views: {
                     'eventsList': {
                         controller: 'eventListController',
-                        templateUrl: 'blocks/eventsListControl/eventsListControl.html'
+                        templateUrl: '/blocks/eventsListControl/eventsListControl.html'
                     }
                 }
             })
@@ -314,7 +314,7 @@
                 views: {
                     'event@main': {
                         controller: 'eventController',
-                        templateUrl: 'blocks/eventControl/eventControl.html'
+                        templateUrl: '/blocks/eventControl/eventControl.html'
                     }
                 }
             });

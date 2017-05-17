@@ -14,6 +14,10 @@ let less = require('gulp-less');
 let sourcemaps = require('gulp-sourcemaps');
 let path = require('path');
 let urlAdjuster = require('gulp-css-url-adjuster');
+let babel = require('gulp-babel');
+let rimraf = require('gulp-rimraf');
+let minifyHTML = require('gulp-minify-html');
+let templateCache = require('gulp-angular-templatecache');
 
 gulp.task('bower', function () {
     return gulp.src('./index.html')
@@ -61,6 +65,11 @@ gulp.task('build', function (callback) {
     runSequence('bower', 'inject',
         callback);
 });
+gulp.task('build:clean', function () {
+    return gulp.src('./dist/', {read: false})
+        .pipe(rimraf({force: true}))
+        .on('error', log);
+});
 gulp.task('lint', function () {
     return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './Content/**/*.js', '!./Scripts/**/leaflet.js '])
     // eslint() attaches the lint output to the "eslint" property
@@ -73,6 +82,74 @@ gulp.task('lint', function () {
         // lint error, return the stream and pipe to failAfterError last. 
         .pipe(eslint.failAfterError());
 });
+gulp.task('template', function () {
+    return gulp.src(['./blocks/**/*.html', './Views/*.html'])
+        .pipe(minifyHTML({quotes: true}))
+        .pipe(templateCache({root: "blocks", module: "app", filename: "templates.js"}))
+        .pipe(gulp.dest('dist'))
+        .on('error', log);
+});
+gulp.task('build:content', function () {
+    return gulp.src(['./Content/**/*.*'], {read: true, base: '.'})
+        .pipe(gulp.dest('dist'))
+        .on('error', log);
+});
+
+gulp.task('build:index', function () {
+    let sources = gulp.src(['dist/vendor.min.{js,css}','dist/script.js','dist/templates.js','dist/client.css'], {read: false});
+    return gulp.src('./index.html')
+        .pipe(inject(sources, {relative: true, ignorePath:'dist'}))
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('server:index', function () {
+    let sources = gulp.src(['dist/vendor.min.{js,css}','dist/script.js','dist/client.css'], {read: false});
+    return gulp.src('./index.html')
+        .pipe(inject(sources, {relative: true}))
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('prod', function (callback) {
+    runSequence('build:clean', ['template', 'js-prod', 'less-prod', 'bower-build', 'build:content'], 'build:index', callback);
+});
+gulp.task('client', function (callback) {
+    runSequence('build:clean', ['template', 'js-client', 'less-prod', 'bower-build', 'build:content'], 'build:index', callback);
+});
+
+gulp.task('js-prod', function () {
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/production/**/*.js'])
+        .pipe(concat('script.js'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(uglify({outSourceMap: true}))
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('js-client', function () {
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/client/**/*.js'])
+        .pipe(concat('script.js'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(uglify({outSourceMap: true}))
+        .pipe(gulp.dest('dist'));
+});
+gulp.task('js-serve', function () {
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/development/**/*.js'])
+        .pipe(sourcemaps.init())
+        .pipe(concat('script.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist'))
+        .pipe(browserSync.stream())
+        .on('error', log);
+});
+gulp.task('less-prod', function () {
+    return gulp.src(['style.less', './Scripts/Keyboard/jsKeyboard.css', './Styles/*.{less,css}','./Content/icons/mainicons/style.css','./Scripts/Custom-leaflet/leaflet.less','./blocks/**/*.{less,css}'])
+        .pipe(concat('client.less'))
+        .pipe(less({
+            paths: [path.join(__dirname, 'less', 'includes')]
+        }))
+        .pipe(gulp.dest('dist'));
+});
 gulp.task('less-serve', function () {
     //,'./Content/icons/mainicons/style.css'
     return gulp.src(['style.less', './Scripts/Keyboard/jsKeyboard.css', './Styles/*.{less,css}','./Content/icons/mainicons/style.css','./Scripts/Custom-leaflet/leaflet.less','./blocks/**/*.{less,css}'])
@@ -80,9 +157,9 @@ gulp.task('less-serve', function () {
         .pipe(less({
             paths: [path.join(__dirname, 'less', 'includes')]
         }))
-        .pipe(urlAdjuster({
-            replace: ['fonts/', '../Content/icons/mainicons/fonts/'],
-        }))
+        // .pipe(urlAdjuster({
+        //     replace: ['fonts/', '../Content/icons/mainicons/fonts/'],
+        // }))
         .pipe(concat('client.css'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist'))
@@ -90,12 +167,13 @@ gulp.task('less-serve', function () {
         .on('error', log);
 });
 
-gulp.task('server',['less-serve'], function () {
+gulp.task('server',['less-serve','js-serve','server:index'], function () {
     browserSync.init({
         server: {
             baseDir: "./"
         }
     });
+    gulp.watch(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/development/**/*.js'], ['js-serve']);
     gulp.watch(['style.less', './blocks/**/*.{less,css}', './Scripts/Keyboard/jsKeyboard.css', './Styles/*.{less,css}'], ['less-serve']);
     browserSync.watch(['./Scripts/**/*.{js,css,html}', './blocks/**/*.{js,css,html}']).on('change', browserSync.reload);
 });
