@@ -46,7 +46,7 @@
                         bounceAtZoomLimits: true,
                         fadeAnimation: false,
                         zoomSnap: 0,
-                        bearing:30
+                        bearing: 30
                     });
                     //console.log('Create map');
                     map.setView([0, 0], 1);
@@ -243,7 +243,7 @@
                         } else {
                             //Тип организации дополнительно
                             //if (org.OrganizationType === 5) {
-                            if (org.CategoryOrganization.length!=0 && org.CategoryOrganization.some(i=>i.Category.ServiceCategoryType == constants.Service || i.Category.ServiceCategoryType == constants.Link)) {
+                            if (org.CategoryOrganization.length != 0 && org.CategoryOrganization.some(i => i.Category.ServiceCategoryType == constants.Service || i.Category.ServiceCategoryType == constants.Link)) {
                                 if (org.CategoryOrganization.length != 0) {
                                     let cat = org.CategoryOrganization[0];
                                     if (org.CategoryOrganization.map(i => i.CategoryID).includes($rootScope.serviceCategories.toilet))
@@ -268,7 +268,7 @@
                         if ($rootScope.currentTerminal.OrganizationID === item.OrganizationID)
                             return 400;
                         //Сервистные
-                        if (item.CategoryOrganization.length!=0 && item.CategoryOrganization.some(i=>i.Category.ServiceCategoryType == constants.Service))
+                        if (item.CategoryOrganization.length != 0 && item.CategoryOrganization.some(i => i.Category.ServiceCategoryType == constants.Service))
                             return 1;
                         return 10;
                     };
@@ -334,7 +334,7 @@
                                         $rootScope.currentOrganization = item;
                                         clickToOrganization(item.OrganizationID);
                                     });
-                                    if($scope.mapFloors[mapObject.MapObject.FloorID])
+                                    if ($scope.mapFloors[mapObject.MapObject.FloorID])
                                         $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(markerText);
                                 }
                                 else {
@@ -458,7 +458,7 @@
 
                             let result = getOptimalPath(mapObjects);
                             //Может быть клик на надпись, но нет входа
-                            if(!result){
+                            if (!result) {
                                 delete $rootScope.currentPath;
                             }
                             else {
@@ -474,7 +474,7 @@
                         }
                     });
                     //Отфильтрованны организации
-                    var _currentOrganizations = $rootScope.$watchCollection('currentOrganizations', selectOrganizations);
+                    var _currentOrganizations = $rootScope.$watch('currentOrganizations', selectOrganizations);
 
                     function selectOrganizations(nw, old) {
                         //Если выбранна организация то нельзя выбирать несколько
@@ -558,6 +558,13 @@
                         }
 
                     });
+                    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+                        if (toState.name.endsWith('.searchResult')) {
+                           // $rootScope.currentOrganizations = undefined;
+                        }
+
+                    });
+
                     let changeStatehandler = $rootScope.$on('$stateChangeSuccess',
                         function (event, toState, toParams, fromState, fromParams) {
                             if (toState.resetMap)

@@ -1,19 +1,19 @@
 ﻿(function () {
     "use strict";
-    function* processData(data) {
-        if (!data) {
-            return;
-        }
-
-        for (let i = 0; i < data.length; i++) {
-            let val = data[i];
-            yield val.id;
-
-            if (val.children) {
-                yield* processData(val.children);
-            }
-        }
-    }
+    // function* processData(data) {
+    //     if (!data) {
+    //         return;
+    //     }
+    //
+    //     for (let i = 0; i < data.length; i++) {
+    //         let val = data[i];
+    //         yield val.id;
+    //
+    //         if (val.children) {
+    //             yield* processData(val.children);
+    //         }
+    //     }
+    // }
 
     var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, $linq) {
 
@@ -61,40 +61,6 @@
             
              $rootScope.currentOrganizations = tmp;
             //Нечеткий поиск на сервере
-            //if ($scope.searchText) {
-
-            //    let url = settings.webApiBaseUrl + '/organization/FuzzySearch/' + $scope.searchText + '/?CustomerID=' + settings.customerID || '';
-            //    if (categoryID && categoryID != -1) {
-            //        let cats = $rootScope.categories.find(i => i.CategoryID == categoryID).ChildrenIds;
-            //        cats.push(categoryID);
-            //        url += '&Categories=' + cats.join(',');
-            //    }
-
-            //    $http.get(url).then(function (response) {
-            //        if (response.data.ReducedResult) {
-            //            let ids = response.data.ReducedResult.map(i => i.ID);
-            //            $rootScope.currentOrganizations = $rootScope.organizations.filter(i => ids.includes(i.OrganizationID));
-            //        }
-            //        if (response.data.FullResult) {
-            //            let ids = response.data.FullResult.map(i => i.ID);
-            //            $rootScope.otherCurrentOrganizations = $rootScope.organizations.filter(i => ids.includes(i.OrganizationID));
-            //        }
-            //    });
-            //}
-            //else {
-            //$rootScope.otherCurrentOrganizations = tmp;
-            //if (categoryID && categoryID != -1) {
-            //    categoryID = parseInt(categoryID);
-
-            //    let cats = $rootScope.categories.find(i => i.CategoryID == categoryID).ChildrenIds;
-            //    cats.push(categoryID);
-            //    let ln = $linq.Enumerable().From(cats);
-            //    tmp = tmp.filter(item => {
-            //        return ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
-            //    });
-            //}
-            //$rootScope.currentOrganizations = tmp;
-            //}
         };
 
         $scope.home = function () {

@@ -117,7 +117,7 @@
                         controller: 'organizationsListController'
                     }
                 },
-                reloadOnSearch: false
+                reloadOnSearch: true
             })
             .state('navigation.searchResult.organization', {
                 url: '/organization/:OrganizationID?MapObjectID',
