@@ -275,7 +275,25 @@
   right: 0px;
   left: 30px;
 }
-
+.organization__sendPathButton_top{
+  height: 80px;
+  background: #006bc2;
+  position: fixed;
+  z-index: 5;
+  top:50px;
+  width:600px;
+  right: calc(~"50%" - ~"550px" );
+  //transition: 0.3s top linear;
+  animation: fall-down 0.2s;
+}
+@keyframes fall-down {
+  from {
+    top: 0;
+  }
+  to {
+    top:50px;
+  }
+}
 .sendPathBlock__mailButton:disabled {
   background-color: darkgrey;
 }
