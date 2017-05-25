@@ -33,33 +33,33 @@
             $scope.searchText = $stateParams.Filter == undefined ? "" : $stateParams.Filter.toLowerCase();
             var tmp = $rootScope.organizations;
             var tmpCat = $rootScope.categories;
-             if ($scope.searchText) {
-                 var tmpCatIds = [];
-                 angular.forEach(tmpCat, function (item) {
-                     if (item.Name && item.Name.toLowerCase().includes($scope.searchText))
-                         tmpCatIds.push(item.CategoryID);
-                 });
-            
-                 let ln = $linq.Enumerable().From(tmpCatIds);
-                 tmp = tmp.filter(item => {
-                     return (item.Name && item.Name.toLowerCase().includes($scope.searchText)) || (item.KeyWords && item.KeyWords.toLowerCase().includes($scope.searchText)) || ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
-                 });
-            
-             }
-             $rootScope.otherCurrentOrganizations = tmp;
-            
-             if (categoryID && categoryID != -1) {
-                 categoryID = parseInt(categoryID);
-            
-                 let cats = $rootScope.categories.find(i => i.CategoryID == categoryID).ChildrenIds;
-                 cats.push(categoryID);
-                 let ln = $linq.Enumerable().From(cats);
-                 tmp = tmp.filter(item => {
-                     return ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
-                 });
-             }
-            
-             $rootScope.currentOrganizations = tmp;
+            if ($scope.searchText) {
+                var tmpCatIds = [];
+                angular.forEach(tmpCat, function (item) {
+                    if (item.Name && item.Name.toLowerCase().includes($scope.searchText))
+                        tmpCatIds.push(item.CategoryID);
+                });
+
+                let ln = $linq.Enumerable().From(tmpCatIds);
+                tmp = tmp.filter(item => {
+                    return (item.Name && item.Name.toLowerCase().includes($scope.searchText)) || (item.KeyWords && item.KeyWords.toLowerCase().includes($scope.searchText)) || ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
+                });
+
+            }
+            $rootScope.otherCurrentOrganizations = tmp;
+
+            if (categoryID && categoryID != -1) {
+                categoryID = parseInt(categoryID);
+
+                let cats = $rootScope.categories.find(i => i.CategoryID == categoryID).ChildrenIds;
+                cats.push(categoryID);
+                let ln = $linq.Enumerable().From(cats);
+                tmp = tmp.filter(item => {
+                    return ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
+                });
+            }
+
+            $rootScope.currentOrganizations = tmp;
             //Нечеткий поиск на сервере
         };
 
@@ -84,7 +84,11 @@
             $rootScope.currentStateName = $state.current.name;
             $rootScope.currentStateParam = $state.params;
             $rootScope.closeResultTitle = 'Найдено ' + $rootScope.currentOrganizations.length;
-            $state.go("navigation.closedResult", { CategoryID: $stateParams.CategoryID, Filter: $stateParams.Filter, OrganizationType: $stateParams.OrganizationType });
+            $state.go("navigation.closedResult", {
+                CategoryID: $stateParams.CategoryID,
+                Filter: $stateParams.Filter,
+                OrganizationType: $stateParams.OrganizationType
+            });
         };
         let stateChangeHandler = $rootScope.$on('$stateChangeSuccess',
             function (event, toState, toParams, fromState, fromParams) {
@@ -102,9 +106,14 @@
             filter();
         });
         $scope.getFloors = function (item) {
-            if(!item)
+            if (!item)
                 return;
-            return item.OrganizationMapObject.filter(i=>$rootScope.floorsDic[i.MapObject.FloorID]).map(i => {
+            return $linq.Enumerable()
+                .From(item.OrganizationMapObject)
+                .Where(i => $rootScope.floorsDic[i.MapObject.FloorID])
+                .Select(i => $rootScope.floorsDic[i.MapObject.FloorID].Number).Distinct().ToArray().join(',');
+
+            return item.OrganizationMapObject.filter(i => $rootScope.floorsDic[i.MapObject.FloorID]).map(i => {
                 return $rootScope.floorsDic[i.MapObject.FloorID].Number;
             }).join(',');
         };
