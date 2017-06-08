@@ -1,6 +1,7 @@
 (function () {
     "use strict";
     var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, proposalService, $linq) {
+        $scope.settings = settings;
         function getOptimalPath(array) {
             let paths = {};
             let mapObject = $rootScope.currentTerminal.TerminalMapObject[0].MapObject;

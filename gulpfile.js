@@ -37,7 +37,7 @@ function log(error) {
 }
 //�������� �������
 gulp.task('inject', function () {
-    var sources = gulp.src(['./Scripts/**/*.{js,css}', './blocks/**/*.{js,css}', './Content/**/*.{js,css}', './bower_components/leaflet.AnimatedMarker/src/AnimatedMarker.js'], {read: false});
+    var sources = gulp.src(['./node_modules/leaflet/dist/leaflet.js','./Scripts/**/*.{js,css}', './blocks/**/*.{js,css}', './Content/**/*.{js,css}', './bower_components/leaflet.AnimatedMarker/src/AnimatedMarker.js'], {read: false});
     return gulp.src('./index.html')
         .pipe(inject(sources, {relative: true}))
         .pipe(gulp.dest('./'));

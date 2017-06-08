@@ -17,6 +17,7 @@
         deltaDistanceTouchMoveAsClick: 100,
         customerID: queryDict.CustomerID,
         terminalID: queryDict.TerminalID,
-        displayKeyboard:true
+        displayKeyboard:true,
+        resourceFolder:'Content/Backup'
     });
 })();

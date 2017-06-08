@@ -27,7 +27,7 @@
         else {
             filter();
         }
-
+        $scope.settings = settings;
         function filter() {
             let categoryID = $stateParams.CategoryID;
             $scope.searchText = $stateParams.Filter == undefined ? "" : $stateParams.Filter.toLowerCase();

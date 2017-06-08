@@ -76,7 +76,7 @@
         floorPromise.then(function (response) {
             //$rootScope.floors = response.data;
         });
-        var organizationPromise = $http.get(settings.webApiBaseUrl + '/organization?$select=KeyWords,LogoBaseColor,Description,OrganizationID,Name,IsAnchor,Schedule,MapSize,CategoryOrganization/CategoryID,CategoryOrganization/Category/ServiceCategoryType,CategoryOrganization/Category/Name,CategoryOrganization/Category/IsUsed,OrganizationMapObject&$expand=CategoryOrganization/Category,OrganizationMapObject/MapObject&$orderby=Name asc&CustomerID=' + settings.customerID);
+        var organizationPromise = $http.get(settings.webApiBaseUrl + '/organization?$select=LogoExtension,WideLogoExtension,KeyWords,LogoBaseColor,Description,OrganizationID,Name,IsAnchor,Schedule,MapSize,CategoryOrganization/CategoryID,CategoryOrganization/Category/LogoExtension,CategoryOrganization/Category/ServiceCategoryType,CategoryOrganization/Category/Name,CategoryOrganization/Category/IsUsed,OrganizationMapObject&$expand=CategoryOrganization/Category,OrganizationMapObject/MapObject&$orderby=Name asc&CustomerID=' + settings.customerID);
         organizationPromise.then(function (response) {
             //$rootScope.organizations = response.data;
         });
@@ -103,7 +103,7 @@
         var customerPromise = $http.get(`${settings.webApiBaseUrl}/Customer?CustomerID=${settings.customerID}`);
 
 
-        var proposalPromise = $http.get(settings.webApiBaseUrl + `/Proposal?$select=ProposalID,DateBegin,DateEnd,Name,Summary&$filter=${filter}&CustomerID=${settings.customerID}`);
+        var proposalPromise = $http.get(settings.webApiBaseUrl + `/Proposal?$select=ProposalID,DateBegin,DateEnd,Name,Summary,LogoExtension&$filter=${filter}&CustomerID=${settings.customerID}`);
 
         //var cinemaTimetable = $http.get(settings.webApiBaseUrl + `/Movie?$expand=CinemaTimeTables&CustomerID=${settings.customerID}`);
 
