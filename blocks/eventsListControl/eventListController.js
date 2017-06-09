@@ -1,6 +1,6 @@
 ﻿(function () {
     "use strict";
-    var controller = function ($scope, $http, settings, $state, $rootScope, $stateParams) {
+    var controller = function ($scope, $http, settings, $state, $rootScope, $stateParams, eventService) {
         this.$http = $http;
         this.settings = settings;
         this.$stateParams = $stateParams;
@@ -14,17 +14,23 @@
                     $state.go("events.searchResult.event", { EventID: $rootScope.events[0].EventID });
                 $scope.selectedEventID = $rootScope.events[0].EventID;
             }
-        }
+        };
 
-        if ($rootScope.events === undefined) {
-            let event = $rootScope.$on('floorLoad', function () {
-                init();
-                event();
-            });
-        }
-        else {
-           init();
-        }
+        eventService.getFilter().then(events=>{
+
+            $rootScope.events = events;
+            init();
+        });
+
+        // if ($rootScope.events === undefined) {
+        //     let event = $rootScope.$on('floorLoad', function () {
+        //         init();
+        //         event();
+        //     });
+        // }
+        // else {
+        //    init();
+        // }
 
         imagesLoaded('.wrapper', { background: true }, function () {
             setTimeout($rootScope.initMasonry, 250);
@@ -35,6 +41,6 @@
         }
 
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', '$stateParams'];
+    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', '$stateParams', 'eventService'];
     angular.module('app').controller('eventListController', controller);
 })();

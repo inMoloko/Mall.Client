@@ -268,6 +268,9 @@ class Graph {
             this.clearDksData();
 
             var startVertex = this.getLayer(startVertexLayerID).getVertex(startVertexX, startVertexY);
+            if(startVertex === undefined)
+                throw `Не найденна вершина начала маршрута: ${startVertexY}, ${startVertexX}`;
+
             startVertex.dksLength = 0;
 
             var destVertexLayer = this.getLayer(destVertexLayerID);

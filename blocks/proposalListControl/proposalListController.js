@@ -1,16 +1,12 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $rootScope, $http, settings, $stateParams, $state) {
-        // let dt = new Date().toISOString();
-        // let filter = `DateEnd ge DateTime'${dt}' and DateBegin le DateTime'${dt}'`;
-        // $http.get(settings.webApiBaseUrl + `/Proposal?$select=ProposalID,DateBegin,DateEnd,Name,Summary&$filter=${filter}&CustomerID=${settings.customerID}`).then(function (data) {
-        //     $scope.items = data.data;
-        //     if ($scope.items !== undefined && $scope.items.length !== 0) {
-        //         $state.go("proposals.searchResult.proposal", { ProposalID: $scope.items[0].ProposalID });
-        //         $scope.selectedProposalID = $scope.items[0].ProposalID;
-        //     }
-        // });
-        $scope.items = $rootScope.proposals;
+    var controller = function ($scope, $rootScope, $http, settings, $stateParams, $state, proposalService) {
+        //$scope.items = $rootScope.proposals;
+
+        proposalService.getFilter().then(i=>{
+            $scope.items = i;
+        });
+
         if ($scope.items !== undefined && $scope.items.length !== 0) {
             if ($state.current.name === 'proposals.searchResult')
                 $state.go("proposals.searchResult.proposal", { ProposalID: $scope.items[0].ProposalID });
@@ -37,9 +33,9 @@
             return result;
         };
 
-        imagesLoaded('.wrapper', { background: true }, function () {
-            setTimeout($rootScope.initMasonry, 250);
-        });
+        // imagesLoaded('.wrapper', { background: true }, function () {
+        //     setTimeout($rootScope.initMasonry, 250);
+        // });
 
         $scope.select = function (proposalID) {
             $scope.selectedProposalID = proposalID;
@@ -48,6 +44,6 @@
         $rootScope.selectPageName = "АКЦИИ и СКИДКИ";
         
     };
-    controller.$inject = ['$scope', '$rootScope', '$http', 'settings', '$stateParams', '$state'];
+    controller.$inject = ['$scope', '$rootScope', '$http', 'settings', '$stateParams', '$state', 'proposalService'];
     angular.module('app').controller('proposalListController', controller);
 })();

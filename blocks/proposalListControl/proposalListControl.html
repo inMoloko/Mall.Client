@@ -35,7 +35,9 @@
     <ul class="wrapper"  style="padding:0;">
         <li ng-click="select(item.ProposalID)" ui-sref="proposals.proposalsList.proposal({ProposalID:item.ProposalID})" class="item" 
             style="border:lightgray solid 1px;margin:0.5%;padding:1%;width: 32%;" ng-repeat="item in items">
-            <img  moloko-image-api="item.ProposalID" url="/Proposal/:id/Logo" class="img-responsive" alt="{{item.Organization.Name}}" style='/*height: 100%; width: 100%;*/ object-fit: cover'>        
+            <img  file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension}}"
+                    <!--moloko-image-api="item.ProposalID" url="/Proposal/:id/Logo" -->
+                  class="img-responsive" alt="{{item.Organization.Name}}" style='object-fit: cover'>
             <div class="proposalsListControlListElement__name" style="white-space: normal;">
                 {{item.Name}}
             </div>

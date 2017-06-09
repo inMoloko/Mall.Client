@@ -37,7 +37,7 @@ function log(error) {
 }
 //�������� �������
 gulp.task('inject', function () {
-    var sources = gulp.src(['./node_modules/leaflet/dist/leaflet.js','./Scripts/**/*.{js,css}', './blocks/**/*.{js,css}', './Content/**/*.{js,css}', './bower_components/leaflet.AnimatedMarker/src/AnimatedMarker.js'], {read: false});
+    var sources = gulp.src(['./node_modules/leaflet/dist/leaflet.js','./Scripts/**/*.{js,css}', '.blocks/**/*.{js,css}', './Content/**/*.{js,css}', './bower_components/leaflet.AnimatedMarker/src/AnimatedMarker.js'], {read: false});
     return gulp.src('./index.html')
         .pipe(inject(sources, {relative: true}))
         .pipe(gulp.dest('./'));
@@ -71,7 +71,7 @@ gulp.task('build:clean', function () {
         .on('error', log);
 });
 gulp.task('lint', function () {
-    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './Content/**/*.js', '!./Scripts/**/leaflet.js '])
+    return gulp.src(['./Scripts/**/*.js', '.blocks/**/*.js', './Content/**/*.js', '!./Scripts/**/leaflet.js '])
     // eslint() attaches the lint output to the "eslint" property
     // of the file object so it can be used by other modules.
         .pipe(eslint())
@@ -175,5 +175,5 @@ gulp.task('server',['less-serve','js-serve','server:index'], function () {
     });
     gulp.watch(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/development/**/*.js'], ['js-serve']);
     gulp.watch(['style.less', './blocks/**/*.{less,css}', './Scripts/Keyboard/jsKeyboard.css', './Styles/*.{less,css}'], ['less-serve']);
-    browserSync.watch(['./Scripts/**/*.{js,css,html}', './blocks/**/*.{js,css,html}']).on('change', browserSync.reload);
+    browserSync.watch(['./Scripts/**/*.{js,css,html}', '.blocks/**/*.{js,css,html}']).on('change', browserSync.reload);
 });

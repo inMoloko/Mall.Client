@@ -1,10 +1,10 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, proposalService, $linq) {
+    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, proposalService, $linq, dbService) {
         $scope.settings = settings;
         function getOptimalPath(array) {
             let paths = {};
-            let mapObject = $rootScope.currentTerminal.TerminalMapObject[0].MapObject;
+            let mapObject = $rootScope.currentTerminal;//.TerminalMapObject[0].MapObject;
             //Надписи не учитывем для посторения
             array = array.filter(i => !i.ParamsAsJson || !i.ParamsAsJson.SignText);
             array.forEach(i => {
@@ -22,28 +22,33 @@
         }
         function filter() {
             let param = $state.params.OrganizationID;
-            if ($rootScope.organizations !== undefined) {
-                $rootScope.currentOrganization = $rootScope.organizations.find(i => i.OrganizationID == param);
-
-            }
-            else {
-                let event = $rootScope.$on('floorLoad', function () {
-                    $rootScope.currentOrganization = $rootScope.organizations.find(i => i.OrganizationID == param);
-                    event();
-                });
-            }
-            if (param)
-                proposalService.getByOrganization(param).then(function (response) {
-                    $scope.proposals = response;
-                });
+            // if ($rootScope.organizations !== undefined) {
+            //     $rootScope.currentOrganization = $rootScope.organizations.find(i => i.OrganizationID == param);
+            //
+            // }
+            // else {
+            //     let event = $rootScope.$on('floorLoad', function () {
+            //         $rootScope.currentOrganization = $rootScope.organizations.find(i => i.OrganizationID == param);
+            //         event();
+            //     });
+            // }
+            // if (param)
+            //     proposalService.getByOrganization(param).then(function (response) {
+            //         $scope.proposals = response;
+            //     });
+            dbService.organizationGetById(param).then(i=>{
+                $rootScope.currentOrganization = i;
+            });
         };
         filter();
         let locationChangeHandler = $rootScope.$on('$locationChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             filter();
 
             if ($rootScope.currentTerminal && $state.params.OrganizationID) {
-                let result = getOptimalPath($rootScope.currentOrganization.OrganizationMapObject.map(j=>j.MapObject));
-                $scope.code = $rootScope.currentTerminal.MTerminalID + $rootScope.customer.Synonym + result.object.MapObjectID;
+                let result = getOptimalPath($rootScope.currentOrganization.MapObjects);
+                dbService.getData().then(data=>{
+                    $scope.code = $rootScope.currentTerminal.MTerminalID + data.Customer.Synonym + result.object.MapObjectID;
+                });
 
             }
         });
@@ -145,11 +150,12 @@
         $scope.getFloors = function (item) {
             if (!item)
                 return;
-            return item.OrganizationMapObject.map(i => {
-                return $rootScope.floorsDic[i.MapObject.FloorID].Number;
-            }).join(',');
+            return item.Floors.map(i=>i.Number).join(',');
+            // return item.OrganizationMapObject.map(i => {
+            //     return $rootScope.floorsDic[i.MapObject.FloorID].Number;
+            // }).join(',');
         };
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', 'proposalService', '$linq'];
+    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', 'proposalService', '$linq', 'dbService'];
     angular.module('app').controller('organizationController', controller);
 })();

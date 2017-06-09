@@ -29,7 +29,7 @@
                 <div class="organizationsSearchResultItem__logoBlock"
                      style="background: #{{item.LogoBaseColor.substring(3)}};">
                     <img class="logoBlock__logo" alt="{{::item.Organization.Name}}"
-                         default="{{settings.webApiBaseUrl}}/Customer/Logo"
+                         default="/Content/images/mega-logo.jpg"
                          file-system-image="Organizations/{{item.OrganizationID+'_Logo.'+item.LogoExtension}}">
                     <div ng-if="item.megacard"
                          style="width:59px;height:30px;background:white;position:absolute;bottom:0;right:0;">
@@ -81,14 +81,14 @@
         <ul style="top:310px;" class="list-group organizationsList__organizationsSearchResultBlock">
             <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem"
                 route-class="{'searchResultFull.result':'searchResultFull'}"
-                ng-repeat="item in $root.otherCurrentOrganizations"
+                ng-repeat="item in $root.otherCurrentOrganizations track by item.OrganizationID"
                 ng-click="select(item)">
                 <div style="position: relative;">
                     <div class="organizationsSearchResultItem__logoBlock"
                          style="background: #{{item.LogoBaseColor.substring(3)}};">
                         <img class="logoBlock__logo"
                              alt="{{::item.Organization.Name}}"
-                             default="{{settings.webApiBaseUrl}}/Customer/Logo"
+                             default="/Content/images/mega-logo.jpg"
                              file-system-image="Organizations/{{item.OrganizationID+'_Logo.'+item.LogoExtension}}">
                         <div ng-if="item.megacard"
                              style="width:59px;height:30px;background:white;position:absolute;bottom:0;right:0;">

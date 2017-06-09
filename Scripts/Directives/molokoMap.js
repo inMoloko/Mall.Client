@@ -1,11 +1,6 @@
 (function () {
     "use strict";
-    // L.Marker.prototype.__setPos = L.Marker.prototype._setPos;
-    // L.Marker.prototype._setPos = function () {
-    //     L.Marker.prototype.__setPos.apply(this, arguments);
-    //     this._zIndex = this.options.zIndexOffset;
-    //     this._resetZIndex();
-    // };
+
     const constants = {
         Terminal: 0,
         Link: 1,
@@ -13,22 +8,22 @@
     };
 
     angular.module('app').directive("molokoMap", [
-        '$rootScope', '$http', '$q', 'settings', '$linq', '$state', '$stateParams', '$timeout', function ($rootScope, $http, $q, settings, $linq, $state, $stateParams, $timeout) {
+        '$rootScope', '$http', '$q', 'settings', '$linq', '$state', '$stateParams', '$timeout', 'dbService', function ($rootScope, $http, $q, settings, $linq, $state, $stateParams, $timeout, dbService) {
             return {
                 restrict: 'E',
                 replace: true,
                 scope: {
                     options: '=options'
                 },
-                templateUrl: '/Views/molokoMap.html',
+                templateUrl: 'blocks/molokoMap/molokoMap.html',
                 link: function ($scope, element, attrs) {
                     $scope.rootScope = $rootScope;
                     if (!$scope.options)
                         $scope.options = {};
                     if (!$scope.options.minZoom)
-                        $scope.options.minZoom = 17;
+                        $scope.options.minZoom = 15;
                     if (!$scope.options.maxZoom)
-                        $scope.options.maxZoom = 19;
+                        $scope.options.maxZoom = 21;
                     if (!$scope.options.orginalAngel)
                         $scope.options.orginalAngel = false;
                     var elm = element[0].children[0];
@@ -41,20 +36,20 @@
                         zoomControl: false,
                         attributionControl: false,
                         markerZoomAnimation: false,
-                        crs: L.CRS.Simple,
+                        //crs: L.CRS.Simple,
                         inertia: false,
                         bounceAtZoomLimits: true,
                         fadeAnimation: false,
-                        zoomSnap: 0,
-                        bearing: 30
                     });
+                    //map.setBearing(0);
+
                     //console.log('Create map');
                     map.setView([0, 0], 1);
                     //Сброс карты
                     $scope.options.reset = function (data) {
                         $scope.options.orginalAngel = false;
 
-                        $scope.setFloor($rootScope.currentTerminal.TerminalMapObject[0].MapObject.FloorID);
+                        $scope.setFloor($rootScope.currentTerminal.FloorID);
                         setBounds(data);
                         //setView(data);
                     };
@@ -109,32 +104,40 @@
                     // Задаем обработчики событий
                     map.on("click", function (e) {
                         var floorID = $scope.currentMapFloor.FloorID;
-                        var currentPoint = map.project(e.latlng);
+                        var currentPoint = e.latlng;
 
-                        // var filtered = $linq.Enumerable().From($scope.mapOrganizations).Select(i => {
+                        // var filtered = $linq.Enumerable().From($scope.mapFloors[floorID].floorMapObjects).Select(i => {
                         //     return {
-                        //         Organization: i.Value,
-                        //         Distance: currentPoint.distanceTo(map.project(i.Value.marker._latlng))
+                        //         OrganizationID: i.Key,
+                        //         MapObject: $linq.Enumerable().From(i.Value).Select(j => {
+                        //             return {
+                        //                 Distance: currentPoint.distanceTo(map.project(j.position)),
+                        //                 MapObjectID: j.mapObjectID
+                        //             };
+                        //         }).OrderBy(j => j.Distance).FirstOrDefault()
                         //     };
-                        // }).Where(i => i.Distance <= 50 && i.Organization.FloorID === floorID).OrderBy(i => i.Distance).ToArray();
-
-                        var filtered = $linq.Enumerable().From($scope.mapFloors[floorID].floorMapObjects).Select(i => {
-                            return {
-                                OrganizationID: i.Key,
-                                MapObject: $linq.Enumerable().From(i.Value).Select(j => {
-                                    return {
-                                        Distance: currentPoint.distanceTo(map.project(j.position)),
-                                        MapObjectID: j.mapObjectID
-                                    };
-                                }).OrderBy(j => j.Distance).FirstOrDefault()
-                            };
-                        }).Where(i => i.MapObject.Distance <= 50).OrderBy(i => i.MapObject.Distance).ToArray();
-
-                        if (filtered[0] !== undefined) {
-                            if ($rootScope.currentOrganization && $rootScope.currentOrganization.OrganizationID === filtered[0].OrganizationID || filtered[0].OrganizationID === $rootScope.currentTerminal.OrganizationID) {
+                        // }).Where(i => i.MapObject.Distance <= 50).OrderBy(i => i.MapObject.Distance).ToArray();
+                        //
+                        // if (filtered[0] !== undefined) {
+                        //     if ($rootScope.currentOrganization && $rootScope.currentOrganization.OrganizationID === filtered[0].OrganizationID || filtered[0].OrganizationID === $rootScope.currentTerminal.OrganizationID) {
+                        //         return;
+                        //     }
+                        //     clickToOrganization(filtered[0].OrganizationID, filtered[0].MapObject.MapObjectID);
+                        // }
+                        let tmp = $linq.Enumerable().From($scope.mapFloors[floorID].layerGroup.getLayers())
+                            .Where(i => i._organization)
+                            .Select(i => {
+                                return {
+                                    Distance: currentPoint.distanceTo(i.getLatLng()),
+                                    OrganizationID: i._organization.OrganizationID,
+                                    MapObjectID: i._mapObject.MapObjectID
+                                }
+                            }).Where(i => i.Distance <= 50).OrderBy(i => i.Distance).FirstOrDefault();
+                        if (tmp) {
+                            if ($rootScope.currentOrganization && $rootScope.currentOrganization.OrganizationID === tmp.OrganizationID || tmp.OrganizationID === $rootScope.currentTerminal.OrganizationID) {
                                 return;
                             }
-                            clickToOrganization(filtered[0].OrganizationID, filtered[0].MapObject.MapObjectID);
+                            clickToOrganization(tmp.OrganizationID, tmp.MapObjectID);
                         }
                     });
                     var _orginalAngel = $scope.$watch('options.orginalAngel', function (n, o) {
@@ -243,10 +246,11 @@
                         } else {
                             //Тип организации дополнительно
                             //if (org.OrganizationType === 5) {
-                            if (org.CategoryOrganization.length != 0 && org.CategoryOrganization.some(i => i.Category.ServiceCategoryType == constants.Service || i.Category.ServiceCategoryType == constants.Link)) {
-                                if (org.CategoryOrganization.length != 0) {
-                                    let cat = org.CategoryOrganization[0];
-                                    if (org.CategoryOrganization.map(i => i.CategoryID).includes($rootScope.serviceCategories.toilet))
+
+                            if (org.ServiceCategoryType !== null) {
+                                if (org.Categories.length != 0) {
+                                    let cat = org.Categories[0];
+                                    if (cat == $rootScope.serviceCategories.toilet)
                                         html = `<div><img class="marker__image marker__wc${cls}" src="${settings.resourceFolder}/Categories/${cat.CategoryID}.${cat.Category.LogoExtension}" data-org-id="${org.OrganizationID}" data-map-id="${mapObjectID}"/></div>`;
                                     // else if (cat.CategoryID === $rootScope.serviceCategories.terminal)
                                     //     html = ``;
@@ -272,21 +276,28 @@
                             return 1;
                         return 10;
                     };
-                    let init = $rootScope.$watchCollection('organizations', function () {
-                        if ($rootScope.organizations === undefined || $scope.mapOrganizations || $scope.mapFloors) {
-                            return;
-                        }
-                        ;
+                    // let init = $rootScope.$watchCollection('organizations', function () {
+                    //     if ($rootScope.organizations === undefined || $scope.mapOrganizations || $scope.mapFloors) {
+                    //         return;
+                    //     }
+                    //     ;
+
+                    dbService.getData().then(i => {
                         $scope.mapFloors = {};
                         $scope.mapOrganizations = {};
                         $scope.mapObjects = {};
+
+                        $rootScope.currentTerminal = i.Floors.find(j => j.TerminalMapObject).TerminalMapObject;
+
                         //var promises = [];
-                        $rootScope.floors.forEach(item => {
-                            let size = map.getSize();
-                            let range = getZoomRange(item.Width, item.Height, size.x * 0.3, size.y);
-                            //TODO Тут надо подумать пока будем брать максимальный зум
-                            if (map.options.maxZoom < map.options.minZoom + range)
-                                map.options.maxZoom = map.options.minZoom + range;
+                        i.Floors.forEach(item => {
+                            if (item.Type !== null)
+                                return;
+                            // let size = map.getSize();
+                            // let range = getZoomRange(item.Width, item.Height, size.x * 0.3, size.y);
+                            // //TODO Тут надо подумать пока будем брать максимальный зум
+                            // if (map.options.maxZoom < map.options.minZoom + range)
+                            //     map.options.maxZoom = map.options.minZoom + range;
 
 
                             //var image = getImage(item.File);
@@ -296,96 +307,186 @@
                             var southWest = map.unproject([-value.width / 2, value.height / 2], map.getMaxZoom());
                             var northEast = map.unproject([value.width / 2, -value.height / 2], map.getMaxZoom());
 
+                            if (true) {
+                                southWest = new L.LatLng(item.SouthWest.Latitude, item.SouthWest.Longitude);
+                                northEast = new L.LatLng(item.NorthEast.Latitude, item.NorthEast.Longitude);
+                            }
+                            else {
+                                if (!settings.terminalID)
+                                    item.layer = L.imageOverlay(`${settings.resourceFolder}/Floors/${item.FloorID}.${item.FileExtension}`, [southWest, northEast]);
+                                else
+                                    item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File?TerminalID=${settings.terminalID}`, [southWest, northEast]);
+                            }
 
-                            if (!settings.terminalID)
-                                item.layer = L.imageOverlay(`${settings.resourceFolder}/Floors/${item.FloorID}.${item.FileExtension}`, [southWest, northEast]);
-                            else
-                                item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File?TerminalID=${settings.terminalID}`, [southWest, northEast]);
+                            item.layer = L.imageOverlay(`${settings.resourceFolder}/Floors/${item.FloorID}.${item.FileExtension}`, new L.LatLngBounds(southWest, northEast));
+
                             item.layerGroup = L.featureGroup();
                             item.pathGroup = L.layerGroup();
                             item.floorMapObjects = {};
                             $scope.mapFloors[item.FloorID] = item;
+                            item.OrganizationMapObjects.forEach(mapObject => {
+                                let marker, category;
+                                let position = map.convertPosition(mapObject.MapObject);
+                                let mapObjectType = dbService.mapObjectGetTypeSync(i, mapObject);
+                                switch (mapObjectType) {
+                                    case 'zooming':
+                                        marker = L.Marker.zoomingMarker(mapObject.MapObject);
+                                        marker.on("click", function (e) {
+                                            //$rootScope.currentOrganization = mapObject.Organization;
+                                            clickToOrganization(mapObject.Organization.OrganizationID);
+                                        });
+                                        break;
+                                    case 'toilet':
+                                        category = mapObject.Organization.Categories[0];
+                                        marker = L.marker(position, {
+                                            icon: L.divIcon({
+                                                className: 'marker',
+                                                html: `<div><img class="marker__image marker__wc}" src="${settings.resourceFolder}/Categories/${category.CategoryID}.${category.LogoExtension}" data-org-id="${mapObject.Organization.OrganizationID}" data-map-id="${mapObject.MapObject.MapObjectID}"/></div>`,
+                                                iconSize: [16, 16]
+                                            }),
+                                            title: mapObject.Organization.Name,
+                                            iconSize: [16, 16],
+                                            zIndexOffset: 10
+                                        });
+                                        marker._organization = mapObject.Organization;
+                                        marker._mapObject = mapObject.MapObject;
+                                        break;
+                                    case 'serviceObject':
+                                        category = mapObject.Organization.Categories[0];
+                                        marker = L.marker(position, {
+                                            icon: L.divIcon({
+                                                className: 'marker',
+                                                html: `<div><img class="marker__image" src="${settings.resourceFolder}/Categories/${category.CategoryID}.${category.LogoExtension}" data-org-id="${mapObject.Organization.OrganizationID}" data-map-id="${mapObject.MapObject.MapObjectID}"/></div>`,
+                                                iconSize: [16, 16]
+                                            }),
+                                            title: mapObject.Organization.Name,
+                                            iconSize: [16, 16],
+                                            zIndexOffset: 1
+                                        });
+                                        marker._organization = mapObject.Organization;
+                                        marker._mapObject = mapObject.MapObject;
+                                        break;
+                                    default:
+                                        marker = L.marker(position, {
+                                            icon: L.divIcon({
+                                                className: 'marker',
+                                                html: `<div><svg><circle class="marker__item" cx="5" cy="5" r="5" data-org-id="${mapObject.Organization.OrganizationID}" data-map-id="${mapObject.MapObject.MapObjectID}"/></svg></div>`,
+                                                iconSize: [16, 16]
+                                            }),
+                                            title: mapObject.Organization.Name,
+                                            iconSize: [16, 16],
+                                            zIndexOffset: 10
+                                        });
+                                        marker._organization = mapObject.Organization;
+                                        marker._mapObject = mapObject.MapObject;
+                                        break;
 
+                                }
+                                if (marker)
+                                    $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(marker);
+
+                                // if (mapObject.MapObject.Params && mapObject.MapObject.Params.SignPointRadius) {
+                                //     var markerText = L.Marker.zoomingMarker(mapObject.MapObject);
+                                //     markerText.on("click", function (e) {
+                                //         $rootScope.currentOrganization = item;
+                                //         clickToOrganization(item.OrganizationID);
+                                //     });
+                                //     if ($scope.mapFloors[mapObject.MapObject.FloorID])
+                                //         $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(markerText);
+                                // }
+                                // else {
+                                //     var position = map.convertPosition(mapObject.MapObject); //map.unproject([mapObject.MapObject.Longitude, mapObject.MapObject.Latitude], map.getMaxZoom());
+                                //     let markerIcon = getIcon(mapObject.Organization, false, mapObject.MapObject.MapObjectID);
+                                //     let marker = L.marker(position, {
+                                //         icon: markerIcon,
+                                //         title: item.Name,
+                                //         iconSize: [16, 16],
+                                //         zIndexOffset: getZIndex(item)
+                                //     });
+                                //     if (mapObject.MapObject.FloorID && $scope.mapFloors[mapObject.MapObject.FloorID]) {
+                                //         $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(marker, {pane: 'tilePane'});
+                                //         if (!$scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID])
+                                //             $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID] = [];
+                                //
+                                //         $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID].push({
+                                //             position: position,
+                                //             mapObjectID: mapObject.MapObject.MapObjectID
+                                //         });
+                                //     }
+                                // }
+                                $scope.mapObjects[mapObject.MapObject.MapObjectID] = mapObject.MapObject;
+                            });
                         });
                         //$q.all(promises).then(function () {
 
                         //Чтобы поставить маркер для терминала без отображения терминалов
-                        {
-                            var terminalOrg = $rootScope.currentTerminal.TerminalMapObject[0].MapObject;
-                            var position = map.unproject([terminalOrg.Longitude, terminalOrg.Latitude], map.getMaxZoom());
-                            let markerIcon = getIcon($rootScope.currentTerminal, false);
-                            terminalOrg.marker = L.marker(position, {
-                                icon: markerIcon,
-                                title: terminalOrg.Name,
-                                iconSize: [16, 16],
-                                zIndexOffset: getZIndex($rootScope.currentTerminal)
-                            });
-                            $scope.mapFloors[terminalOrg.FloorID].layerGroup.addLayer(terminalOrg.marker, {pane: 'tilePane'});
-                            $scope.mapOrganizations[terminalOrg.OrganizationID] = terminalOrg;
-                        }
+                        var terminalOrg = $rootScope.currentTerminal;
+                        //var position = map.unproject([terminalOrg.Longitude, terminalOrg.Latitude], map.getMaxZoom());
+                        //let markerIcon = getIcon($rootScope.currentTerminal, false);
+                        terminalOrg.marker = L.marker(map.convertPosition(terminalOrg), {
+                            icon: L.divIcon({
+                                className: 'marker',
+                                html: `<div><img style="width:40px;margin-top: -60px;margin-left: -10px;" src="Content/images/youHere.png"/></div>`,
+                                iconSize: [16, 16]
+                            }),
+                            title: terminalOrg.Name,
+                            iconSize: [16, 16],
+                            zIndexOffset: getZIndex($rootScope.currentTerminal)
+                        });
+                        $scope.mapFloors[terminalOrg.FloorID].layerGroup.addLayer(terminalOrg.marker, {pane: 'tilePane'});
+                        $scope.mapOrganizations[terminalOrg.OrganizationID] = terminalOrg;
 
                         //Наносим организации
                         $scope.options.zoom = map.getZoom();
-                        $rootScope.organizations.forEach(item => {
-                            item.OrganizationMapObject.forEach(mapObject => {
-                                if (mapObject.MapObject.ParamsAsJson && mapObject.MapObject.ParamsAsJson.SignPointRadius) {
-                                    var markerText = L.Marker.zoomingMarker(mapObject.MapObject);
-                                    markerText.on("click", function (e) {
-                                        $rootScope.currentOrganization = item;
-                                        clickToOrganization(item.OrganizationID);
-                                    });
-                                    if ($scope.mapFloors[mapObject.MapObject.FloorID])
-                                        $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(markerText);
-                                }
-                                else {
-                                    var position = map.unproject([mapObject.MapObject.Longitude, mapObject.MapObject.Latitude], map.getMaxZoom());
-                                    let markerIcon = getIcon(item, false, mapObject.MapObject.MapObjectID);
-                                    let marker = L.marker(position, {
-                                        icon: markerIcon,
-                                        title: item.Name,
-                                        iconSize: [16, 16],
-                                        zIndexOffset: getZIndex(item)
-                                    });
-                                    if (mapObject.MapObject.FloorID && $scope.mapFloors[mapObject.MapObject.FloorID]) {
-                                        $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(marker, {pane: 'tilePane'});
-                                        if (!$scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID])
-                                            $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID] = [];
-
-                                        $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID].push({
-                                            position: position,
-                                            mapObjectID: mapObject.MapObject.MapObjectID
-                                        });
-                                    }
-                                }
-                                $scope.mapObjects[mapObject.MapObject.MapObjectID] = mapObject.MapObject;
-                            });
-
-                            $scope.mapOrganizations[item.OrganizationID] = item;
-                            //Добавляем оргии с надписями поверх
-
-                            // if (item.SignPointLongitude && item.SignPointLatitude && item.SignPointRadius && item.FloorID) {
-                            //     var markerText = L.Marker.zoomingMarker(item);
-                            //     markerText.on("click", function (e) {
-                            //         $rootScope.currentOrganization = item;
-                            //         clickToOrganization(item.OrganizationID);
-                            //     });
-                            //     $scope.mapFloors[item.FloorID].layerGroup.addLayer(markerText);
-                            // }
-
-                        });
+                        // i.Organizations.forEach(item => {
+                        //     item.OrganizationMapObject.forEach(mapObject => {
+                        //         if (mapObject.MapObject.ParamsAsJson && mapObject.MapObject.ParamsAsJson.SignPointRadius) {
+                        //             var markerText = L.Marker.zoomingMarker(mapObject.MapObject);
+                        //             markerText.on("click", function (e) {
+                        //                 $rootScope.currentOrganization = item;
+                        //                 clickToOrganization(item.OrganizationID);
+                        //             });
+                        //             if ($scope.mapFloors[mapObject.MapObject.FloorID])
+                        //                 $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(markerText);
+                        //         }
+                        //         else {
+                        //             var position = map.unproject([mapObject.MapObject.Longitude, mapObject.MapObject.Latitude], map.getMaxZoom());
+                        //             let markerIcon = getIcon(item, false, mapObject.MapObject.MapObjectID);
+                        //             let marker = L.marker(position, {
+                        //                 icon: markerIcon,
+                        //                 title: item.Name,
+                        //                 iconSize: [16, 16],
+                        //                 zIndexOffset: getZIndex(item)
+                        //             });
+                        //             if (mapObject.MapObject.FloorID && $scope.mapFloors[mapObject.MapObject.FloorID]) {
+                        //                 $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(marker, {pane: 'tilePane'});
+                        //                 if (!$scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID])
+                        //                     $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID] = [];
+                        //
+                        //                 $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID].push({
+                        //                     position: position,
+                        //                     mapObjectID: mapObject.MapObject.MapObjectID
+                        //                 });
+                        //             }
+                        //         }
+                        //         $scope.mapObjects[mapObject.MapObject.MapObjectID] = mapObject.MapObject;
+                        //     });
+                        //
+                        //     $scope.mapOrganizations[item.OrganizationID] = item;
+                        // });
                         //Устанавливаем терминал
-                        $scope.setFloor($rootScope.currentTerminal.TerminalMapObject[0].MapObject.FloorID);
+                        $scope.setFloor($rootScope.currentTerminal.FloorID);
 
-                        init();
+                        //init();
                     });
                     $scope.getCount = function (floorID) {
                         return $scope.selectedOrganizations === undefined ? 0 : $linq.Enumerable().From($scope.selectedOrganizations).SelectMany(i => i.OrganizationMapObject).Count(i => i.MapObject.FloorID == floorID);
                     };
                     function getOptimalPath(array) {
                         let paths = {};
-                        let mapObject = $rootScope.currentTerminal.TerminalMapObject[0].MapObject;
+                        let mapObject = $rootScope.currentTerminal;//.TerminalMapObject[0].MapObject;
                         //Надписи не учитывем для посторения
-                        array = array.filter(i => !i.ParamsAsJson || !i.ParamsAsJson.SignText);
+                        array = array.filter(i => !i.Params || !i.Params.SignText);
                         array.forEach(i => {
                             let path = $rootScope.mapGraph.findPath(mapObject.Longitude, mapObject.Latitude, mapObject.FloorID, i.Longitude, i.Latitude, i.FloorID);
                             let sum = path[path.length - 1].dksLength;
@@ -448,7 +549,8 @@
                                 document.querySelectorAll('[data-org-id="' + $rootScope.currentOrganization.OrganizationID + '"]').forEach(m => {
                                     m.classList.add('_selected');
                                 });
-                                mapObjects = $rootScope.currentOrganization.OrganizationMapObject.map(i => i.MapObject);
+                                //mapObjects = $rootScope.currentOrganization.OrganizationMapObject.map(i => i.MapObject);
+                                mapObjects = $rootScope.currentOrganization.MapObjects;
                             }
                             // $scope.mapOrganizations[$rootScope.currentOrganization.OrganizationID].marker.setIcon(markerIcon);
 
@@ -533,7 +635,8 @@
                                         currentLines.set(currentFloor, currentLine);
                                     }
                                 }
-                                currentLine.push(map.unproject([path.x, path.y], maxZoom));
+                                //currentLine.push(map.unproject([path.x, path.y], maxZoom));
+                                currentLine.push(new L.latLng(path.y, path.x));
 
                             });
                             let angle = $scope.options.orginalAngel == true ? 0 : ($rootScope.currentTerminal.LookDirectionAngleDegrees * 3.14 / 180);
@@ -560,7 +663,7 @@
                     });
                     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
                         if (toState.name.endsWith('.searchResult')) {
-                           // $rootScope.currentOrganizations = undefined;
+                            // $rootScope.currentOrganizations = undefined;
                         }
 
                     });

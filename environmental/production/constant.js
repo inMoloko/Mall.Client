@@ -17,6 +17,8 @@
         deltaDistanceTouchMoveAsClick: 100,
         customerID: queryDict.CustomerID,
         terminalID: queryDict.TerminalID,
-        displayKeyboard:true
+        displayKeyboard:true,
+        resourceFolder:'Content/Backup',
+        dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,
     });
 })();

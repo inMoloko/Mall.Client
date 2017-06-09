@@ -5,7 +5,7 @@
                 <!--<img class="img-responsive logoBlock__organizationLogo" moloko-image-api="$root.currentOrganization.OrganizationID" url="/Organization/:id/Logo"-->
                     <!--default-src="/Customer/Logo" alt="{{item.Organization.Name}}">-->
                 <img class="img-responsive logoBlock__organizationLogo"
-                     default="{{settings.webApiBaseUrl}}/Customer/Logo"
+                     default="/Content/images/mega-logo.jpg"
                      file-system-image="Organizations/{{$root.currentOrganization.OrganizationID+'_Logo.'+$root.currentOrganization.LogoExtension}}">
             </div>
             <div style="flex-basis: 40%;">
@@ -45,7 +45,7 @@
         <div class="organizationCategoryBlock__category" ng-bind="currentOrganization.CategoryOrganization|limitTo:6|joinBy:', ':'Category.Name'">
         </div>
     </div>
-    <div class="organization__proposalsBlock"  ng-show="proposals.length!==0&&!isVisibleSendPathControl"  ng-click="openProposal()">
+    <div class="organization__proposalsBlock"  ng-show="currentOrganization.Proposals.length!==0&&!isVisibleSendPathControl"  ng-click="openProposal()">
         <div style="width: 100%;height: 100%;display: flex;">
             <div class="headBlock__logoBlock" style="flex-basis: 95%;max-width:95%">
                 <div class="organizationProposalBlock__toListProposalsBlock">

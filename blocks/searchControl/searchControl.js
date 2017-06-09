@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, $timeout) {
+    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, $timeout, categoryService) {
         //Загружаем категории
 
         $scope.config = {
@@ -19,6 +19,9 @@
             $rootScope.$broadcast("resetMap");
             $state.go("navigation.mainMenu");
         };
+        categoryService.get().then(i => {
+            $scope.categories = i;
+        });
 
         // $(function () {
         //     jsKeyboard.init("virtualKeyboard");
@@ -31,15 +34,15 @@
         //        $state.go('navigation.searchResult', { CategoryID: $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : undefined, Filter: $rootScope.currentFilter }, { reload: false, });
         //    }, 100);
 
-        $('#searchInputBlock').bind('writeKeyboard', function (event, a) {            
-            $rootScope.currentFilter = $('#searchInputBlock')[0].value;            
+        $('#searchInputBlock').bind('writeKeyboard', function (event, a) {
+            $rootScope.currentFilter = $('#searchInputBlock')[0].value;
             //$state.go('navigation.searchResult', { CategoryID: $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : undefined, Filter: $rootScope.currentFilter }, { reload: false, });
             $scope.$apply();
         });
-               
+
         $scope.find = function (category, name) {
             $rootScope.currentOrganization = undefined;
-            $state.go('navigation.searchResult', { CategoryID: category ? category.CategoryID : null, Filter: name });
+            $state.go('navigation.searchResult', {CategoryID: category ? category.CategoryID : null, Filter: name});
         };
         $scope.levelLimit = function () {
             if ($rootScope.categories !== undefined) {
@@ -50,19 +53,25 @@
             //Чтобы избаваиться от задержки при схлапывании списка категорий при выборе категории
             $timeout(function () {
                 $rootScope.currentCategory = category;
-            $rootScope.currentOrganization = undefined;
-            //TODO Зачемто сброс фильтра при установке категорий == пункт меню
-            // if ($rootScope.menuItems[category.CategoryID]) {
-            //     $rootScope.currentFilter = undefined;
-            // };
-            if ($state.$current.name == "searchResultFull.result")
-                $state.go('searchResultFull.result', { CategoryID: category.CategoryID, Filter: $rootScope.currentFilter }, { reload: false });
-            else
-                $state.go('navigation.searchResult', { CategoryID: category.CategoryID, Filter: $rootScope.currentFilter }, { reload: false });
+                $rootScope.currentOrganization = undefined;
+                //TODO Зачемто сброс фильтра при установке категорий == пункт меню
+                // if ($rootScope.menuItems[category.CategoryID]) {
+                //     $rootScope.currentFilter = undefined;
+                // };
+                if ($state.$current.name == "searchResultFull.result")
+                    $state.go('searchResultFull.result', {
+                        CategoryID: category.CategoryID,
+                        Filter: $rootScope.currentFilter
+                    }, {reload: false});
+                else
+                    $state.go('navigation.searchResult', {
+                        CategoryID: category.CategoryID,
+                        Filter: $rootScope.currentFilter
+                    }, {reload: false});
 
             }, 10);
 
-            
+
         };
 
         $scope.$watch("currentFilter", function (n, o) {
@@ -72,11 +81,17 @@
                 return;
             $rootScope.currentOrganization = undefined;
             if ($state.$current.name == "searchResultFull.result")
-                $state.go('searchResultFull.result', { CategoryID: $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : undefined, Filter: $rootScope.currentFilter }, {
+                $state.go('searchResultFull.result', {
+                    CategoryID: $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : undefined,
+                    Filter: $rootScope.currentFilter
+                }, {
                     reload: false,
                 });
             else
-                $state.go('navigation.searchResult', { CategoryID: $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : undefined, Filter: $rootScope.currentFilter }, {
+                $state.go('navigation.searchResult', {
+                    CategoryID: $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : undefined,
+                    Filter: $rootScope.currentFilter
+                }, {
                     reload: false,
                 });
             // $state.transitionTo('navigation.searchResult', { CategoryID: $scope.currentCategory ? $scope.currentCategory.CategoryID : undefined, Filter: $scope.currentFilter }, {
@@ -89,10 +104,14 @@
             //Начальное состояние ничего не выбранно
             if (toState.name === 'navigation.mainMenu') {
                 $rootScope.currentFilter = undefined;
-                $rootScope.currentCategory = { CategoryID: -1 };
-            };
+                $rootScope.currentCategory = {CategoryID: -1};
+            }
+            ;
             $rootScope.currentFilter = $stateParams.Filter;
-            $rootScope.currentCategory = $rootScope.categoriesDic[$stateParams.CategoryID || -1];
+            categoryService.getById($stateParams.CategoryID || -1).then(i => {
+                $rootScope.currentCategory = i;
+            });
+            //$rootScope.currentCategory = $rootScope.categoriesDic[$stateParams.CategoryID || -1];
         });
         //Установка при загрузке
         $rootScope.currentFilter = $stateParams.Filter;
@@ -109,6 +128,6 @@
             changeStatehandler();
         });
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', '$timeout'];
+    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', '$timeout', 'categoryService'];
     angular.module('app').controller('searchControlController', controller);
 })();

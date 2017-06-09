@@ -35,7 +35,7 @@
                         <!--<div class="child" style="display: -moz-inline-box;-->
                                          <!--display: inline-block;-->
                                          <!--vertical-align: middle; ">-->
-                            <i ng-class="{'iconMall-bus':item.TransportType.Name==='Автобус','iconMall-minibus':item.TransportType.Name==='Маршрутное такси'}"
+                            <i ng-class="{'iconMall-bus':item.TransportType.Name.toLowerCase().includes('автобус'),'iconMall-minibus':item.TransportType.Name.toLowerCase().includes('маршрут')}"
                                style="font-size: 6em;/*color:#28303b*/"></i>
                         <!--</div>-->
                         <!--<div class="helper"-->

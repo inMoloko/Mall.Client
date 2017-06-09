@@ -2,7 +2,11 @@
     "use strict";
     var app = angular.module('app');
     var queryDict = {}
-    location.search.substr(1).split("&").forEach(function (item) { queryDict[item.split("=")[0]] = item.split("=")[1] })
+    location.search.substr(1).split("&").forEach(function (item) { queryDict[item.split("=")[0]] = item.split("=")[1] });
+
+    if(!queryDict.SerialNumber){
+        console.error('Не указан серийный номер');
+    }
     app.constant('settings', {
         webApiBaseUrl: 'http://localhost:5555/api',
         webApiODataUrl: 'http://localhost:5555/odata',
@@ -18,6 +22,7 @@
         customerID: queryDict.CustomerID,
         terminalID: queryDict.TerminalID,
         displayKeyboard:true,
-        resourceFolder:'Content/Backup'
+        resourceFolder:'Content/Backup',
+        dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
     });
 })();

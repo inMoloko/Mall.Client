@@ -21,8 +21,10 @@
 
                 <div class="organizationProposalsListElement_logoBlock" style="">
                     <div class="text-center organizationProposalsListElement_logo" style="">
-                        <img class="img-responsive organizationProposalsListElement_image" moloko-image-api="item.ProposalID" url="/Proposal/:id/LogoPreview"
-                            alt="{{item.Name}}" style=''>
+                        <img class="img-responsive organizationProposalsListElement_image"
+                             default="/Content/images/mega-logo.jpg"
+                             alt="{{item.Name}}"
+                             file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension}}">
                     </div>
                 </div>
                 <div class="organizationProposalsListElement_infoBlock" style="">
@@ -78,7 +80,7 @@
         <ul class="wrapper" style="padding:0;">
             <li  ui-sref=".proposal({ProposalID:item.ProposalID})" class="item"
                 style="border:lightgray solid 1px;margin:0.5%;padding:1%;width: 32%;" ng-repeat="item in items">
-                <img moloko-image-api="item.ProposalID" url="/Proposal/:id/Logo" class="img-responsive" alt="{{item.Organization.Name}}" style='/*height: 100%; width: 100%;*/ object-fit: cover'>
+                <img file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension}}" class="img-responsive" alt="{{item.Organization.Name}}" style='/*height: 100%; width: 100%;*/ object-fit: cover'>
                 <div class="proposalsListControlListElement__name" style="white-space: normal;">
                     {{item.Name}}
                 </div>

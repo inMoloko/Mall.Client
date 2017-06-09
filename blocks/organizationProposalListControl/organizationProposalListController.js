@@ -1,11 +1,14 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $rootScope, $state, $http, settings, $stateParams) {
+    var controller = function ($scope, $rootScope, $state, $http, settings, $stateParams, proposalService) {
         let param = $stateParams.OrganizationID;
-        let dt = new Date().toISOString();
-        let filter = `OrganizationID eq ${param} and DateEnd ge DateTime'${dt}' and DateBegin le DateTime'${dt}'`;
-        $http.get(settings.webApiBaseUrl + `/Proposal?$select=ProposalID,DateBegin,DateEnd,Name,Summary&$filter=${filter}`).then(function (data) {
-            $scope.items = data.data;
+        // let dt = new Date().toISOString();
+        // let filter = `OrganizationID eq ${param} and DateEnd ge DateTime'${dt}' and DateBegin le DateTime'${dt}'`;
+        // $http.get(settings.webApiBaseUrl + `/Proposal?$select=ProposalID,DateBegin,DateEnd,Name,Summary&$filter=${filter}`).then(function (data) {
+        //     $scope.items = data.data;
+        // });
+        proposalService.getByOrganization(param).then(i=>{
+            $scope.items = i;
         });
 
         $scope.hide = function () {
@@ -42,6 +45,6 @@
             setTimeout($rootScope.initMasonry, 250);
         });
     };
-    controller.$inject = ['$scope', '$rootScope', '$state', '$http', 'settings', '$stateParams'];
+    controller.$inject = ['$scope', '$rootScope', '$state', '$http', 'settings', '$stateParams', 'proposalService'];
     angular.module('app').controller('organizationProposalListController', controller);
 })();

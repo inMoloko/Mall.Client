@@ -1,10 +1,13 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $rootScope, $state, $http, settings, $stateParams) {
+    var controller = function ($scope, $rootScope, $state, $http, settings, $stateParams, proposalService) {
         let param = $stateParams.ProposalID;
-        $http.get(settings.webApiBaseUrl + `/Proposal/${param}`).then(function (data) {
-            $scope.item = data.data;
-            $scope.remainder = moment($scope.item.DateEnd).diff(moment(), 'days');
+        // $http.get(settings.webApiBaseUrl + `/Proposal/${param}`).then(function (data) {
+        //     $scope.item = data.data;
+        //     $scope.remainder = moment($scope.item.DateEnd).diff(moment(), 'days');
+        // });
+        proposalService.get(param).then(i=>{
+            $scope.item = i;
         });
         $scope.day = function (days) {
             let expressions = ['день', 'дня', 'дней'];
@@ -36,6 +39,6 @@
             $state.go("navigation.closedResult", { CategoryID: $stateParams.CategoryID, Filter: $stateParams.Filter, OrganizationType: $stateParams.OrganizationType });
         };
     };
-    controller.$inject = ['$scope', '$rootScope', '$state', '$http', 'settings', '$stateParams'];
+    controller.$inject = ['$scope', '$rootScope', '$state', '$http', 'settings', '$stateParams', 'proposalService'];
     angular.module('app').controller('proposalController', controller);
 })();

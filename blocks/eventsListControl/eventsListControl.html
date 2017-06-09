@@ -5,6 +5,7 @@
             <div class="proposalsListControlListElement__imageBlock" >
                 <img class="img-responsive" alt="{{item.Name}}"
                      file-system-image="Events/{{item.EventID+'_Logo.'+item.LogoExtension}}"
+                     default="/Content/images/mega-logo.jpg"
                      style='height: 100%; width: 100%; object-fit: cover'>
                 <!--moloko-image-api="item.EventID" url="/Event/:id/Logo"-->
             </div>
@@ -35,7 +36,8 @@
     <ul class="wrapper" style="padding:0;">
         <li ng-click="select(item.EventID)" ui-sref="events.eventsList.event({EventID:item.EventID})" class="item"
             style="border:lightgray solid 1px;margin:0.5%;padding:1%;width: 32%;" ng-repeat="item in events">
-            <img moloko-image-api="item.EventID" url="/Event/:id/Logo" class="img-responsive" style='/*height: 100%; width: 100%;*/ object-fit: cover'>
+            <img file-system-image="Events/{{item.EventID+'_Logo.'+item.LogoExtension}}" class="img-responsive" style='/*height: 100%; width: 100%;*/ object-fit: cover'>
+                    <!--moloko-image-api="item.EventID" url="/Event/:id/Logo" class="img-responsive" style='/*height: 100%; width: 100%;*/ object-fit: cover'>-->
             <div class="proposalsListControlListElement__name" style="white-space: normal;">
                 {{item.Name}}
             </div>

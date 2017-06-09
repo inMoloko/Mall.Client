@@ -10,15 +10,15 @@
     };
 
     angular.module('app').directive("transportMap", [
-        '$rootScope', 'settings', '$linq', '$state', '$stateParams', '$timeout', 'busStopsService', 'floorService', 'transportRouteService',
-        function ($rootScope, settings, $linq, $state, $stateParams, $timeout, busStopsService, floorService, transportRouteService) {
+        '$rootScope', 'settings', '$linq', '$state', '$stateParams', '$timeout', 'busStopsService', 'floorService', 'transportRouteService', 'dbService',
+        function ($rootScope, settings, $linq, $state, $stateParams, $timeout, busStopsService, floorService, transportRouteService, dbService) {
             return {
                 restrict: 'E',
                 replace: true,
                 scope: {
                     options: '=options'
                 },
-                templateUrl: './Views/transportMap.html',
+                templateUrl: 'blocks/transportMap/transportMap.html',
                 link: function ($scope, element, attrs) {
 
                     $scope.mapFloors = {};
@@ -45,7 +45,7 @@
                     map.setView([0, 0], 1);
                     //Сброс карты
                     $scope.options.reset = function (data) {
-                        $scope.setFloor($rootScope.currentTerminal.TerminalMapObject[0].MapObject.FloorID);
+                        $scope.setFloor($rootScope.currentTerminal);
                         setBounds(data);
                         //setView(data);
                     };
@@ -157,8 +157,8 @@
                             $scope.$parent.$digest();
                     });
 
-                    floorService.getFullMap().then(floors => {
-                        floors.forEach(item => {
+                    dbService.getData().then(data => {
+                        data.Floors.forEach(item => {
                             if (item.Type !== 0)
                                 return;
                             let size = map.getSize();
@@ -167,21 +167,27 @@
                             if (map.options.maxZoom < map.options.minZoom + range)
                                 map.options.maxZoom = map.options.minZoom + range;
 
-                            var value = {width: item.Width, height: item.Height};
-                            var southWest = map.unproject([-value.width / 2, value.height / 2], map.getMaxZoom());
-                            var northEast = map.unproject([value.width / 2, -value.height / 2], map.getMaxZoom());
+                            // var value = {width: item.Width, height: item.Height};
+                            // var southWest = map.unproject([-value.width / 2, value.height / 2], map.getMaxZoom());
+                            // var northEast = map.unproject([value.width / 2, -value.height / 2], map.getMaxZoom());
 
-                            if (!settings.terminalID)
-                                item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File`, [southWest, northEast]);
-                            else
-                                item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File?TerminalID=${settings.terminalID}`, [southWest, northEast]);
+                            // if (!settings.terminalID)
+                            //     item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File`, [southWest, northEast]);
+                            // else
+                            //     item.layer = L.imageOverlay(`${settings.webApiBaseUrl}/Floor/${item.FloorID}/File?TerminalID=${settings.terminalID}`, [southWest, northEast]);
+
+                            let southWest = new L.LatLng(item.SouthWest.Latitude, item.SouthWest.Longitude);
+                            let northEast = new L.LatLng(item.NorthEast.Latitude, item.NorthEast.Longitude);
+
+                            item.layer = L.imageOverlay(`${settings.resourceFolder}/Floors/${item.FloorID}.${item.FileExtension}`, new L.LatLngBounds(southWest, northEast));
+
                             item.layerGroup = new L.FeatureGroup.ObjectLayer();
                             item.pathGroup = L.layerGroup();
                             //item.floorMapObjects = {};
                             $scope.mapFloors[item.FloorID] = item;
                             //Остановки
                             item.BusStopMapObjects.forEach(busStop => {
-                                let position = map.unproject([busStop.MapObject.Longitude, busStop.MapObject.Latitude], map.getMaxZoom());
+                                let position = new L.LatLng(busStop.MapObject.Latitude, busStop.MapObject.Longitude);//map.unproject([busStop.MapObject.Longitude, busStop.MapObject.Latitude], map.getMaxZoom());
 
                                 if (busStop.MapObject.Params && busStop.MapObject.Params.FontSize) {
                                     let marker = item.layerGroup.addTextMarker(position, {
@@ -203,7 +209,7 @@
                             });
                             //Организации
                             item.OrganizationMapObjects.forEach(org => {
-                                let position = map.unproject([org.MapObject.Longitude, org.MapObject.Latitude], map.getMaxZoom());
+                                let position = new L.LatLng(org.MapObject.Latitude, org.MapObject.Longitude); //map.unproject([org.MapObject.Longitude, org.MapObject.Latitude], map.getMaxZoom());
                                 if (org.MapObject.Params && org.MapObject.Params.SignPointRadius) {
                                     org.MapObject.ParamsAsJson = org.MapObject.Params;
                                     let markerText = L.Marker.zoomingMarker(org.MapObject);
@@ -214,10 +220,10 @@
                                 }
 
                             });
-                            if (item.Terminal) {
-                                let position = map.unproject([item.Terminal.MapObject.Longitude, item.Terminal.MapObject.Latitude], map.getMaxZoom());
-                                item.layerGroup.addTerminal(position, {MapObjectID: item.Terminal.MapObject.MapObjectID});
-                                $scope.terminalMapObject = item.Terminal.MapObject;
+                            if (item.TerminalMapObject) {
+                                let position = new L.latLng(item.TerminalMapObject.Latitude, item.TerminalMapObject.Longitude); //map.unproject([item.Terminal.MapObject.Longitude, item.Terminal.MapObject.Latitude], map.getMaxZoom());
+                                item.layerGroup.addTerminal(position, {MapObjectID: item.TerminalMapObject.MapObjectID});
+                                $scope.terminalMapObject = item.TerminalMapObject;
                                 $scope.setFloor(item.FloorID);
                             }
                         });
@@ -284,7 +290,7 @@
                                         currentLines.set(currentFloor, currentLine);
                                     }
                                 }
-                                currentLine.push(map.unproject([path.x, path.y], maxZoom));
+                                currentLine.push(new L.latLng(path.Y, path.X)/*map.unproject([path.x, path.y], maxZoom)*/);
 
                             });
 

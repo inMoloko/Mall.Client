@@ -15,53 +15,61 @@
     //     }
     // }
 
-    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, $linq) {
+    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, $linq, dbService) {
 
-        if ($rootScope.organizations === undefined) {
-            let event = $rootScope.$on('floorLoad', function () {
-                filter();
-                event();
-            });
-
-        }
-        else {
-            filter();
-        }
-        $scope.settings = settings;
+        // if ($rootScope.organizations === undefined) {
+        //     let event = $rootScope.$on('floorLoad', function () {
+        //         filter();
+        //         event();
+        //     });
+        //
+        // }
+        // else {
+        //     filter();
+        // }
+        filter();
         function filter() {
-            let categoryID = $stateParams.CategoryID;
-            $scope.searchText = $stateParams.Filter == undefined ? "" : $stateParams.Filter.toLowerCase();
-            var tmp = $rootScope.organizations;
-            var tmpCat = $rootScope.categories;
-            if ($scope.searchText) {
-                var tmpCatIds = [];
-                angular.forEach(tmpCat, function (item) {
-                    if (item.Name && item.Name.toLowerCase().includes($scope.searchText))
-                        tmpCatIds.push(item.CategoryID);
-                });
+            dbService.organizationGetFilter($stateParams.Filter, $stateParams.CategoryID).then(result => {
+                $rootScope.otherCurrentOrganizations = result.otherCurrentOrganizations;
+                $rootScope.currentOrganizations = result.currentOrganizations;
 
-                let ln = $linq.Enumerable().From(tmpCatIds);
-                tmp = tmp.filter(item => {
-                    return (item.Name && item.Name.toLowerCase().includes($scope.searchText)) || (item.KeyWords && item.KeyWords.toLowerCase().includes($scope.searchText)) || ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
-                });
-
-            }
-            $rootScope.otherCurrentOrganizations = tmp;
-
-            if (categoryID && categoryID != -1) {
-                categoryID = parseInt(categoryID);
-
-                let cats = $rootScope.categories.find(i => i.CategoryID == categoryID).ChildrenIds;
-                cats.push(categoryID);
-                let ln = $linq.Enumerable().From(cats);
-                tmp = tmp.filter(item => {
-                    return ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
-                });
-            }
-
-            $rootScope.currentOrganizations = tmp;
-            //Нечеткий поиск на сервере
+            });
         };
+        $scope.settings = settings;
+        // function filter() {
+        //     let categoryID = $stateParams.CategoryID;
+        //     $scope.searchText = $stateParams.Filter == undefined ? "" : $stateParams.Filter.toLowerCase();
+        //     var tmp = $rootScope.organizations;
+        //     var tmpCat = $rootScope.categories;
+        //     if ($scope.searchText) {
+        //         var tmpCatIds = [];
+        //         angular.forEach(tmpCat, function (item) {
+        //             if (item.Name && item.Name.toLowerCase().includes($scope.searchText))
+        //                 tmpCatIds.push(item.CategoryID);
+        //         });
+        //
+        //         let ln = $linq.Enumerable().From(tmpCatIds);
+        //         tmp = tmp.filter(item => {
+        //             return (item.Name && item.Name.toLowerCase().includes($scope.searchText)) || (item.KeyWords && item.KeyWords.toLowerCase().includes($scope.searchText)) || ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
+        //         });
+        //
+        //     }
+        //     $rootScope.otherCurrentOrganizations = tmp;
+        //
+        //     if (categoryID && categoryID != -1) {
+        //         categoryID = parseInt(categoryID);
+        //
+        //         let cats = $rootScope.categories.find(i => i.CategoryID == categoryID).ChildrenIds;
+        //         cats.push(categoryID);
+        //         let ln = $linq.Enumerable().From(cats);
+        //         tmp = tmp.filter(item => {
+        //             return ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
+        //         });
+        //     }
+        //
+        //     $rootScope.currentOrganizations = tmp;
+        //     //Нечеткий поиск на сервере
+        // };
 
         $scope.home = function () {
             $state.go('navigation.mainMenu');
@@ -109,15 +117,17 @@
             if (!item)
                 return;
             return $linq.Enumerable()
-                .From(item.OrganizationMapObject)
-                .Where(i => $rootScope.floorsDic[i.MapObject.FloorID])
-                .Select(i => $rootScope.floorsDic[i.MapObject.FloorID].Number).Distinct().ToArray().join(',');
-
-            return item.OrganizationMapObject.filter(i => $rootScope.floorsDic[i.MapObject.FloorID]).map(i => {
-                return $rootScope.floorsDic[i.MapObject.FloorID].Number;
-            }).join(',');
+                .From(item.Floors).Select(i=>i.Number).ToArray().join(',');
+            // return $linq.Enumerable()
+            //     .From(item.OrganizationMapObject)
+            //     .Where(i => $rootScope.floorsDic[i.MapObject.FloorID])
+            //     .Select(i => $rootScope.floorsDic[i.MapObject.FloorID].Number).Distinct().ToArray().join(',');
+            //
+            // return item.OrganizationMapObject.filter(i => $rootScope.floorsDic[i.MapObject.FloorID]).map(i => {
+            //     return $rootScope.floorsDic[i.MapObject.FloorID].Number;
+            // }).join(',');
         };
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', '$linq'];
+    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', '$linq', 'dbService'];
     angular.module('app').controller('organizationsListController', controller);
 })();

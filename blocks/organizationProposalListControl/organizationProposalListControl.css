@@ -101,6 +101,7 @@
     border: 1px solid transparent;
     margin-bottom: 10px;
     margin-right: 1.25%;
+    display: flex;
 }
 
 .colorTheme_black .organizationProposalsListBlock__listElement{
@@ -109,7 +110,7 @@
 }
 /*organizationProposalsListElement_logoBlock*/
 .organizationProposalsListElement_logoBlock{
-    position: absolute;
+    /*position: absolute;*/
     height: 100%;
     width: 46.875%;
 }
@@ -121,7 +122,7 @@
 .organizationProposalsListElement_logo{
     height: 100%;
     background: transparent;
-    position: absolute;
+    /*position: absolute;*/
     width: 100%;
 }
 
@@ -135,7 +136,7 @@
 
 /*organizationProposalsListElement_infoBlock*/
 .organizationProposalsListElement_infoBlock{
-    position: absolute;
+    /*position: absolute;*/
     height: 100%;
     width:53.125%;
     left: 46.875%;
@@ -150,7 +151,7 @@
 /*organizationProposalsListElement_info*/
 .organizationProposalsListElement_info{
     background:transparent;
-    position: absolute;
+    /*position: absolute;*/
     width:100%;
     height: 100%;
     padding-left: 10px;

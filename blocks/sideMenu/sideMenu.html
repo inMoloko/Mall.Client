@@ -1,4 +1,4 @@
-<div id="sideMenu" class="sideMenu" ng-controller="sideMenuController">
+<div id="sideMenu" class="sideMenu">
     <div class="sideMenu__head">
         <div style="background: transparent;
                     z-index: 5; position:absolute;
@@ -24,9 +24,7 @@
         </div>
         <div class="sideMenu__sheduleButton vertical" ng-click="goScheduleControl()">
             <div class="sideMenu__sheduleButtonText">
-                <span ng-class="listAnchorLength" style="text-decoration: none;
-                    display: inline-block;
-                    border-bottom-width:1px; ">Сегодня с {{::customer.ScheduleFrom}} до {{::customer.ScheduleTo}}</span>
+                <span ng-class="listAnchorLength" style="border-bottom-width:1px; ">Сегодня с {{::schedule.From}} до {{::schedule.To}}</span>
             </div>
         </div>
         <div style="background: transparent;
@@ -52,9 +50,7 @@
         </div>
         <div class="sideMenu__sheduleButton "  ng-click="goScheduleControl()">
             <div class="sideMenu__sheduleButtonText">
-                <span ng-class="listAnchorLength" style="text-decoration: none;
-                    display: inline-block;
-                    border-bottom-width:1px; ">Сегодня с {{::customer.ScheduleFrom}} до {{::customer.ScheduleTo}}</span>
+                <span ng-class="listAnchorLength" style="border-bottom-width:1px; ">Сегодня с {{::schedule.From}} до {{::schedule.To}}</span>
             </div>
         </div>
     </div>
