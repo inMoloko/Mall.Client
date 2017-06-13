@@ -312,7 +312,7 @@ L.Marker.MovingMarker = L.Marker.extend({
         }
     },
     _getGetRunningManIcon: function (angle) {
-        angle = Math.round(angle * 100) / 100;
+        angle =0; Math.round(angle * 100) / 100;
         //x = (x1 - x0) * cos(a) - (y1-y0)* sin(a);
         //y = (x1 - x0) * sin(a) + (y1-y0)* cos(a);
         let x = 20;

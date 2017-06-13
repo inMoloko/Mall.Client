@@ -41,7 +41,7 @@
                         bounceAtZoomLimits: true,
                         fadeAnimation: false,
                     });
-                    //map.setBearing(0);
+                    map.setBearing(0);
 
                     //console.log('Create map');
                     map.setView([0, 0], 1);
@@ -78,12 +78,17 @@
                         let width = $state.current.name == "navigation" ? 50 : size.x * 0.3;
                         //calculateBounds();
                         map.fitBounds(bounds, {
+                            //padding: [500, 50]
                             paddingTopLeft: [width, 50],
                             paddingBottomRight: [50, 50],
-                            reset: false,
-                            animate: false
                         });
-                        let zoom = map.getBoundsZoom(bounds);
+                        // let zoom = map.getBoundsZoom(bounds);
+                        // let center = bounds.getCenter();
+                        // center.lat += 100 / Math.pow(2, zoom);
+                        //
+                        // map.setView(center, zoom);
+
+
                         //map.fitBounds(bounds, { reset: false, animate: false });
                         calculateBounds();
                     };
@@ -153,6 +158,7 @@
                     var tmprect;
 
                     function calculateBounds(offset) {
+
                         let full = $state.current.name == "navigation";
 
                         var tb = $scope.currentMapFloor.layer.getBounds();

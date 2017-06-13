@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, proposalService, $linq, dbService) {
+    var controller = function ($scope, $http, settings, $rootScope, $state, $stateParams, proposalService, $linq, dbService, $timeout) {
         $scope.settings = settings;
         function getOptimalPath(array) {
             let paths = {};
@@ -52,14 +52,11 @@
 
             }
         });
-        // let locationChangeHandler = $scope.$on('$locationChangeSuccess', function () {
-        //     if($stateParams.OrganizationID !== undefined){
-        //         $rootScope.currentOrganization = $rootScope.organizations.find(i => i.OrganizationID == param);
-        //     }
-        // });
         $scope.proposalListClosed = true;
         $scope.closeOrganization = function () {
-            $rootScope.currentOrganization = undefined;
+            $timeout(function(){
+                $rootScope.currentOrganization = undefined;
+            });
         };
         $scope.openProposal = function () {
             if ($state.includes("**.proposalsList")) {
@@ -156,6 +153,6 @@
             // }).join(',');
         };
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', 'proposalService', '$linq', 'dbService'];
+    controller.$inject = ['$scope', '$http', 'settings', '$rootScope', '$state', '$stateParams', 'proposalService', '$linq', 'dbService', '$timeout'];
     angular.module('app').controller('organizationController', controller);
 })();

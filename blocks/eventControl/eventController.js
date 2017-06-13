@@ -1,26 +1,18 @@
 ﻿(function () {
     "use strict";
-    var controller = function ($scope, $http, settings, $state, $rootScope, $stateParams) {
-        this.$http = $http;
-        this.settings = settings;
-        this.$stateParams = $stateParams;
-        this.$rootScope = $rootScope;
-        this.$scope = $scope;
-        this.$state = $state;
-
-        if ($rootScope.events === undefined) {
-            let event = $rootScope.$on('floorLoad', function () {
-                $scope.item = $rootScope.events.find(i => i.EventID == $stateParams.EventID);
-                event();
+    class EventController {
+        constructor($rootScope, $stateParams, eventService) {
+            let self = this;
+            this.$stateParams = $stateParams;
+            this.$rootScope = $rootScope;
+            $rootScope.selectPageName = "АФИША и НОВОСТИ";
+            eventService.get($stateParams.EventID).then(i => {
+                self.item = i;
             });
-
-        }
-        else {
-            $scope.item = $rootScope.events.find(i => i.EventID == $stateParams.EventID);
         }
 
-        $rootScope.selectPageName = "АФИША и НОВОСТИ";
-    };
-    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', '$stateParams'];
-    angular.module('app').controller('eventController', controller);
+    }
+
+    EventController.$inject = ['$rootScope', '$stateParams', 'eventService'];
+    angular.module('app').controller('eventController', EventController);
 })();

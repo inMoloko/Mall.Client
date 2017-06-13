@@ -1,4 +1,4 @@
-<div class="proposalControl" style="">
+<div class="proposalControl">
     <div style="background:transparent;width:100%;  height:100%;position: absolute;height:100%;">
         <div class="" style="height: 100%;
                 width: 100%;
@@ -18,20 +18,20 @@
                                 <div class="text-center" style="height: 100%;
                                     background: transparent;
                                     width: 100%;">
-                                    <img class="img-responsive" alt="{{item.Name}}"
-                                         file-system-image="Events/{{item.EventID+'_Logo.'+item.LogoExtension}}"
+                                    <img class="img-responsive" alt="{{controller.item.Name}}"
+                                         file-system-image="Events/{{controller.item.EventID+'_Logo.'+controller.item.LogoExtension}}"
                                          style='height: 100%; width: 100%; object-fit: cover'>
                                     <!--moloko-image-api="item.EventID" url="/Event/:id/Logo"-->
                                 </div>
                             </div>
                         </div>
-                        <div ng-if="item.DateEnd" style="background: transparent;
+                        <div ng-if="controller.item.DateEnd" style="background: transparent;
                                 z-index: 5;
                                 width: 100%;
                                 top:46%; text-align:center;
                                 font-weight:600;
                                 font-size:20px;">
-                            Осталось {{item.DateEnd|remainDays}}
+                            Осталось {{controller.item.DateEnd|remainDays}}
                         </div>
                     </div>
 
@@ -41,19 +41,19 @@
                                 <div style="flex-grow: 1;text-transform:uppercase">
                                     <div class="parent " style="width: 100%;height: 100%;">
                                         <div class="child organizationProposalInfoBlock__name" style="">
-                                            {{item.Name}}
+                                            {{controller.item.Name}}
                                         </div>
                                         <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div ng-if="item.DateEnd" class="organizationProposalInfoBlock__remainder" style="margin-bottom:5px;font-size: 20px;font-weight:600;">
-                            Осталось {{item.DateEnd|remainDays}}
+                        <div ng-if="controller.item.DateEnd" class="organizationProposalInfoBlock__remainder" style="margin-bottom:5px;font-size: 20px;font-weight:600;">
+                            Осталось {{controller.item.DateEnd|remainDays}}
                         </div>
                         <div style="background: transparent;height: 100%;overflow: auto;" >
                             <div class="organizationProposalInfoBlock__description" style="">
-                                {{item.Description}}
+                                {{controller.item.Description}}
                             </div>
                         </div>                      
                     </div>
@@ -78,23 +78,23 @@
                     <table class="outer-wrapper">
                         <td style="vertical-align: middle;">
                             <div class="organizationProposalInfoBlock__name" style="text-transform:uppercase;margin-top: 120px;margin-bottom: 0;display: inline-block;">
-                                {{item.Name}}
+                                {{controller.item.Name}}
                             </div>
                         </td>
                     </table>
                 </div>
                 <div style="margin-bottom:10px;flex-basis:40%;">
-                    <img moloko-image-source="item.Logo" class="img-responsive" alt="{{item.Name}}"
+                    <img moloko-image-source="item.Logo" class="img-responsive" alt="{{controller.item.Name}}"
                          style='height: 100%; width: 100%; object-fit: cover'>
                 </div>
-                <div ng-if="item.DateEnd" style="margin-top: 5px;
+                <div ng-if="controller.item.DateEnd" style="margin-top: 5px;
                         margin-bottom: 20px;
                         font-weight: 600;
                         font-size: 20px;">
-                    Осталось {{item.DateEnd|remainDays}}
+                    Осталось {{controller.item.DateEnd|remainDays}}
                 </div>
                 <div class="organizationProposalInfoBlock__description" style="margin-bottom:10px;flex-basis:40%;overflow:scroll;">
-                    {{item.Description}}
+                    {{controller.item.Description}}
                 </div>
             </div>
             <div style="margin-left:10px;flex-basis:20%; display: flex;flex-direction: column;">

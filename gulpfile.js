@@ -37,7 +37,7 @@ function log(error) {
 }
 //�������� �������
 gulp.task('inject', function () {
-    var sources = gulp.src(['./node_modules/leaflet/dist/leaflet.js','./Scripts/**/*.{js,css}', '.blocks/**/*.{js,css}', './Content/**/*.{js,css}', './bower_components/leaflet.AnimatedMarker/src/AnimatedMarker.js'], {read: false});
+    var sources = gulp.src(['./Scripts/**/*.{js,css}', '.blocks/**/*.{js,css}', './Content/**/*.{js,css}', './bower_components/leaflet.AnimatedMarker/src/AnimatedMarker.js'], {read: false});
     return gulp.src('./index.html')
         .pipe(inject(sources, {relative: true}))
         .pipe(gulp.dest('./'));
@@ -45,7 +45,10 @@ gulp.task('inject', function () {
 gulp.task('bower-build', function () {
     var jsFilter = gulpFilter('**/*.js', {restore: true});  //отбираем только  javascript файлы
     var cssFilter = gulpFilter('**/*.css');  //отбираем только css файлы
-    return gulp.src(mainBowerFiles())
+    let bower = mainBowerFiles();
+    bower.push('./Scripts/Custom-leaflet/leaflet-src.js');
+
+    return gulp.src(bower)
     // собираем js файлы , склеиваем и отправляем в нужную папку
         .pipe(jsFilter)
         .pipe(concat('vendor.min.js'))
@@ -116,16 +119,17 @@ gulp.task('client', function (callback) {
 });
 
 gulp.task('js-prod', function () {
-    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/production/**/*.js'])
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/production/**/*.js', '!./Scripts/**/leaflet-src.js '])
         .pipe(concat('script.js'))
         .pipe(babel({
-            presets: ['es2015']
+            presets: ['es2015'],
         }))
         .pipe(uglify({outSourceMap: true}))
         .pipe(gulp.dest('dist'));
 });
+//'node_modules/angular-ui-router/release/angular-ui-router.js',
 gulp.task('js-client', function () {
-    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/client/**/*.js'])
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/client/**/*.js', '!./Scripts/**/leaflet-src.js '])
         .pipe(concat('script.js'))
         .pipe(babel({
             presets: ['es2015']
@@ -134,7 +138,7 @@ gulp.task('js-client', function () {
         .pipe(gulp.dest('dist'));
 });
 gulp.task('js-serve', function () {
-    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/development/**/*.js'])
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/development/**/*.js', '!./Scripts/**/leaflet-src.js '])
         .pipe(sourcemaps.init())
         .pipe(concat('script.js'))
         .pipe(sourcemaps.write())

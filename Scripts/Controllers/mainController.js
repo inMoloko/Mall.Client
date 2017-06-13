@@ -284,50 +284,49 @@
         //     $rootScope.currentStateParam;
         //     $rootScope.closeResultTitle;
         //
-        //     $rootScope.addStatistics = function (action, parametr) {
-        //         var statItem = {
-        //             Action: action,
-        //             ParamsAsJson: parametr,
-        //             Date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, -1)
-        //         };
-        //         if (!$rootScope.statisticStack)
-        //             $rootScope.statisticStack = [];
-        //         $rootScope.statisticStack.push(statItem);
-        //     };
-        //     let locationChangeHandler = $rootScope.$on('$locationChangeSuccess', function () {
-        //         if ($state.current.name === 'navigation.searchResult.organization' ||
-        //             $state.current.name === 'navigation.organization' ||
-        //             $state.current.name === 'navigation.mainMenu.organization' ||
-        //             $state.current.name === 'navigation.closedResult.organization') {
-        //             $rootScope.addStatistics('SelectОрганизацияСхема', {
-        //                 OrganizationID: +$rootScope.currentOrganization.OrganizationID,
-        //                 CategoryID: +$rootScope.currentCategory.CategoryID,
-        //                 Filter: $rootScope.currentFilter
-        //             });
-        //         }
-        //         $rootScope.addStatistics('Command', '{"Param":"' + $location.url() + '"}');
-        //
-        //     });
-        //
-        //     $rootScope.sendStatistics = function () {
-        //         //Возможно ParamsAsJson объект, тогда его нужно преобразовать в строку
-        //         $rootScope.statisticStack.forEach(i => {
-        //             if (angular.isObject(i.ParamsAsJson))
-        //                 i.ParamsAsJson = angular.toJson(i.ParamsAsJson);
-        //         });
-        //
-        //         $http({
-        //             method: 'POST',
-        //             url: settings.webApiBaseUrl + '/Statistic',
-        //             data: JSON.stringify($rootScope.statisticStack),
-        //             headers: {'Content-type': 'application/json'}
-        //         }).then(function (response) {
-        //             $rootScope.statisticStack = undefined;
-        //         },function (response) {
-        //             //$rootScope.addStatistics('SendStatistics', '{"Param":"Not sended"}');
-        //             console.error("При отправке статистики произошла ошибка");
-        //         });
-        //     };
+        $rootScope.addStatistics = function (action, parametr) {
+            var statItem = {
+                Action: action,
+                ParamsAsJson: parametr,
+                Date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, -1)
+            };
+            if (!$rootScope.statisticStack)
+                $rootScope.statisticStack = [];
+            $rootScope.statisticStack.push(statItem);
+        };
+        let locationChangeHandler = $rootScope.$on('$locationChangeSuccess', function () {
+            if ($state.current.name === 'navigation.searchResult.organization' ||
+                $state.current.name === 'navigation.organization' ||
+                $state.current.name === 'navigation.mainMenu.organization' ||
+                $state.current.name === 'navigation.closedResult.organization') {
+                $rootScope.addStatistics('SelectОрганизацияСхема', {
+                    OrganizationID: +$rootScope.currentOrganization.OrganizationID,
+                    CategoryID: + $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : null,
+                    Filter: $rootScope.currentFilter
+                });
+            }
+            $rootScope.addStatistics('Command', '{"Param":"' + $location.url() + '"}');
+
+        });
+        $rootScope.sendStatistics = function () {
+            //Возможно ParamsAsJson объект, тогда его нужно преобразовать в строку
+            $rootScope.statisticStack.forEach(i => {
+                if (angular.isObject(i.ParamsAsJson))
+                    i.ParamsAsJson = angular.toJson(i.ParamsAsJson);
+            });
+
+            $http({
+                method: 'POST',
+                url: settings.webApiBaseUrl + '/Statistic',
+                data: JSON.stringify($rootScope.statisticStack),
+                headers: {'Content-type': 'application/json'}
+            }).then(function (response) {
+                $rootScope.statisticStack = undefined;
+            }, function (response) {
+                //$rootScope.addStatistics('SendStatistics', '{"Param":"Not sended"}');
+                console.error("При отправке статистики произошла ошибка");
+            });
+        };
         //     $rootScope.systemSettings = response[8].data;
         //     if ($rootScope.systemSettings && $rootScope.systemSettings.length) {
         //         let result = $rootScope.systemSettings.find(i => i.SettingType == "TERMINAL_MENU_ITEMS");
@@ -444,7 +443,7 @@
             });
             $rootScope.anchorOrganizations = $rootScope.anchorOrganizations.filter(a => a.displaySchedule != undefined);
         });
-        bannerService.getAllActual().then(banners=>{
+        bannerService.getAllActual().then(banners => {
 
             $rootScope.banners = banners;
             $rootScope.horizontalBanners = banners;
@@ -475,7 +474,6 @@
                     $rootScope.currentOrganizations = undefined;
                     $rootScope.currentOrganization = undefined;
                 }
-                ;
             });
         $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams) {
             console.log('');
@@ -640,6 +638,6 @@
         });
 
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', 'arrayHelper', '$q', 'Idle', '$location', '$stateParams', '$timeout', 'dbService', '$linq','bannerService'];
+    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', 'arrayHelper', '$q', 'Idle', '$location', '$stateParams', '$timeout', 'dbService', '$linq', 'bannerService'];
     angular.module('app').controller('mainController', controller);
 })();

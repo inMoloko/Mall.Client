@@ -110,7 +110,7 @@
                 reloadOnSearch: false
             })
             .state('navigation.searchResult', {
-                url: '/searchResult/?CategoryID&Filter&OrganizationType',
+                url: '/searchResult?CategoryID&Filter&OrganizationType',
                 views: {
                     'searchResult': {
                         templateUrl: 'blocks/organizationsList/organizationsList.html',
@@ -205,7 +205,7 @@
 
             .state('feedback', {
                 url: "/feedback",
-                templateUrl: "blocks/feedback/feedBack.html"
+                templateUrl: "blocks/feedbackLayout/feedbackLayout.html"
             })
             .state('feedback.category', {
                 url: "/category",
@@ -305,7 +305,8 @@
                 views: {
                     'eventsList': {
                         controller: 'eventListController',
-                        templateUrl: 'blocks/eventsListControl/eventsListControl.html'
+                        templateUrl: 'blocks/eventsListControl/eventsListControl.html',
+                        controllerAs: 'controller'
                     }
                 }
             })
