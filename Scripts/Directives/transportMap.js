@@ -24,7 +24,7 @@
                     $scope.mapFloors = {};
                     $scope.rootScope = $rootScope;
                     if (!$scope.options)
-                        $scope.options = {minZoom: 17, maxZoom: 19};
+                        $scope.options = {minZoom: 15, maxZoom: 19};
                     var elm = element[0].children[0];
 
                     // Инициализируем карту Leaflet
@@ -35,7 +35,6 @@
                         zoomControl: false,
                         attributionControl: false,
                         markerZoomAnimation: false,
-                        crs: L.CRS.Simple,
                         inertia: false,
                         bounceAtZoomLimits: true,
                         fadeAnimation: false,
