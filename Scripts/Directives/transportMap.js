@@ -227,6 +227,7 @@
                                 $scope.setFloor(item.FloorID);
                             }
                         });
+                        floorService.initGraph(data.Floors, $scope.terminalMapObject);
                     });
 
                     //Связь остановки и маркера
@@ -260,7 +261,7 @@
                                 }
                             });
                             let path = floorService.getOptimalPath(i.map(i => i.MapObject), $scope.terminalMapObject);
-                            $rootScope.currentPath = path.path;
+                            $rootScope.currentPath = path ? path.path : null;
                         });
                     };
 
@@ -290,7 +291,7 @@
                                         currentLines.set(currentFloor, currentLine);
                                     }
                                 }
-                                currentLine.push(new L.latLng(path.Y, path.X)/*map.unproject([path.x, path.y], maxZoom)*/);
+                                currentLine.push(new L.latLng(path.Y||path.y, path.X||path.x)/*map.unproject([path.x, path.y], maxZoom)*/);
 
                             });
 

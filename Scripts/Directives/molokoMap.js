@@ -63,8 +63,7 @@
                             currentHeight = currentHeight / 2;
                             currentWidth = currentWidth / 2;
                             count++;
-                        }
-                        ;
+                        };
                         return count;
                     }
 

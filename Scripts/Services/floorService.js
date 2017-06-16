@@ -31,7 +31,7 @@
                 });
             }
         });
-        self.graph.getLayer(terminal.MapObject.FloorID).addVertexWithShortestSegment(terminal.MapObject.Longitude, terminal.MapObject.Latitude);
+        self.graph.getLayer(terminal.FloorID).addVertexWithShortestSegment(terminal.Longitude, terminal.Latitude);
     };
     /**
      *

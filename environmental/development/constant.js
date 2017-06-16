@@ -23,6 +23,7 @@
         displayKeyboard:true,
         autoReset:false,
         resourceFolder:'Content/Backup',
-        dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
+        //dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
+        dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,
     });
 })();
