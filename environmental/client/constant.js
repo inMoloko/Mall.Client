@@ -8,7 +8,7 @@
         console.error('Не указан серийный номер');
     }
     app.constant('settings', {
-        webApiBaseUrl: 'http://localhost:5555/api',
+        webApiBaseUrl: 'http://lk.inmoloko.ru/api',
         authUrl: 'http://lk.inmoloko.ru',
         webApiODataUrl: 'http://localhost:5555/odata',
         defaultPage: '/Monitoring',
@@ -25,7 +25,7 @@
         serialNumber:queryDict.SerialNumber,
         token:queryDict.Token,
         displayKeyboard:true,
-        resourceFolder: 'Content/Backup',//'C:/MOLOKO.Sync/1/Resources',
-        dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
+        resourceFolder: 'C:/MOLOKO.Content',//'C:/MOLOKO.Sync/1/Resources',
+        dbPath: `C:/MOLOKO.Content/db/${queryDict.SerialNumber}.json`,
     });
 })();
