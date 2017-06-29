@@ -27,7 +27,7 @@
                     .From(data.Banners)
                     .Where(i => self.$linq
                         .Enumerable()
-                        .From(i.BannerSchedules).Any(j => moment(i.DateFrom).isBefore() && moment(i.DateTo).isAfter() && i[nameOfDay] === true)).ToArray();
+                        .From(i.BannerSchedules).Any(j => moment(j.DateFrom).isBefore() && moment(j.DateTo).isAfter() && j[nameOfDay] === true)).ToArray();
             });
         }
 

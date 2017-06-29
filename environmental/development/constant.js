@@ -2,12 +2,13 @@
     "use strict";
     var app = angular.module('app');
     var queryDict = {};
-    location.search.substr(1).split("&").forEach(function (item) { queryDict[item.split("=")[0]] = item.split("=")[1] });
+    location.search.substr(1).split("&").forEach(function (item) { queryDict[item.split("=")[0]] = decodeURIComponent(item.split("=")[1]) });
     if(!queryDict.SerialNumber){
         console.error('Не указан серийный номер');
     }
     app.constant('settings', {
         webApiBaseUrl: 'http://localhost:5555/api',
+        authUrl: 'http://localhost:51147',
         webApiODataUrl: 'http://localhost:5555/odata',
         defaultPage: '/Monitoring',
         //Доступные темы. Первая тема принимается темой по умолчанию
@@ -20,10 +21,12 @@
         deltaDistanceTouchMoveAsClick: 100,
         customerID: queryDict.CustomerID,
         terminalID: queryDict.TerminalID,
+        serialNumber:queryDict.SerialNumber,
+        token:queryDict.Token,
         displayKeyboard:true,
         autoReset:false,
         resourceFolder:'Content/Backup',
-        //dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
-        dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,
+        dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
+        //dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,
     });
 })();

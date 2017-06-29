@@ -1,14 +1,15 @@
 (function () {
     "use strict";
     var app = angular.module('app');
-    var queryDict = {}
-    location.search.substr(1).split("&").forEach(function (item) { queryDict[item.split("=")[0]] = item.split("=")[1] });
+    var queryDict = {};
+    location.search.substr(1).split("&").forEach(function (item) { queryDict[item.split("=")[0]] = decodeURIComponent(item.split("=")[1]) });
 
     if(!queryDict.SerialNumber){
         console.error('Не указан серийный номер');
     }
     app.constant('settings', {
         webApiBaseUrl: 'http://localhost:5555/api',
+        authUrl: 'http://lk.inmoloko.ru',
         webApiODataUrl: 'http://localhost:5555/odata',
         defaultPage: '/Monitoring',
         //Доступные темы. Первая тема принимается темой по умолчанию
@@ -21,8 +22,10 @@
         deltaDistanceTouchMoveAsClick: 100,
         customerID: queryDict.CustomerID,
         terminalID: queryDict.TerminalID,
+        serialNumber:queryDict.SerialNumber,
+        token:queryDict.Token,
         displayKeyboard:true,
-        resourceFolder:'Content/Backup',
+        resourceFolder: 'Content/Backup',//'C:/MOLOKO.Sync/1/Resources',
         dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
     });
 })();

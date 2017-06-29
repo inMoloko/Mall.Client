@@ -19,7 +19,8 @@
                                     background: transparent;
                                     width: 100%;">
                                     <img class="img-responsive" alt="{{controller.item.Name}}"
-                                         file-system-image="Events/{{controller.item.EventID+'_Logo.'+controller.item.LogoExtension}}"
+                                         file-system-image="Events/{{controller.item.EventID+'_Logo.'+(controller.item.LogoExtension||'jpg')}}"
+                                         default="Content/images/mega-logo.jpg"
                                          style='height: 100%; width: 100%; object-fit: cover'>
                                     <!--moloko-image-api="item.EventID" url="/Event/:id/Logo"-->
                                 </div>

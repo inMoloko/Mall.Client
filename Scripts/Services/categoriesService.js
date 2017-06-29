@@ -13,14 +13,22 @@
 
         get() {
             let self = this;
-            return self.dbService.getData().then(data => self.$linq.Enumerable().From(data.Categories).Select(i=>i.Value).ToArray());
+            return self.dbService.getData().then(data => self.$linq.Enumerable().From(data.Categories).Select(i => {
+                let cat = i.Value;
+                if (cat.ChildIds) {
+                    cat.Children = cat.ChildIds.filter(j=>j!== cat.CategoryID).map(j => data.Categories[j]);
+                }
+                return cat;
+            }).ToArray());
         }
+
         getById(categoryID) {
             let self = this;
             return self.dbService.getData().then(data => {
                 return data.Categories[categoryID];
             });
         }
+
         getFilterCategories(categoryID) {
             //return this.$http.get(this.settings.webApiBaseUrl + '/Category/GetFilterCategories?CategoryID=' + categoryID, {cache: true}).then(i => i.data);
             let self = this;

@@ -1,10 +1,11 @@
 ﻿<div class="screensaverControl" ng-click="closeScreenSaver()">    
     <ul id="slides" >
         <li class="slide showing" style="position: initial;" ng-if="banners.length==0">
-            <img class="screensaverControl__image" moloko-image-source="::customer.Logo" />
+            <img class="screensaverControl__image" file-system-image="Content/images/mega-logo.jpg" />
         </li>
         <li class="slide " style="position: initial;" ng-repeat="item in banners track by item.BannerID">
-            <img class="screensaverControl__image"  moloko-image-source="item.Image"/>
+            <img class="screensaverControl__image"  default="Content/images/mega-logo.jpg"
+                 file-system-image="Banners/{{item.BannerID+'.'+item.ImageExtension}}"/>
         </li>        
     </ul>
     <span class="screensaverControl__text" >Прикоснитесь, чтобы перейти на главную страницу</span>

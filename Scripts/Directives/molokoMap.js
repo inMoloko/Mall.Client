@@ -41,8 +41,10 @@
                         bounceAtZoomLimits: true,
                         fadeAnimation: false,
                     });
-                    map.setBearing(0);
-
+                    //map.setBearing(90);
+                    // map.on('moveend', e => {
+                    //     console.log(e.target.dragging._draggable._newPos, map.getPixelOrigin(), map.getPixelBounds());
+                    // });
                     //console.log('Create map');
                     map.setView([0, 0], 1);
                     //Сброс карты
@@ -63,8 +65,14 @@
                             currentHeight = currentHeight / 2;
                             currentWidth = currentWidth / 2;
                             count++;
-                        };
+                        }
+                        ;
                         return count;
+                    }
+
+                    function getXOffset() {
+                        let match = document.querySelector('.leaflet-pane.leaflet-map-pane').style.transform.match(/translate3d\((.+)px,(.+)px,(.+)px\)/);
+                        return parseInt(match[1]);
                     }
 
                     function setBounds() {
@@ -74,22 +82,41 @@
                         rad = $scope.options.orginalAngel == true ? 0 : rad;
 
                         let size = map.getSize();
-                        let width = $state.current.name == "navigation" ? 50 : size.x * 0.3;
-                        //calculateBounds();
+                        let width = $state.current.name == "navigation" ? 50 : 620;
+
+                        //map._size.x = 1920-600;
                         map.fitBounds(bounds, {
-                            //padding: [500, 50]
-                            paddingTopLeft: [width, 50],
+                            paddingTopLeft: [50, 50],
                             paddingBottomRight: [50, 50],
                         });
-                        // let zoom = map.getBoundsZoom(bounds);
-                        // let center = bounds.getCenter();
-                        // center.lat += 100 / Math.pow(2, zoom);
-                        //
-                        // map.setView(center, zoom);
 
+                        map.setAbsoluteOffset({x: width / 2, y: 0});
 
-                        //map.fitBounds(bounds, { reset: false, animate: false });
                         calculateBounds();
+                        return;
+
+                        // let bearing = map.getBearing();
+                        // if (bearing === 180) {
+                        //     map.fitBounds(bounds, {
+                        //         paddingTopLeft: [50, 50],
+                        //         paddingBottomRight: [width, 50],
+                        //     });
+                        // } else if (bearing === 270) {
+                        //     map.fitBounds(bounds, {
+                        //         paddingTopLeft: [50, 50],
+                        //         paddingBottomRight: [50, -width / 2],
+                        //     });
+                        // } else if (bearing === 90) {
+                        //     map.fitBounds(bounds, {
+                        //         paddingTopLeft: [50, -width / 2],
+                        //         paddingBottomRight: [50, 50],
+                        //     });
+                        // } else {
+                        //     map.fitBounds(bounds, {
+                        //         paddingTopLeft: [width, 50],
+                        //         paddingBottomRight: [50, 50],
+                        //     });
+                        // }
                     };
 
                     var formatThemeHandler = $rootScope.$watch("formatTheme", function (n, w) {
@@ -103,31 +130,12 @@
                         $timeout(function () {
                             setBounds();
                         }, 40);
-                        // /setBounds();
                     });
                     // Задаем обработчики событий
                     map.on("click", function (e) {
                         var floorID = $scope.currentMapFloor.FloorID;
                         var currentPoint = e.latlng;
 
-                        // var filtered = $linq.Enumerable().From($scope.mapFloors[floorID].floorMapObjects).Select(i => {
-                        //     return {
-                        //         OrganizationID: i.Key,
-                        //         MapObject: $linq.Enumerable().From(i.Value).Select(j => {
-                        //             return {
-                        //                 Distance: currentPoint.distanceTo(map.project(j.position)),
-                        //                 MapObjectID: j.mapObjectID
-                        //             };
-                        //         }).OrderBy(j => j.Distance).FirstOrDefault()
-                        //     };
-                        // }).Where(i => i.MapObject.Distance <= 50).OrderBy(i => i.MapObject.Distance).ToArray();
-                        //
-                        // if (filtered[0] !== undefined) {
-                        //     if ($rootScope.currentOrganization && $rootScope.currentOrganization.OrganizationID === filtered[0].OrganizationID || filtered[0].OrganizationID === $rootScope.currentTerminal.OrganizationID) {
-                        //         return;
-                        //     }
-                        //     clickToOrganization(filtered[0].OrganizationID, filtered[0].MapObject.MapObjectID);
-                        // }
                         let tmp = $linq.Enumerable().From($scope.mapFloors[floorID].layerGroup.getLayers())
                             .Where(i => i._organization)
                             .Select(i => {
@@ -144,19 +152,12 @@
                             clickToOrganization(tmp.OrganizationID, tmp.MapObjectID);
                         }
                     });
-                    var _orginalAngel = $scope.$watch('options.orginalAngel', function (n, o) {
-                        if (n === o)
-                            return;
-                        if ($scope.options.orginalAngel)
-                            map.setBearing(0);
-                        else
-                            map.setBearing($rootScope.currentTerminal.LookDirectionAngleDegrees);
-                        //setView({ fullScreen: $state.current.name == "navigation" });
-                        setBounds();
-                    });
                     var tmprect;
 
                     function calculateBounds(offset) {
+
+                        // map.setMaxBounds($scope.currentMapFloor.layer.getBounds());
+                        // return;
 
                         let full = $state.current.name == "navigation";
 
@@ -166,15 +167,43 @@
                         var s2 = map.containerPointToLatLng(L.point(offset || 620, 0));
                         var s = s2.lng - s1.lng;
 
-                        s2 = map.containerPointToLatLng(L.point(50, 0));
-                        let p = s2.lng - s1.lng;
-                        var maxBoundsSouthWest = new L.LatLng(tb.getSouthWest().lat, full ? tb.getSouthWest().lng : tb.getSouthWest().lng - s);
-                        var maxBoundsNorthEast = new L.LatLng(tb.getNorthEast().lat, tb.getNorthEast().lng);
+                        let maxBoundsSouthWest;
+                        let maxBoundsNorthEast;
 
-                        let bounds = new L.LatLngBounds(maxBoundsSouthWest, maxBoundsNorthEast);
-                        map.setMaxBounds(bounds);
+                        map.setMaxBounds(tb);
+                        return;
 
-                        return bounds.getCenter();
+                        // let bearing = map.getBearing();
+                        // if (bearing === 180) {
+                        //     maxBoundsSouthWest = new L.LatLng(tb.getSouthWest().lat, full ? tb.getSouthWest().lng : tb.getSouthWest().lng - s);
+                        //     maxBoundsNorthEast = new L.LatLng(tb.getNorthEast().lat, tb.getNorthEast().lng);
+                        //
+                        // } else if (bearing === 270) {
+                        //     s1 = map.containerPointToLatLng(L.point(0, 0));
+                        //     s2 = map.containerPointToLatLng(L.point(0, offset || 620));
+                        //     s = s2.lng - s1.lng;
+                        //
+                        //     maxBoundsSouthWest = new L.LatLng(tb.getSouthWest().lat, tb.getSouthWest().lng);
+                        //     maxBoundsNorthEast = new L.LatLng(full ? tb.getNorthEast().lat : tb.getNorthEast().lat - s / 2, tb.getNorthEast().lng);
+                        // } else if (bearing === 90) {
+                        //     s1 = map.containerPointToLatLng(L.point(0, 0));
+                        //     s2 = map.containerPointToLatLng(L.point(0, offset || 620));
+                        //     s = s2.lng - s1.lng;
+                        //     maxBoundsSouthWest = new L.LatLng(full ? tb.getSouthWest().lat : tb.getSouthWest().lat - s / 4, tb.getSouthWest().lng);
+                        //     maxBoundsNorthEast = new L.LatLng(tb.getNorthEast().lat, tb.getNorthEast().lng);
+                        // } else {
+                        //     maxBoundsSouthWest = new L.LatLng(tb.getSouthWest().lat, full ? tb.getSouthWest().lng : tb.getSouthWest().lng - s);
+                        //     maxBoundsNorthEast = new L.LatLng(tb.getNorthEast().lat, tb.getNorthEast().lng);
+                        // }
+                        //
+                        //
+                        // let bounds = new L.LatLngBounds(maxBoundsSouthWest, maxBoundsNorthEast);
+                        //
+                        // // let f = L.rectangle(bounds);
+                        // // f.addTo(map);
+                        // map.setMaxBounds(bounds);
+                        //
+                        // return bounds.getCenter();
                     }
 
 
@@ -185,7 +214,7 @@
                         $scope.plusDisable = $scope.options.zoom >= map.getMaxZoom();
 
 
-                        calculateBounds();
+                        //calculateBounds();
                         if (!$rootScope.$$phase)
                             $scope.$parent.$digest();
                     });
@@ -293,6 +322,8 @@
                         $scope.mapObjects = {};
 
                         $rootScope.currentTerminal = i.Floors.find(j => j.TerminalMapObject).TerminalMapObject;
+
+                        map.setBearing($rootScope.currentTerminal.Params.LookDirectionAngleDegrees || 0);
 
                         //var promises = [];
                         i.Floors.forEach(item => {
@@ -485,7 +516,7 @@
                         //init();
                     });
                     $scope.getCount = function (floorID) {
-                        return $scope.selectedOrganizations === undefined ? 0 : $linq.Enumerable().From($scope.selectedOrganizations).SelectMany(i => i.OrganizationMapObject).Count(i => i.MapObject.FloorID == floorID);
+                        return $scope.selectedOrganizations === undefined ? 0 : $linq.Enumerable().From($scope.selectedOrganizations).SelectMany(i => i.MapObjects).Count(i => i.FloorID == floorID);
                     };
                     function getOptimalPath(array) {
                         let paths = {};
@@ -707,7 +738,6 @@
                         formatThemeHandler();
                         currentOrganizationHandler();
                         currentPathHandler();
-                        _orginalAngel();
                         _currentOrganizations();
                         map.removeEventListener();
                         map.remove();

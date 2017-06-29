@@ -117,7 +117,7 @@
             if (!item)
                 return;
             return $linq.Enumerable()
-                .From(item.Floors).Select(i=>i.Number).ToArray().join(',');
+                .From(item.Floors).Select(i=>i.Number).Distinct().ToArray().join(',');
             // return $linq.Enumerable()
             //     .From(item.OrganizationMapObject)
             //     .Where(i => $rootScope.floorsDic[i.MapObject.FloorID])

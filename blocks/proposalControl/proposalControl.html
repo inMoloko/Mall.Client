@@ -18,7 +18,8 @@
                                     background: transparent;
                                     width: 100%;">
                                     <img  class="img-responsive" alt="{{item.Name}}"
-                                         file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension}}"
+                                         file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension||'jpg'}}"
+                                          default="Content/images/mega-logo.jpg"
                                          style='height: 100%; width: 100%; object-fit: cover'>
                                     <!--moloko-image-source="item.Logo"-->
                                 </div>

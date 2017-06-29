@@ -52,7 +52,9 @@ gulp.task('bower-build', function () {
     // собираем js файлы , склеиваем и отправляем в нужную папку
         .pipe(jsFilter)
         .pipe(concat('vendor.min.js'))
+        //.pipe(gulp.dest('dist'))
         .pipe(uglify({outSourceMap: true}))
+        .on('error', function (err) { console.error(err) })
         .pipe(gulp.dest('dist'))
         .pipe(jsFilter.restore)
         // собраем css файлы, склеиваем и отправляем их под синтаксисом css
@@ -119,7 +121,7 @@ gulp.task('client', function (callback) {
 });
 
 gulp.task('js-prod', function () {
-    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/production/**/*.js', '!./Scripts/**/leaflet-src.js '])
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/production/**/*.js','!./Scripts/**/leaflet-src.js '])
         .pipe(concat('script.js'))
         .pipe(babel({
             presets: ['es2015'],
@@ -129,15 +131,17 @@ gulp.task('js-prod', function () {
 });
 //'node_modules/angular-ui-router/release/angular-ui-router.js',
 gulp.task('js-client', function () {
-    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/client/**/*.js', '!./Scripts/**/leaflet-src.js '])
+    return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/client/**/*.js','!./Scripts/**/leaflet-src.js '])
         .pipe(concat('script.js'))
         .pipe(babel({
-            presets: ['es2015']
+            presets: ['es2015'],
+            compact: true
         }))
         .pipe(uglify({outSourceMap: true}))
         .pipe(gulp.dest('dist'));
 });
 gulp.task('js-serve', function () {
+    //, '!./Scripts/**/leaflet-src.js '
     return gulp.src(['./Scripts/**/*.js', './blocks/**/*.js', './environmental/development/**/*.js', '!./Scripts/**/leaflet-src.js '])
         .pipe(sourcemaps.init())
         .pipe(concat('script.js'))

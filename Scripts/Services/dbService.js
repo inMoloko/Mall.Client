@@ -26,7 +26,7 @@
             let setting = data.SystemSettings.TERMINAL_MENU_ITEMS;
             let restaurantCategories = data.Categories[setting['Рестораны и кафе']].ChildIds;
             let entertainmentCategories = data.Categories[setting['Развлечения и услуги']].ChildIds;
-            let serviceCategories = data.Categories[setting['Сервисы']].ChildIds;
+            let serviceCategories = setting['Сервисы'] ? data.Categories[setting['Сервисы']].ChildIds : [];
             let categoryID = organization.Categories[0].CategoryID;
             let type;
             if (serviceCategories.includes(categoryID)) {
@@ -95,7 +95,7 @@
                     result = result.Where(i => (i.Name && i.Name.toLowerCase().includes(filter)) || (i.KeyWords && i.KeyWords.toLowerCase().includes(filter)))
                 }
                 tmp.currentOrganizations = result.ToArray();
-                return  tmp;
+                return tmp;
             });
         }
 

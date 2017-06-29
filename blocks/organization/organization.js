@@ -147,7 +147,7 @@
         $scope.getFloors = function (item) {
             if (!item)
                 return;
-            return item.Floors.map(i=>i.Number).join(',');
+            return $linq.Enumerable().From(item.Floors).Select(i=>i.Number).Distinct().ToArray().join(',');
             // return item.OrganizationMapObject.map(i => {
             //     return $rootScope.floorsDic[i.MapObject.FloorID].Number;
             // }).join(',');

@@ -6,10 +6,11 @@
 
         $rootScope.$watch('banners', function () {
             if ($rootScope.banners !== undefined)
-                if ($rootScope.orientation == 'vertical')
-                    $scope.banners = $rootScope.verticalBanners;
-                else
-                    $scope.banners = $rootScope.horizontalBanners;
+               $scope.banners = $rootScope.banners;
+                // if ($rootScope.orientation == 'vertical')
+                //     $scope.banners = $rootScope.verticalBanners;
+                // else
+                //     $scope.banners = $rootScope.horizontalBanners;
 
             $scope.start();
         });

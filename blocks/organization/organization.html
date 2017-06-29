@@ -5,7 +5,7 @@
                 <!--<img class="img-responsive logoBlock__organizationLogo" moloko-image-api="$root.currentOrganization.OrganizationID" url="/Organization/:id/Logo"-->
                     <!--default-src="/Customer/Logo" alt="{{item.Organization.Name}}">-->
                 <img class="img-responsive logoBlock__organizationLogo"
-                     default="/Content/images/mega-logo.jpg"
+                     default="Content/images/mega-logo.jpg"
                      file-system-image="Organizations/{{$root.currentOrganization.OrganizationID+'_Logo.'+$root.currentOrganization.LogoExtension}}">
             </div>
             <div style="flex-basis: 40%;">
@@ -152,7 +152,7 @@
 
         <div style="margin-left:10px; margin-right:10px;" ng-click="changeSendSection('telegram')">
             <button style="background:transparent; border:4px solid transparent; width: 60px; height:60px; border-radius:50%;margin-top:10px;">
-                <img src="../../Content/images/telegram.png" style="width: 60px;margin-left: -4px;margin-top: -4px;" />
+                <img src="Content/images/telegram.png" style="width: 60px;margin-left: -4px;margin-top: -4px;" />
             </button>
             <div class="sendPathBlock__selectedSection" ng-show="selectedSendSection === 'telegram'" ></div>
         </div>

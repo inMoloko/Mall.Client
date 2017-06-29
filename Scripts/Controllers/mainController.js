@@ -1,6 +1,6 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $http, settings, $state, $rootScope, arrayHelper, $q, Idle, $location, $stateParams, $timeout, dbService, $linq, bannerService) {
+    var controller = function ($scope, $http, settings, $state, $rootScope, arrayHelper, $q, Idle, $location, $stateParams, $timeout, dbService, $linq, bannerService, dbVersionService, logService) {
         //Обработка простоя
         $scope.$on('IdleTimeout', function () {
             $rootScope.colorTheme = settings.colorThemes[0];
@@ -636,8 +636,8 @@
                 $rootScope.anchorOrganizations = $rootScope.anchorOrganizations.filter(a => a.displaySchedule != undefined);
             }
         });
-
+        dbVersionService.checkDb();
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', 'arrayHelper', '$q', 'Idle', '$location', '$stateParams', '$timeout', 'dbService', '$linq', 'bannerService'];
+    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', 'arrayHelper', '$q', 'Idle', '$location', '$stateParams', '$timeout', 'dbService', '$linq', 'bannerService','dbVersionService', 'logService'];
     angular.module('app').controller('mainController', controller);
 })();
