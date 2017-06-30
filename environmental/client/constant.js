@@ -8,7 +8,8 @@
         console.error('Не указан серийный номер');
     }
     app.constant('settings', {
-        webApiBaseUrl: 'http://lk.inmoloko.ru/api',
+        checkApiUrl:'http://lk.inmoloko.ru/api',
+        webApiBaseUrl: 'http://localhost:5555/api',
         authUrl: 'http://lk.inmoloko.ru',
         webApiODataUrl: 'http://localhost:5555/odata',
         defaultPage: '/Monitoring',

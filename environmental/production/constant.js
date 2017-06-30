@@ -21,7 +21,8 @@
         serialNumber:queryDict.SerialNumber,
         token:queryDict.Token,
         displayKeyboard:true,
+        preventStatistic: true,
         resourceFolder:'Content/Backup',
-        dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,
+        dbPath: `http://lk.inmoloko.ru/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,
     });
 })();

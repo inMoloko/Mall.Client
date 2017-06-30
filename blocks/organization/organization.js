@@ -45,8 +45,8 @@
             filter();
 
             if ($rootScope.currentTerminal && $state.params.OrganizationID) {
-                let result = getOptimalPath($rootScope.currentOrganization.MapObjects);
                 dbService.getData().then(data=>{
+                    let result = getOptimalPath(data.Organizations[$state.params.OrganizationID].MapObjects);
                     $scope.code = $rootScope.currentTerminal.MTerminalID + data.Customer.Synonym + result.object.MapObjectID;
                 });
 

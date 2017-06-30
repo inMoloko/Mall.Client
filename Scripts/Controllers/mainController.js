@@ -309,6 +309,8 @@
 
         });
         $rootScope.sendStatistics = function () {
+            if(settings.preventStatistic === true)
+                return;
             //Возможно ParamsAsJson объект, тогда его нужно преобразовать в строку
             $rootScope.statisticStack.forEach(i => {
                 if (angular.isObject(i.ParamsAsJson))

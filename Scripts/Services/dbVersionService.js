@@ -36,7 +36,7 @@
                     return;
                 }
                 self.getToken(floor.TerminalMapObject.Token).then(token => {
-                    return self.$http.post(`${self.settings.webApiBaseUrl}/TerminalService/CheckDbVersion`, {
+                    return self.$http.post(`${self.settings.checkApiUrl}/TerminalService/CheckDbVersion`, {
                         ClientTime: new Date(),
                         CreationDate: i.CreationDate
                     }, {
