@@ -7,9 +7,9 @@
         console.error('Не указан серийный номер');
     }
     app.constant('settings', {
-        webApiBaseUrl: 'http://localhost:5555/api',
+        webApiBaseUrl: 'http://localhost:51147/api',
         authUrl: 'http://localhost:51147',
-        webApiODataUrl: 'http://localhost:5555/odata',
+        checkApiUrl:'http://localhost:51147/api',
         defaultPage: '/Monitoring',
         //Доступные темы. Первая тема принимается темой по умолчанию
         colorThemes: ['colorTheme_color', 'colorTheme_blackLite'],
@@ -24,7 +24,7 @@
         serialNumber:queryDict.SerialNumber,
         token:queryDict.Token,
         displayKeyboard:true,
-        autoReset:false,
+        autoReset:true,
         resourceFolder:'Content/Backup',
         dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
         //dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,

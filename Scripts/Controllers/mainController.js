@@ -1,13 +1,13 @@
 (function () {
     "use strict";
-    var controller = function ($scope, $http, settings, $state, $rootScope, arrayHelper, $q, Idle, $location, $stateParams, $timeout, dbService, $linq, bannerService, dbVersionService, logService) {
+    var controller = function ($scope, $http, settings, $state, $rootScope, arrayHelper, $q, Idle, $location, $stateParams, $timeout, dbService, $linq, bannerService, dbVersionService, logService, statisticService) {
         //Обработка простоя
         $scope.$on('IdleTimeout', function () {
             $rootScope.colorTheme = settings.colorThemes[0];
             $rootScope.formatTheme = $scope.formatThemesMain[0];
 
-            if ($rootScope.statisticStack && $rootScope.statisticStack.length > 0)
-                $rootScope.sendStatistics();
+            //if ($rootScope.statisticStack && $rootScope.statisticStack.length > 0)
+            $rootScope.sendStatistics();
             //$state.go('navigation.mainMenu', {});
             // console.log('send');
             // Idle.watch();
@@ -288,11 +288,13 @@
             var statItem = {
                 Action: action,
                 ParamsAsJson: parametr,
-                Date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, -1)
+                Date: new Date()//(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().slice(0, -1)
             };
-            if (!$rootScope.statisticStack)
-                $rootScope.statisticStack = [];
-            $rootScope.statisticStack.push(statItem);
+            statisticService.addStatistic(statItem);
+
+            // if (!$rootScope.statisticStack)
+            //     $rootScope.statisticStack = [];
+            // $rootScope.statisticStack.push(statItem);
         };
         let locationChangeHandler = $rootScope.$on('$locationChangeSuccess', function () {
             if ($state.current.name === 'navigation.searchResult.organization' ||
@@ -301,33 +303,34 @@
                 $state.current.name === 'navigation.closedResult.organization') {
                 $rootScope.addStatistics('SelectОрганизацияСхема', {
                     OrganizationID: +$rootScope.currentOrganization.OrganizationID,
-                    CategoryID: + $rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : null,
+                    CategoryID: +$rootScope.currentCategory ? $rootScope.currentCategory.CategoryID : null,
                     Filter: $rootScope.currentFilter
                 });
-            }
-            $rootScope.addStatistics('Command', '{"Param":"' + $location.url() + '"}');
+            } else
+                $rootScope.addStatistics('Command', {url: $location.url()});
 
         });
         $rootScope.sendStatistics = function () {
-            if(settings.preventStatistic === true)
-                return;
+            // if(settings.preventStatistic === true)
+            //     return;
+            statisticService.sendStatistics();
             //Возможно ParamsAsJson объект, тогда его нужно преобразовать в строку
-            $rootScope.statisticStack.forEach(i => {
-                if (angular.isObject(i.ParamsAsJson))
-                    i.ParamsAsJson = angular.toJson(i.ParamsAsJson);
-            });
-
-            $http({
-                method: 'POST',
-                url: settings.webApiBaseUrl + '/Statistic',
-                data: JSON.stringify($rootScope.statisticStack),
-                headers: {'Content-type': 'application/json'}
-            }).then(function (response) {
-                $rootScope.statisticStack = undefined;
-            }, function (response) {
-                //$rootScope.addStatistics('SendStatistics', '{"Param":"Not sended"}');
-                console.error("При отправке статистики произошла ошибка");
-            });
+            // $rootScope.statisticStack.forEach(i => {
+            //     if (angular.isObject(i.ParamsAsJson))
+            //         i.ParamsAsJson = angular.toJson(i.ParamsAsJson);
+            // });
+            //
+            // $http({
+            //     method: 'POST',
+            //     url: settings.webApiBaseUrl + '/Statistic',
+            //     data: JSON.stringify($rootScope.statisticStack),
+            //     headers: {'Content-type': 'application/json'}
+            // }).then(function (response) {
+            //     $rootScope.statisticStack = undefined;
+            // }, function (response) {
+            //     //$rootScope.addStatistics('SendStatistics', '{"Param":"Not sended"}');
+            //     console.error("При отправке статистики произошла ошибка");
+            // });
         };
         //     $rootScope.systemSettings = response[8].data;
         //     if ($rootScope.systemSettings && $rootScope.systemSettings.length) {
@@ -497,67 +500,6 @@
 
         var x, y;
 
-        //получаем координаты начальной точки касания
-        // window.addEventListener('touchstart', function (event) {
-        //     x = event.changedTouches[0].pageX;
-        //     y = event.changedTouches[0].pageY;
-        //
-        //     console.log("event.touches.length = " + event.touches.length);
-        //     if (event.touches.length == 2) {
-        //         event.preventDefault();
-        //     }
-        // }, true);
-        //
-        //
-        // //при завершении касания имитируем клик
-        // $scope.touchHandler = function (event) {
-        //     var touches = event.changedTouches,
-        //         first = touches[0],
-        //         type = "";
-        //     switch (event.type) {
-        //         case "touchend":
-        //             type = "click";
-        //             break;
-        //         default:
-        //             return;
-        //     }
-        //
-        //     // initMouseEvent(type, canBubble, cancelable, view, clickCount,
-        //     //                screenX, screenY, clientX, clientY, ctrlKey,
-        //     //                altKey, shiftKey, metaKey, button, relatedTarget);
-        //
-        //     var deltaX = event.changedTouches[0].pageX - x;
-        //     var deltaY = event.changedTouches[0].pageY - y;
-        //     var difference = (deltaX * deltaX) + (deltaY * deltaY);
-        //     if (Math.sqrt(difference) < settings.deltaDistanceTouchMoveAsClick) {
-        //         var simulatedEvent = document.createEvent("MouseEvent");
-        //         simulatedEvent.initMouseEvent("mousedown", true, true, window, 1,
-        //             first.screenX, first.screenY,
-        //             first.clientX, first.clientY, false,
-        //             false, false, false, 0/*left*/, null);
-        //         first.target.dispatchEvent(simulatedEvent);
-        //         simulatedEvent.initMouseEvent("mouseup", true, true, window, 1,
-        //             first.screenX, first.screenY,
-        //             first.clientX, first.clientY, false,
-        //             false, false, false, 0/*left*/, null);
-        //         first.target.dispatchEvent(simulatedEvent);
-        //         simulatedEvent.initMouseEvent(type, true, true, window, 1,
-        //             first.screenX, first.screenY,
-        //             first.clientX, first.clientY, false,
-        //             false, false, false, 0/*left*/, null);
-        //         first.target.dispatchEvent(simulatedEvent);
-        //         if (event.srcElement.nodeName == "INPUT")
-        //             event.srcElement.focus();
-        //         event.preventDefault();
-        //     }
-        //
-        // }
-        //
-        // $scope.initEvent = function () {
-        //     document.addEventListener("touchend", $scope.touchHandler, true);
-        // }
-        // $scope.initEvent();
-
         function init() {
             preventLongPressMenu(document);
         }
@@ -640,6 +582,6 @@
         });
         dbVersionService.checkDb();
     };
-    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', 'arrayHelper', '$q', 'Idle', '$location', '$stateParams', '$timeout', 'dbService', '$linq', 'bannerService','dbVersionService', 'logService'];
+    controller.$inject = ['$scope', '$http', 'settings', '$state', '$rootScope', 'arrayHelper', '$q', 'Idle', '$location', '$stateParams', '$timeout', 'dbService', '$linq', 'bannerService', 'dbVersionService', 'logService', 'statisticService'];
     angular.module('app').controller('mainController', controller);
 })();
