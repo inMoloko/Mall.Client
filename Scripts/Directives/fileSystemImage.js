@@ -15,6 +15,8 @@
                 scope.$watch('model', function () {
                     if (scope.model && /\.(png|jpg|ico|gif)$/.test(scope.model))
                         element.attr("src", settings.resourceFolder + '/' + scope.model);
+                    else
+                        element.attr('src', attributes.default);
                 });
                 element.bind('error', function (error) {
                     element.attr('src', attributes.default);

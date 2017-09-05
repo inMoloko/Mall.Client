@@ -60,7 +60,7 @@
     <div ng-show="$root.currentOrganizations.length==0">
         <div class="errorHeaderBlock organizationsSearchResultItem__errorHeaderBlock"
              ng-show="$root.currentOrganizations.length==0">
-            По запросу <strong>"{{searchText| limitTo: 150 }}{{searchText.length > 150 ? '...' : ''}}" </strong><span
+            По запросу <strong>"{{$root.searchText| limitTo: 150 }}{{searchText.length > 150 ? '...' : ''}}" </strong><span
                 ng-show="currentCategory&&currentCategory.CategoryID!=-1&&$root.otherCurrentOrganizations.length>0">для категории <strong>"{{currentCategory.Name}}"</strong></span>
             ничего не найдено.
         </div>

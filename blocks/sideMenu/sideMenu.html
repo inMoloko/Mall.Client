@@ -81,7 +81,11 @@
     <div style="margin-left:60px;">
         <div ng-class="sizeMenuItem()" ng-repeat="menuItem in menuItems" class="sideMenuItemBlock__itemButton" ng-click="selectItem(menuItem)">
             <button class="sideMenuItemBlock__itemButtonImage" >
-                <i ng-class="{'iconMall-shop':menuItem.Name==='Магазины','iconMall-burger':menuItem.Name==='Рестораны и кафе','iconMall-service':menuItem.Name.indexOf('Развлечения')!=-1,'iconMall-iconCinema':menuItem.Name==='Кино'||menuItem.Name.indexOf('Синема')!=-1}"></i>
+                <i ng-class="{'iconMall-shop':menuItem.Name==='Магазины',
+                'iconMall-burger':menuItem.Name==='Рестораны и кафе',
+                'iconMall-service':menuItem.Name==='Сервисы',
+                'iconMall-iconGoodSmile':menuItem.Name==='Развлечения и услуги',
+                'iconMall-iconCinema':menuItem.Name==='Кино'||menuItem.Name.indexOf('Синема')!=-1}"></i>
             </button>
             <span ng-hide="visibleMenuItemName()" class="sideMenuItemBlock__itemButtonText">{{menuItem.Name}}</span>
         </div>
