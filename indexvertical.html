@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="utf-8"/>
+<title>Навигация</title>
+<link rel="stylesheet" href="Styles/w3.css">
+
+<body><div class="wrapper">
+    <div class="w3-content w3-section" style="margin-top: 0">
+        <img class="mySlides w3-animate-fading" src="Content/Backup/VerticalBanners/1.jpg" >
+        <img class="mySlides w3-animate-fading" src="Content/Backup/VerticalBanners/2.jpg">
+    </div>
+    <div class="h_iframe">
+        <iframe id="my_iframe" src="/index.html" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+</body>
+
+<style>
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    .wrapper {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        background: lightgray;
+    }
+
+    .h_iframe {
+        position: relative;
+    }
+
+    .h_iframe iframe {
+        -webkit-transform-origin: top left;
+
+    }
+
+    .mySlides{
+        position: relative;
+        width: 100%;
+        height: 1320px;
+        object-fit: cover;
+    }
+
+
+</style>
+
+<script>
+    var queryDict = {};
+    location.search.substr(1).split("&").forEach(function (item) { queryDict[item.split("=")[0]] = item.split("=")[1] });
+    //var url = '/index.html?CustomerID=' + (queryDict.CustomerID || 1);
+    var url = new URL(window.location.href);
+    var serialNum = url.searchParams.get('SerialNumber');
+    url = 'index.html?SerialNumber='+serialNum;
+    document.getElementById('my_iframe').src = url;
+
+    getScale = function () {
+        var element = document.getElementById('my_iframe');
+        if (window.innerWidth >= 1920 && window.innerHeight >= 1080) {
+            element.style.width = '100%';
+            element.style.height = '100%';
+            element.style.transform = 'scale(1)';
+        }
+        else {
+            element.style.width = '1920px';
+            element.style.height = '1080px';
+            if (window.innerWidth / 1920 > window.innerHeight / 1080)
+                element.style.transform = 'scale(' + window.innerHeight / 1080 + ')';
+            else
+                element.style.transform = 'scale(' + window.innerWidth / 1920 + ')';
+        }
+    }
+    window.addEventListener("resize", function () {
+        getScale();
+    });
+    getScale();
+
+
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}
+        x[myIndex-1].style.display = "block";
+        setTimeout(carousel, 9000);
+    }
+
+</script>
+</html>
