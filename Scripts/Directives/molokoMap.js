@@ -373,7 +373,7 @@
                                         });
                                         break;
                                     case 'toilet':
-                                        category = mapObject.Organization.Categories[0];
+                                        category = mapObject.Organization.Categories.find(j => j.ServiceCategoryType != null);
                                         marker = L.marker(position, {
                                             icon: L.divIcon({
                                                 className: 'marker',
@@ -388,7 +388,7 @@
                                         marker._mapObject = mapObject.MapObject;
                                         break;
                                     case 'serviceObject':
-                                        category = mapObject.Organization.Categories[0];
+                                        category = mapObject.Organization.Categories.find(j => j.ServiceCategoryType != null);
                                         marker = L.marker(position, {
                                             icon: L.divIcon({
                                                 className: 'marker',
@@ -518,6 +518,7 @@
                     $scope.getCount = function (floorID) {
                         return $scope.selectedOrganizations === undefined ? 0 : $linq.Enumerable().From($scope.selectedOrganizations).SelectMany(i => i.MapObjects).Count(i => i.FloorID == floorID);
                     };
+
                     function getOptimalPath(array) {
                         let paths = {};
                         let mapObject = $rootScope.currentTerminal;//.TerminalMapObject[0].MapObject;

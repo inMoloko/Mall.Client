@@ -9,7 +9,7 @@
     }
     app.constant('settings', {
         checkApiUrl:'http://lk.inmoloko.ru/api',
-        webApiBaseUrl: 'http://localhost:5555/api',
+        webApiBaseUrl: 'http://lk.inmoloko.ru/api',
         authUrl: 'http://lk.inmoloko.ru',
         webApiODataUrl: 'http://localhost:5555/odata',
         defaultPage: '/Monitoring',
