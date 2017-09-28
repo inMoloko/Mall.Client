@@ -27,7 +27,11 @@
                 jElement.on('focusout', function () {
                     refresh();
                 });
-                jElement.on('focus, click', event);
+                jElement.on('focus, click', function () {
+                    jsKeyboard.currentElement = jElement;
+                    jsKeyboard.currentElementCursorPosition = jElement.val().length || 0;
+                    jsKeyboard.show();
+                });
                 jElement.on('show', function () {
                     refresh(5000);
                 });

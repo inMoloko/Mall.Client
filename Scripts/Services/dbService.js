@@ -6,6 +6,7 @@
  */
 (function () {
     'use strict';
+
     class DbService {
         constructor($q, $http, settings, $linq) {
             this.$q = $q;
@@ -16,7 +17,22 @@
 
         getData() {
             let self = this;
-            return self.$http.get(self.settings.dbPath, {cache: true}).then(i => i.data);
+            return self.$http.get(self.settings.dbPath, {cache: true}).then(i => {
+                if (self.cache) {
+                    return self.cache;
+                } else {
+                    self.cache = i.data;
+                    self.$linq.Enumerable().From(self.cache.Organizations).ForEach(organization => {
+                        organization.Value.FloorsList = self.$linq.Enumerable()
+                            .From(organization.Value.Floors).Select(i => i.Number).Distinct().ToArray().join(',');
+                        organization.Value.CategoriesList = self.$linq.Enumerable()
+                            .From(organization.Value.Categories).Select(i=>i.Name).Take(6).ToArray().join(', ');
+
+                    });
+
+                    return self.cache;
+                }
+            });
         }
 
         getOrganizationTypeSync(data, organization) {
@@ -141,6 +157,7 @@
             return self.getData().then(data => data.SystemSettings.TERMINAL_MENU_ITEMS);
         }
     }
+
     angular
         .module('app')
         .service('dbService', DbService);

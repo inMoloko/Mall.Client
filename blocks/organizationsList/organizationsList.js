@@ -14,11 +14,12 @@
         // }
         filter();
         function filter() {
+            // console.time('search');
             dbService.organizationGetFilter($stateParams.Filter, $stateParams.CategoryID).then(result => {
                 $rootScope.otherCurrentOrganizations = result.otherCurrentOrganizations;
                 $rootScope.currentOrganizations = result.currentOrganizations;
                 $rootScope.searchText = $stateParams.Filter;
-
+                // console.timeEnd('search');
             });
         };
         $scope.settings = settings;
@@ -89,8 +90,7 @@
                 if (toState.name === 'navigation.searchResult' && fromState.name === 'navigation.searchResult.organization') {
                     $rootScope.currentOrganization = undefined;
                     filter();
-                }
-                ;
+                } ;
             });
         $scope.$on("$destroy", function () {
             stateChangeHandler();
