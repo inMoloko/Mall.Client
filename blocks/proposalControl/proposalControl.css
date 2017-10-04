@@ -86,6 +86,7 @@
     padding-right:16px;
     /*padding-left: 10px;overflow: auto;*/
     font-size:14px;
+    overflow: auto;
 }
 .colorTheme_black .organizationProposalInfoBlock__description,
 .colorTheme_blackLite .organizationProposalInfoBlock__description{    

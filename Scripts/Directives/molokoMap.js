@@ -474,42 +474,7 @@
 
                         //Наносим организации
                         $scope.options.zoom = map.getZoom();
-                        // i.Organizations.forEach(item => {
-                        //     item.OrganizationMapObject.forEach(mapObject => {
-                        //         if (mapObject.MapObject.ParamsAsJson && mapObject.MapObject.ParamsAsJson.SignPointRadius) {
-                        //             var markerText = L.Marker.zoomingMarker(mapObject.MapObject);
-                        //             markerText.on("click", function (e) {
-                        //                 $rootScope.currentOrganization = item;
-                        //                 clickToOrganization(item.OrganizationID);
-                        //             });
-                        //             if ($scope.mapFloors[mapObject.MapObject.FloorID])
-                        //                 $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(markerText);
-                        //         }
-                        //         else {
-                        //             var position = map.unproject([mapObject.MapObject.Longitude, mapObject.MapObject.Latitude], map.getMaxZoom());
-                        //             let markerIcon = getIcon(item, false, mapObject.MapObject.MapObjectID);
-                        //             let marker = L.marker(position, {
-                        //                 icon: markerIcon,
-                        //                 title: item.Name,
-                        //                 iconSize: [16, 16],
-                        //                 zIndexOffset: getZIndex(item)
-                        //             });
-                        //             if (mapObject.MapObject.FloorID && $scope.mapFloors[mapObject.MapObject.FloorID]) {
-                        //                 $scope.mapFloors[mapObject.MapObject.FloorID].layerGroup.addLayer(marker, {pane: 'tilePane'});
-                        //                 if (!$scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID])
-                        //                     $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID] = [];
-                        //
-                        //                 $scope.mapFloors[mapObject.MapObject.FloorID].floorMapObjects[item.OrganizationID].push({
-                        //                     position: position,
-                        //                     mapObjectID: mapObject.MapObject.MapObjectID
-                        //                 });
-                        //             }
-                        //         }
-                        //         $scope.mapObjects[mapObject.MapObject.MapObjectID] = mapObject.MapObject;
-                        //     });
-                        //
-                        //     $scope.mapOrganizations[item.OrganizationID] = item;
-                        // });
+
                         //Устанавливаем терминал
                         $scope.setFloor($rootScope.currentTerminal.FloorID);
 

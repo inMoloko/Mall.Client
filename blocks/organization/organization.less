@@ -272,8 +272,8 @@
   bottom: 0px;
   position: absolute;
   z-index: 5;
-  right: 0px;
-  left: 30px;
+  right: 0;
+  left: 0;
 }
 
 .organization__sendPathButton_top {
@@ -288,9 +288,13 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   //transition: 0.3s top linear;
   animation: fall-down 0.8s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .child {
     border-bottom: dashed 1px;
     padding-bottom: 2px;
+    font-size: 18px;
   }
 }
 
@@ -311,7 +315,19 @@
   background: #006bc2;
   width: 100%;
   height: 100%;
-  display: flex
+  display: flex;
+  justify-content: center;
+}
+
+.sendPathBlock__item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.sendPathBlock__item button {
+  width: 60px;
+  height:60px;
+  border-radius:50%;
+  margin-top:10px;
 }
 
 .sendPathBlock__selectedSection {

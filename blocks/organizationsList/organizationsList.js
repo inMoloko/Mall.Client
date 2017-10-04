@@ -12,7 +12,6 @@
         // else {
         //     filter();
         // }
-        $scope.countTiles = $state.current.name === 'searchResultFull.result' ? 8 : 2;
 
         filter();
 

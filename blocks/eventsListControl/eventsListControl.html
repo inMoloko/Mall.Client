@@ -9,13 +9,10 @@
                 <!--moloko-image-api="item.EventID" url="/Event/:id/Logo"-->
             <!--</div>-->
 
-            <div class="proposalsListControlListElement__infoBlock">
-                <div class="proposalsListControlListElement__name">
-                    {{item.Name}}
+            <div class="proposalsListControlListElement__infoBlock" >
+                <div class="proposalsListControlListElement__name" ng-bind="item.Name">
                 </div>
-                <div class="proposalsListControlListElement__summary">
-                    {{item.Summary}}
-                </div>
+                <div class="proposalsListControlListElement__summary" ng-bind="item.Summary"></div>
                 <div class="proposalsListControlListElement__remainder" ng-if="item.DateEnd">
                     Осталось {{item.DateEnd|remainDays}}
                 </div>

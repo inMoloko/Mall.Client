@@ -1,12 +1,4 @@
 <div class="proposalControl" >
-    <!--<div style="background:transparent;position:absolute;height:100%;">-->
-        <!--<div class="" style="height: 100%;-->
-                <!--width: 100%;-->
-                <!--background: transparent;-->
-                <!--display: flex;-->
-                <!--flex-direction: column;-->
-                <!--align-content: space-around;">-->
-            <!--<div style="background:transparent;height: 100%;width: 100%;">-->
                 <div style="height: 100%;display: flex;">
                     <div class="organizationProposal__imageBlock" >
                         <div style="z-index: 5;
@@ -32,66 +24,50 @@
                         <button ui-sref="navigation.searchResult.organization({OrganizationID:item.Organization.OrganizationID})" class="proposalControl__map-btn">
                             <i class="iconMall-iconMap"></i>
                             <span>На карте</span>
-                            <!--<div style="display:inline-block;height:60px;">-->
-                                <!--<div class="parent" style="width: 40px;height: 60px;">-->
-                                    <!--<div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">-->
-                                        <!--<i class="iconMall-iconMap" style="font-size: 2em;color:white"></i>-->
-                                    <!--</div>-->
-                                    <!--<div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div style="display:inline-block;">-->
-                                <!--<div class="parent" style="width: 100%;height: 100%;">-->
-                                    <!--<div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle; font-size:18px;">-->
-                                        <!--На карте-->
-                                    <!--</div>-->
-                                    <!--<div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
-                                <!--</div>-->
-                            <!--</div>-->
                         </button>
                     </div>
                     
                     <div class="organizationProposal__infoBlock" style="display: flex;flex-direction: column;">
-                        <div style="background: transparent;">
-                            <div style="display:flex;flex-direction: row;justify-content: space-between;">
-                                <div style="flex-grow: 1;text-transform:uppercase">
-                                    <div class="parent " style="width: 100%;height: 100%;">
-                                        <div class="child organizationProposalInfoBlock__name" >
+                        <!--<div style="background: transparent;">-->
+                            <!--<div style="display:flex;flex-direction: row;justify-content: space-between;">-->
+                                <!--<div style="flex-grow: 1;text-transform:uppercase">-->
+                                    <!--<div class="parent " style="width: 100%;height: 100%;">-->
+                                        <div class="child organizationProposalInfoBlock__name" style="text-transform:uppercase">
                                             {{item.Name}}
                                         </div>
-                                        <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-                        <div ng-if="item.DateEnd" class="organizationProposalInfoBlock__remainder" style="margin-bottom:5px;font-size: 20px;font-weight:600;">
-                            Осталось {{item.DateEnd|remainDays}}
-                        </div>
-                            <div style="background: transparent;height: 100%;overflow: auto;" >
+                                        <!--<div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>    -->
+                        <!--</div>-->
+                        <!--<div ng-if="item.DateEnd" class="organizationProposalInfoBlock__remainder" style="margin-bottom:5px;font-size: 20px;font-weight:600;">-->
+                            <!--Осталось {{item.DateEnd|remainDays}}-->
+                        <!--</div>-->
+                            <div style="overflow: auto;" >
                                 <div class="organizationProposalInfoBlock__description" >
                                     {{item.Description}}
                                 </div>
                             </div>
-                            <div ui-sref="navigation.searchResult.organization({OrganizationID:item.Organization.OrganizationID})"  class="organizationProposalInfoBlock__toMap" style="background: transparent;height: 150px;overflow: auto;">
-                                <button  style="height: 60px;border: 0;border-radius: 4px;background: black;color: #ffffff;position:absolute; bottom:10px; left:10px;">
-                                    <div style="display:inline-block;height:60px;">
-                                        <div class="parent" style="width: 50px;height: 60px;">
-                                            <div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">
-                                                <i class="iconMall-iconMap" style="font-size: 3em;color:white"></i>
-                                            </div>
-                                            <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
-                                        </div>
-                                    </div>
-                                    <div style="display:inline-block;">
-                                        <div class="parent" style="width: 100%;height: 100%;">
-                                            <div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle; font-size:18px;">
-                                                НА КАРТЕ
-                                            </div>
-                                            <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
+                            <!--<div ui-sref="navigation.searchResult.organization({OrganizationID:item.Organization.OrganizationID})"  class="organizationProposalInfoBlock__toMap" style="background: transparent;height: 150px;overflow: auto;">-->
+                                <!--<button  style="height: 60px;border: 0;border-radius: 4px;background: black;color: #ffffff;position:absolute; bottom:10px; left:10px;">-->
+                                    <!--<div style="display:inline-block;height:60px;">-->
+                                        <!--<div class="parent" style="width: 50px;height: 60px;">-->
+                                            <!--<div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">-->
+                                                <!--<i class="iconMall-iconMap" style="font-size: 3em;color:white"></i>-->
+                                            <!--</div>-->
+                                            <!--<div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div style="display:inline-block;">-->
+                                        <!--<div class="parent" style="width: 100%;height: 100%;">-->
+                                            <!--<div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle; font-size:18px;">-->
+                                                <!--НА КАРТЕ-->
+                                            <!--</div>-->
+                                            <!--<div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</button>-->
+                            <!--</div>-->
                     </div>
                 </div>
             <!--</div>-->
