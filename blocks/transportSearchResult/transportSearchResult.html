@@ -1,7 +1,7 @@
 <div class="appContainer__headBlock appContainer__transportHeadBlock search-block">
     <button class="search-block__home" ui-sref="navigation.mainMenu">
         <!--<img src="content/images/iconHome.png" style="max-width: 100%;max-height: 100%;" />-->
-        <i class="iconMall-iconHome headControl__iconHome" style=""></i>
+        <i class="iconMall-iconHome headControl__iconHome" ></i>
     </button>
     <div class="search-block__filter-container">
         <input class="search-block__filter" type="text" placeholder="Химки, Планерная..."
@@ -21,7 +21,7 @@
                                                                                               ng-bind="items.length"></span>
             </div>
             <!--<button class="listToolBar__closeButton" ui-sref=".closedResult">-->
-                <!--<i class="iconMall-iconArrowUp closeButton_icon" style=""></i>-->
+                <!--<i class="iconMall-iconArrowUp closeButton_icon" ></i>-->
             <!--</button>-->
             <button class="listToolBar__closeButton" ui-sref="navigation.mainMenu">
                 <i class="iconMall-iconClose closeButton_icon"></i>
@@ -44,13 +44,13 @@
                 </div>
                 <div class="" style="background:transparent;
                             left: 180px;padding-left: 20px;padding-right: 16px;display:flex;flex-direction:column;flex:1">
-                    <div class="transportListItemInfoBlock__name" style="">
+                    <div class="transportListItemInfoBlock__name" >
                         {{item.TransportType.Name}} № {{item.Name}}
                     </div>
                     <div class="transportListItemInfoBlock__description">
                         {{item.Description}}
                     </div>
-                    <div class="transportListItemInfoBlock__price" style="" ng-show="item.Price">
+                    <div class="transportListItemInfoBlock__price"  ng-show="item.Price">
                         Стоимость проезда: {{item.Price}}
                     </div>
                 </div>

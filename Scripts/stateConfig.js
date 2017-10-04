@@ -165,7 +165,7 @@
                 url: "/result/?CategoryID&Filter&OrganizationType",
                 views: {
                     'searchResultFull': {
-                        templateUrl: 'blocks/organizationsList/organizationsList.html',
+                        templateUrl: 'blocks/organizationsListFull/organizationsListFull.html',
                         controller: 'organizationsListController'
                     }
                 },

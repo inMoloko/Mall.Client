@@ -14,8 +14,6 @@
             // //TODO
             if (settings.autoReset === false)
                 return;
-            if ($rootScope.organizations == undefined)
-                location.reload();
             $("input, textarea").focusout();
             if ($rootScope.banners.length > 0)
                 $state.go('screensaver', {});
@@ -23,6 +21,9 @@
                 $state.go('navigation.mainMenu', {});
                 Idle.watch();
             }
+            $timeout(function () {
+                location.reload();
+            });
         });
 
         $scope.formatThemesMain = [];

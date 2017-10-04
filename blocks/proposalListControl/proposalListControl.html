@@ -1,5 +1,5 @@
-<div class="proposalsListControl" style="">
-    <ul class="list-group proposalsListControl__listBlock" style="" >
+<div class="proposalsListControl" >
+    <ul class="list-group proposalsListControl__listBlock"  >
         <li  class="list-group-item proposalsListControlListBlock__listElement" ng-class="{true:'selected', false:''}[item.ProposalID===selectedProposalID]"
              ui-sref="proposals.searchResult.proposal({ProposalID:item.ProposalID})" ng-repeat="item in items" ng-click="select(item.ProposalID)">            
             <div class="proposalsListControlListElement__imageBlock" style="background: #{{item.LogoBaseColor.substring(3)}};">

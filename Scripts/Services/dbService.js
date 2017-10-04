@@ -27,7 +27,7 @@
                             .From(organization.Value.Floors).Select(i => i.Number).Distinct().ToArray().join(',');
                         organization.Value.CategoriesList = self.$linq.Enumerable()
                             .From(organization.Value.Categories).Select(i=>i.Name).Take(6).ToArray().join(', ');
-
+                        organization.Value.ImageUrl =`Organizations/${organization.Value.OrganizationID}_Logo.${organization.Value.LogoExtension}`;
                     });
 
                     return self.cache;

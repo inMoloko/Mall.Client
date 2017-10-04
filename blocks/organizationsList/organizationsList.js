@@ -12,7 +12,10 @@
         // else {
         //     filter();
         // }
+        $scope.countTiles = $state.current.name === 'searchResultFull.result' ? 8 : 2;
+
         filter();
+
         function filter() {
             // console.time('search');
             dbService.organizationGetFilter($stateParams.Filter, $stateParams.CategoryID).then(result => {
@@ -23,40 +26,6 @@
             });
         };
         $scope.settings = settings;
-        // function filter() {
-        //     let categoryID = $stateParams.CategoryID;
-        //     $scope.searchText = $stateParams.Filter == undefined ? "" : $stateParams.Filter.toLowerCase();
-        //     var tmp = $rootScope.organizations;
-        //     var tmpCat = $rootScope.categories;
-        //     if ($scope.searchText) {
-        //         var tmpCatIds = [];
-        //         angular.forEach(tmpCat, function (item) {
-        //             if (item.Name && item.Name.toLowerCase().includes($scope.searchText))
-        //                 tmpCatIds.push(item.CategoryID);
-        //         });
-        //
-        //         let ln = $linq.Enumerable().From(tmpCatIds);
-        //         tmp = tmp.filter(item => {
-        //             return (item.Name && item.Name.toLowerCase().includes($scope.searchText)) || (item.KeyWords && item.KeyWords.toLowerCase().includes($scope.searchText)) || ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
-        //         });
-        //
-        //     }
-        //     $rootScope.otherCurrentOrganizations = tmp;
-        //
-        //     if (categoryID && categoryID != -1) {
-        //         categoryID = parseInt(categoryID);
-        //
-        //         let cats = $rootScope.categories.find(i => i.CategoryID == categoryID).ChildrenIds;
-        //         cats.push(categoryID);
-        //         let ln = $linq.Enumerable().From(cats);
-        //         tmp = tmp.filter(item => {
-        //             return ln.Intersect(item.CategoryOrganization.map(i => i.CategoryID)).Count() !== 0;
-        //         });
-        //     }
-        //
-        //     $rootScope.currentOrganizations = tmp;
-        //     //Нечеткий поиск на сервере
-        // };
 
         $scope.home = function () {
             $state.go('navigation.mainMenu');
@@ -68,13 +37,7 @@
                 CategoryID: $stateParams.CategoryID
             }, {inherit: true});
         };
-        // $scope.megacard = function (item) {
-        //     // CategoryOrganization[0].CategoryID
-        //     return item.CategoryOrganization.map(i => i.CategoryID).includes(1704);
-        // };
-        //$scope.hide = function () {
-        //    $state.go("navigation.closedResult", { CategoryID: $stateParams.CategoryID, Filter: $stateParams.Filter, OrganizationType: $stateParams.OrganizationType });
-        //};
+
         $scope.hide = function () {
             $rootScope.currentStateName = $state.current.name;
             $rootScope.currentStateParam = $state.params;
@@ -90,7 +53,8 @@
                 if (toState.name === 'navigation.searchResult' && fromState.name === 'navigation.searchResult.organization') {
                     $rootScope.currentOrganization = undefined;
                     filter();
-                } ;
+                }
+                ;
             });
         $scope.$on("$destroy", function () {
             stateChangeHandler();
@@ -103,7 +67,7 @@
             if (!item)
                 return;
             return $linq.Enumerable()
-                .From(item.Floors).Select(i=>i.Number).Distinct().ToArray().join(',');
+                .From(item.Floors).Select(i => i.Number).Distinct().ToArray().join(',');
             // return $linq.Enumerable()
             //     .From(item.OrganizationMapObject)
             //     .Where(i => $rootScope.floorsDic[i.MapObject.FloorID])

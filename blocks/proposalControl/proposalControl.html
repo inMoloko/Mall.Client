@@ -1,56 +1,53 @@
-<div class="proposalControl" style="">
-    <div style="background:transparent;width:100%;  height:100%;position: absolute;height:100%;">
-        <div class="" style="height: 100%;
-                width: 100%;
-                background: transparent;
-                display: flex;
-                flex-direction: column;
-                align-content: space-around;">
-            <div style="background:transparent;height: 100%;width: 100%;">
-                <div style="background:transparent;width: 100%;height: 100%;display: flex;">
-                    <div class="organizationProposal__imageBlock" style="">
-                        <div style="background: transparent;
-                            z-index: 5;
-                            width: 100%;
+<div class="proposalControl" >
+    <!--<div style="background:transparent;position:absolute;height:100%;">-->
+        <!--<div class="" style="height: 100%;-->
+                <!--width: 100%;-->
+                <!--background: transparent;-->
+                <!--display: flex;-->
+                <!--flex-direction: column;-->
+                <!--align-content: space-around;">-->
+            <!--<div style="background:transparent;height: 100%;width: 100%;">-->
+                <div style="height: 100%;display: flex;">
+                    <div class="organizationProposal__imageBlock" >
+                        <div style="z-index: 5;
                             padding:10px;">
-                            <div style="height: 100%;width: 100%;background:transparent">
-                                <div class="text-center" style="height: 100%;
-                                    background: transparent;
-                                    width: 100%;">
-                                    <img  class="img-responsive" alt="{{item.Name}}"
+                            <!--<div style="height: 100%;background:transparent">-->
+                                <!--<div class="text-center" style="height: 100%;-->
+                                    <!--background: transparent;">-->
+                                    <img alt="{{item.Name}}"
                                          file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension||'jpg'}}"
                                           default="Content/images/mega-logo.jpg"
                                          style='height: 100%; width: 100%; object-fit: cover'>
                                     <!--moloko-image-source="item.Logo"-->
-                                </div>
-                            </div>
+                                <!--</div>-->
+                            <!--</div>-->
                         </div>
-                        <div ng-if="item.DateEnd" style="background: transparent;
-                                z-index: 5;
-                                width: 100%;
+                        <div ng-if="item.DateEnd" style="z-index: 5;
                                 top:46%; text-align:center;
                                 font-weight:600;
                                 font-size:20px;">
                             Осталось {{item.DateEnd|remainDays}}
                         </div>
                         
-                        <button ui-sref="navigation.searchResult.organization({OrganizationID:item.Organization.OrganizationID})" style="height: 60px;border: 0;border-radius: 4px;background: #28303b;color: #ffffff;position:absolute; bottom:10px; left:10px;">
-                            <div style="display:inline-block;height:60px;">
-                                <div class="parent" style="width: 40px;height: 60px;">
-                                    <div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">
-                                        <i class="iconMall-iconMap" style="font-size: 2em;color:white"></i>
-                                    </div>
-                                    <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
-                                </div>
-                            </div>
-                            <div style="display:inline-block;">
-                                <div class="parent" style="width: 100%;height: 100%;">
-                                    <div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle; font-size:18px;">
-                                        На карте
-                                    </div>
-                                    <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
-                                </div>
-                            </div>
+                        <button ui-sref="navigation.searchResult.organization({OrganizationID:item.Organization.OrganizationID})" class="proposalControl__map-btn">
+                            <i class="iconMall-iconMap"></i>
+                            <span>На карте</span>
+                            <!--<div style="display:inline-block;height:60px;">-->
+                                <!--<div class="parent" style="width: 40px;height: 60px;">-->
+                                    <!--<div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">-->
+                                        <!--<i class="iconMall-iconMap" style="font-size: 2em;color:white"></i>-->
+                                    <!--</div>-->
+                                    <!--<div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--<div style="display:inline-block;">-->
+                                <!--<div class="parent" style="width: 100%;height: 100%;">-->
+                                    <!--<div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle; font-size:18px;">-->
+                                        <!--На карте-->
+                                    <!--</div>-->
+                                    <!--<div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>-->
+                                <!--</div>-->
+                            <!--</div>-->
                         </button>
                     </div>
                     
@@ -59,7 +56,7 @@
                             <div style="display:flex;flex-direction: row;justify-content: space-between;">
                                 <div style="flex-grow: 1;text-transform:uppercase">
                                     <div class="parent " style="width: 100%;height: 100%;">
-                                        <div class="child organizationProposalInfoBlock__name" style="">
+                                        <div class="child organizationProposalInfoBlock__name" >
                                             {{item.Name}}
                                         </div>
                                         <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
@@ -71,7 +68,7 @@
                             Осталось {{item.DateEnd|remainDays}}
                         </div>
                             <div style="background: transparent;height: 100%;overflow: auto;" >
-                                <div class="organizationProposalInfoBlock__description" style="">
+                                <div class="organizationProposalInfoBlock__description" >
                                     {{item.Description}}
                                 </div>
                             </div>
@@ -97,15 +94,14 @@
                             </div>
                     </div>
                 </div>
-            </div>
+            <!--</div>-->
 
 
-        </div>
-    </div>
-    
+        <!--</div>-->
+    <!--</div>-->
 </div>
 
-<div class="proposalControl vertical" style="">
+<div class="proposalControl vertical" >
     <div style="background:transparent;width:100%;  height:100%;position: absolute;height:100%;">
         <div class="" style="height: 100%;
                 width: 100%;

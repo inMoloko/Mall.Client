@@ -1,41 +1,41 @@
-<div class="organizationProposalsList" style="">
-    <div class="organizationProposalsList__headBlock" style="">
-        <div class="organizationProposalsListHeadBlock__titleBlock" style="">
-            <div class="parent organizationProposalsListTitleBlock__title" style="">
+<div class="organizationProposalsList" >
+    <div class="organizationProposalsList__headBlock" >
+        <div class="organizationProposalsListHeadBlock__titleBlock" >
+            <div class="parent organizationProposalsListTitleBlock__title" >
                 <div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">
                     АКЦИИ и НОВОСТИ в {{currentOrganization.Name}}
                 </div>
                 <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
             </div>
         </div>
-        <div class="organizationProposalsListHeadBlock__closeBlock" ui-sref="navigation.searchResult.organization" style="">
-            <button class="organizationProposalsListCloseBlock__button" style="">
-                <i class="iconMall-iconClose organizationProposalsListCloseButton__icon" style=""></i>
+        <div class="organizationProposalsListHeadBlock__closeBlock" ui-sref="navigation.searchResult.organization" >
+            <button class="organizationProposalsListCloseBlock__button" >
+                <i class="iconMall-iconClose organizationProposalsListCloseButton__icon" ></i>
             </button>
         </div>
     </div>
     <div class="organizationProposalsList__listBlock">
-        <ul class="list-group organizationProposalsListBlock__list" style="" >
+        <ul class="list-group organizationProposalsListBlock__list"  >
             <li class="list-group-item organizationProposalsListBlock__listElement" style="min-height:165px;" ng-repeat="item in items"
                 ui-sref=".proposal({ProposalID:item.ProposalID})">
 
-                <div class="organizationProposalsListElement_logoBlock" style="">
-                    <div class="text-center organizationProposalsListElement_logo" style="">
+                <div class="organizationProposalsListElement_logoBlock" >
+                    <div class="text-center organizationProposalsListElement_logo" >
                         <img class="img-responsive organizationProposalsListElement_image"
                              default="Content/images/mega-logo.jpg"
                              alt="{{item.Name}}"
                              file-system-image="Proposals/{{item.ProposalID+'_Logo.'+item.LogoExtension}}">
                     </div>
                 </div>
-                <div class="organizationProposalsListElement_infoBlock" style="">
-                    <div class="organizationProposalsListElement_info" style="">
+                <div class="organizationProposalsListElement_infoBlock" >
+                    <div class="organizationProposalsListElement_info" >
                         <!--<div class="" style="background:transparent;position: relative;width:100%;height: 15%;font-family: Open Sans;font-size: 20px;">
                             АКЦИЯ
                         </div>-->
-                        <div class="organizationProposalsListElement_name" style="">
+                        <div class="organizationProposalsListElement_name" >
                             {{item.Name}}
                         </div>
-                        <div class="organizationProposalsListElement_summary" style="">
+                        <div class="organizationProposalsListElement_summary" >
                             {{item.Summary}}
                         </div>
                         <div ng-if="item.DateEnd" class="organizationProposalsListElement_remainder">
@@ -48,24 +48,24 @@
     </div>
 </div>
 
-<div class="organizationProposalsList vertical" style="">
-    <div class="organizationProposalsList__headBlock" style="">
-        <div class="organizationProposalsListHeadBlock__titleBlock" style="">
-            <div class="parent organizationProposalsListTitleBlock__title" style="">
+<div class="organizationProposalsList vertical" >
+    <div class="organizationProposalsList__headBlock" >
+        <div class="organizationProposalsListHeadBlock__titleBlock" >
+            <div class="parent organizationProposalsListTitleBlock__title" >
                 <div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">
                     АКЦИИ и НОВОСТИ в {{currentOrganization.Name}}
                 </div>
                 <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
             </div>
         </div>
-        <div class="organizationProposalsListHeadBlock__closeBlock" ng-click="back()" style="">
-            <button class="organizationProposalsListCloseBlock__button" style="">
-                <i class="iconMall-iconClose organizationProposalsListCloseButton__icon" style=""></i>
+        <div class="organizationProposalsListHeadBlock__closeBlock" ng-click="back()" >
+            <button class="organizationProposalsListCloseBlock__button" >
+                <i class="iconMall-iconClose organizationProposalsListCloseButton__icon" ></i>
             </button>
         </div>
         <div class="organizationsHeadBlock__closeButtonBlock" ng-click="hide()" style="right:60px;">
-            <button class="closeButtonBlock_closeButton" style="">
-                <i class="iconMall-iconArrowUp closeButton_icon" style=""></i>
+            <button class="closeButtonBlock_closeButton" >
+                <i class="iconMall-iconArrowUp closeButton_icon" ></i>
             </button>
         </div>
     </div>

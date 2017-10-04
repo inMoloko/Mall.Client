@@ -20,17 +20,17 @@
             </button>
         </div>
     </div>
-    <ul class="list-group organizationsList__organizationsSearchResultBlock" vs-repeat>
+    <ul class="list-group organizationsList__organizationsSearchResultBlock">
         <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem"
             route-class="{'searchResultFull.result':'searchResultFull'}"
             ng-repeat="item in $root.currentOrganizations track by item.OrganizationID"
             ng-click="select(item)">
-            <div>
-                <div class="organizationsSearchResultItem__logoBlock">
-                     <!--style="background: #{{item.LogoBaseColor.substring(3)}};">-->
+            <div style="position: relative;">
+                <div class="organizationsSearchResultItem__logoBlock"
+                     style="background: #{{item.LogoBaseColor.substring(3)}};">
                     <img class="logoBlock__logo" alt="{{::item.Organization.Name}}"
                          default="Content/images/mega-logo.jpg"
-                         file-system-image="{{item.ImageUrl}}">
+                         file-system-image="Organizations/{{item.OrganizationID+'_Logo.'+item.LogoExtension}}">
                     <div ng-if="item.megacard"
                          style="width:59px;height:30px;background:white;position:absolute;bottom:0;right:0;">
                         <i class="iconMall-iconMegacard logoBlock__icon"
@@ -39,7 +39,9 @@
                 </div>
 
                 <div class="organizationsSearchResultItem__infoBlock" >
-                    <div class="organizationsSearchResultItem__nameBlock" ng-bind="item.Name"></div>
+                    <div class="organizationsSearchResultItem__nameBlock" >
+                        {{::item.Name}}
+                    </div>
                     <div class="organizationsSearchResultItem__categoryBlock" ng-bind="item.CategoriesList">
                         <!--{{::item.Categories|limitTo:6|joinBy:', ':'Name'}}-->
                     </div>
@@ -76,7 +78,7 @@
             Возможно, Вы искали следующее:
         </div>
 
-        <ul style="top:310px;" class="list-group organizationsList__organizationsSearchResultBlock" vs-repeat>
+        <ul style="top:310px;" class="list-group organizationsList__organizationsSearchResultBlock">
             <li class="list-group-item organizationsSearchResultBlock__organizationsSearchResultItem"
                 route-class="{'searchResultFull.result':'searchResultFull'}"
                 ng-repeat="item in $root.otherCurrentOrganizations track by item.OrganizationID"

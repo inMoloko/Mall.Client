@@ -24,7 +24,7 @@
         serialNumber:queryDict.SerialNumber,
         token:queryDict.Token,
         displayKeyboard:true,
-        autoReset:true,
+        autoReset:false,
         resourceFolder:'Content/Backup',
         dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
         //dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,

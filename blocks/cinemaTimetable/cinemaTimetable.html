@@ -1,40 +1,40 @@
-﻿<div class="cinemaTimetable" style="">
-    <div class="cinemaTimetable__headBlock" style="">
-        <div class="cinemaTimetableHeadBlock__titleBlock" style="">
-            <div class="parent cinemaTimetableTitleBlock__title" style="">
+﻿<div class="cinemaTimetable" >
+    <div class="cinemaTimetable__headBlock" >
+        <div class="cinemaTimetableHeadBlock__titleBlock" >
+            <div class="parent cinemaTimetableTitleBlock__title" >
                 <div class="child" style="display: -moz-inline-box;display: inline-block;vertical-align: middle;">
                     Расписание в {{currentOrganization.Name}}
                 </div>
                 <div class="helper" style="display: inline-block;height: 100%;width: 0px;vertical-align: middle;"></div>
             </div>
         </div>
-        <div class="cinemaTimetableHeadBlock__closeBlock" ui-sref="navigation.searchResult.organization" style="">
-            <button class="cinemaTimetableCloseBlock__button" style="">
-                <i class="iconMall-iconClose cinemaTimetableCloseButton__icon" style=""></i>
+        <div class="cinemaTimetableHeadBlock__closeBlock" ui-sref="navigation.searchResult.organization" >
+            <button class="cinemaTimetableCloseBlock__button" >
+                <i class="iconMall-iconClose cinemaTimetableCloseButton__icon" ></i>
             </button>
         </div>
     </div>
     <div class="cinemaTimetable__listBlock">
-        <ul class="list-group cinemaTimetableBlock__list" style="" >
+        <ul class="list-group cinemaTimetableBlock__list"  >
             <li class="list-group-item cinemaTimetableBlock__listElement" style="min-height:465px;" ng-repeat="item in cinemaTimetable"
                 ui-sref=".proposal({ProposalID:item.ProposalID})">
 
-                <div class="cinemaTimetableElement_logoBlock" style="">
-                    <div class="text-center cinemaTimetableElement_logo" style="">
+                <div class="cinemaTimetableElement_logoBlock" >
+                    <div class="text-center cinemaTimetableElement_logo" >
                         <img class="img-responsive cinemaTimetableElement_image" moloko-image-api="item.MovieID" url="/Movie/:id/Poster" alt="{{item.Name}}"
                             style=''>
                     </div>
                 </div>
-                <div class="cinemaTimetableElement_infoBlock" style="">
-                    <div class="cinemaTimetableElement_info" style="">
+                <div class="cinemaTimetableElement_infoBlock" >
+                    <div class="cinemaTimetableElement_info" >
                         <!--<div class="" style="background:transparent;position: relative;width:100%;height: 15%;font-family: Open Sans;font-size: 20px;">
                             АКЦИЯ
                         </div>-->
-                        <div class="cinemaTimetableElement_name" style="">
+                        <div class="cinemaTimetableElement_name" >
                             {{item.Title}}
                         </div>
                         <div class="cinemaTimetableElement_ageLimit">{{item.AgeLimit}}+</div>
-                        <div class="cinemaTimetableElement_genre" style="" ng-bind="::item.Genre">
+                        <div class="cinemaTimetableElement_genre"  ng-bind="::item.Genre">
                         </div>
                         <div class="cinemaTimetableElement_summary"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjxzdmcgaGVpZ2h0PSIyMHB4IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyMCAyMCIgd2lkdGg9IjIwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48dGl0bGUvPjxkZXNjLz48ZGVmcy8+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIiBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSI+PGcgZmlsbD0iIzAwMDAwMCIgZmlsbC1vcGFjaXR5PSIwLjkiIGlkPSJJY29ucy1EZXZpY2UiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00NC4wMDAwMDAsIDAuMDAwMDAwKSI+PGcgaWQ9ImFjY2Vzcy10aW1lIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NC4wMDAwMDAsIDAuMDAwMDAwKSI+PHBhdGggZD0iTTEwLDAgQzQuNSwwIDAsNC41IDAsMTAgQzAsMTUuNSA0LjUsMjAgMTAsMjAgQzE1LjUsMjAgMjAsMTUuNSAyMCwxMCBDMjAsNC41IDE1LjUsMCAxMCwwIEwxMCwwIFogTTEwLDE4IEM1LjYsMTggMiwxNC40IDIsMTAgQzIsNS42IDUuNiwyIDEwLDIgQzE0LjQsMiAxOCw1LjYgMTgsMTAgQzE4LDE0LjQgMTQuNCwxOCAxMCwxOCBaIE0xMC41LDUgTDksNSBMOSwxMSBMMTQuMiwxNC4yIEwxNSwxMi45IEwxMC41LDEwLjIgTDEwLjUsNSBaIiBpZD0iU2hhcGUiLz48L2c+PC9nPjwvZz48L3N2Zz4=" /> {{::item.Timing}} мин.</div>
                         <div class="cinemaTimetableElement_remainder">Сеансы на сегодня</div>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="cinemaTimetableElement_summary" style="" ng-bind="::item.Description">
+                        <div class="cinemaTimetableElement_summary"  ng-bind="::item.Description">
                         </div>
                     </div>
                 </div>
