@@ -13,6 +13,16 @@
 
         getToken() {
             let self = this;
+
+            let token = localStorage.getItem('auth_token');
+            if (token) {
+                token = angular.fromJson(token);
+                if (moment(token['.expires']).isAfter()) {
+                    return self.$q.resolve(token.access_token);
+                }
+            }
+
+
             if (self.settings.token) {
                 return self.$http({
                     method: 'POST',
@@ -20,7 +30,10 @@
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     data: `grant_type=password&username=${self.settings.serialNumber}&password=${encodeURIComponent(self.settings.token)}`
                     //data: `grant_type=password&username=${self.settings.serialNumber}&password=${self.settings.token.replace(/\+/g,"%2B")}`
-                }).then(response => response.data.access_token);
+                }).then(response => {
+                    localStorage.setItem('auth_token', angular.toJson(response.data));
+                    return response.data.access_token;
+                });
             }
             else {
                 return self.dbService.getData().then(i => {
@@ -36,7 +49,10 @@
                         url: self.settings.authUrl + `/Token`,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         data: `grant_type=password&username=${encodeURIComponent(self.settings.serialNumber)}&password=${encodeURIComponent(self.settings.token)}`
-                    }).then(response => response.data.access_token);
+                    }).then(response => {
+                        localStorage.setItem('auth_token', angular.toJson(response.data));
+                        return response.data.access_token;
+                    });
                 });
             }
         }
