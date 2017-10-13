@@ -77,8 +77,8 @@
 
         sendStatistics() {
             let self = this;
-            if (!self.settings.token)
-                return;
+            // if (!self.settings.token)
+            //     return;
             let promise = self.getAll().then(statistics => {
                 if (statistics.length === 0) {
                     console.log('нет записей статистики');

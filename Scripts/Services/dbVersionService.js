@@ -3,6 +3,7 @@
  */
 (function () {
     'use strict';
+
     class DbVersionService {
         constructor($q, $http, settings, authService, dbService) {
             this.$q = $q;
@@ -30,12 +31,16 @@
                         }
                     });
                 }).then(i => {
-                    console.info('Информация о версии базы данных успешно обновленна');
+                    if (i.status === 200)
+                        console.info('Информация о версии базы данных успешно обновленна');
+                    else
+                        console.error('Ошибка обновления версии базы данных', i);
                 });
             });
         }
 
     }
+
     angular
         .module('app')
         .service('dbVersionService', DbVersionService);
