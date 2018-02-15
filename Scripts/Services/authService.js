@@ -17,7 +17,7 @@
             let token = localStorage.getItem('auth_token');
             if (token) {
                 token = angular.fromJson(token);
-                if (moment(token['.expires']).isAfter()) {
+                if (token && token['.expires'] && moment(token['.expires']).isAfter()) {
                     return self.$q.resolve(token.access_token);
                 }
             }
