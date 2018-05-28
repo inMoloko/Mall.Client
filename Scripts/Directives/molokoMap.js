@@ -6,6 +6,7 @@
         Link: 1,
         Service: 2
     };
+   L.Map.addInitHook('addHandler', 'tap', L.Map.Tap);
 
     angular.module('app').directive("molokoMap", [
         '$rootScope', '$http', '$q', 'settings', '$linq', '$state', '$stateParams', '$timeout', 'dbService', function ($rootScope, $http, $q, settings, $linq, $state, $stateParams, $timeout, dbService) {
