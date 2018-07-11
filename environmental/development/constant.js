@@ -26,7 +26,7 @@
         displayKeyboard:true,
         autoReset:true,
         resourceFolder:'Content/Backup',
-        dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
-        //dbPath: `http://mproduction:9999/api/Backup/Get?TerminalID=${queryDict.TerminalID}`,
+        //dbPath: `Content/Backup/db/${queryDict.SerialNumber}.json`,
+        dbPath: `http://lk.inmoloko.ru/api/Backup/Get?TerminalID=${queryDict.TerminalID||63}`,
     });
 })();

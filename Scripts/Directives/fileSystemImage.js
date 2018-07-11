@@ -13,7 +13,7 @@
                 //var e1 = element.val();
                 element.attr('src', attributes.default);
                 scope.$watch('model', function () {
-                    if (scope.model && /\.(png|jpg|ico|gif)$/.test(scope.model))
+                    if (scope.model && /\.(png|jpg|ico|gif|svg)$/.test(scope.model))
                         element.attr("src", settings.resourceFolder + '/' + scope.model);
                     else
                         element.attr('src', attributes.default);
